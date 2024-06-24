@@ -1,0 +1,20 @@
+.auth-card {
+  &-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  .input {
+    width: 400px;
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px
+    }
+  }
+  .auth-message {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}

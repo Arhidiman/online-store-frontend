@@ -1,0 +1,1 @@
+export {Goods} from '@/modules/Goods//ui/Goods.tsx'
