@@ -1,2 +1,4 @@
-export const USERS_URL = '/api/users'
-export const USER_SIGN_IN_URL = '/api/users/sign-in'
+export const apiUrls = {
+    USER_SIGN_UP: '/api/user/sign-up',
+    USER_SIGN_IN: '/api/user/sign-in',
+}

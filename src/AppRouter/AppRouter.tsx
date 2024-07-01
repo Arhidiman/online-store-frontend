@@ -8,7 +8,7 @@ export const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path={routes.auth} element={<AuthPage/>}/>
+                <Route path={routes.main} element={<AuthPage/>}/>
                 <Route path={routes.goods} element={<Main/>}/>
             </Routes>
         </Router>

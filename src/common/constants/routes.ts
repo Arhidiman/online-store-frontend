@@ -1,4 +1,4 @@
 export const routes = {
-    auth: '/auth',
+    main: '/',
     goods: '/goods'
 }
