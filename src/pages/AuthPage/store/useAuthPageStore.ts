@@ -11,24 +11,29 @@ import {saveToLocalStorage} from "@/common/lib/saveToLocalStorage.ts";
 export interface IAuthPageStore {
     isAuth: boolean,
     isSignedIn: boolean,
-    currentUser: IUser,
+    authUser: IUser,
+    login: string,
+    password: string
     switchAuthReg: () => void,
     signUpNewUser: (user: IUser, navigate: NavigateFunction) => void,
-    signIn: (user: IUser, navigate: NavigateFunction) => void,
+    signIn: (data: {username: string, password: string}, navigate: NavigateFunction) => Promise<void>,
     setUserName: (name: string) => void,
     setUserPassword: (name: string) => void
 }
 
 interface IUser {
-    name: string,
-    password: string,
-    _id: string
+    username: string,
+    user_id: string,
+    user_role ? : string,
+    jwt_token ? : string
 }
 
 export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     isAuth: false,
     isSignedIn: false,
-    currentUser: {} as IUser,
+    authUser: {} as IUser,
+    password: '',
+    login: '',
     switchAuthReg: () => set((state: IAuthPageStore) => ({
         isAuth: !state.isAuth
     })),
@@ -53,38 +58,43 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
             }
         }
     },
-    signIn: async (user: IUser, navigate: NavigateFunction) => {
+    signIn: async (data: {username: string, password: string}, navigate: NavigateFunction) => {
         try {
-            const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_IN, user)
+            const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_IN, data)
+            console.log(response.data, 'res data')
+
             saveToLocalStorage('name', response.data.name)
             saveToLocalStorage('_id', response.data._id)
+
+            const {username, user_id, user_role, jwt_token} = response.data
+
+            set((state: IAuthPageStore) => ({
+                ...state,
+                isSignedIn: true,
+                authUser : {
+                    username, user_id, user_role, jwt_token
+                }
+            }))
+
             navigate(routes.goods)
             notification.success({
                 message: 'User successfully signed in'
             })
         } catch (error) {
             if(axios.isAxiosError(error)) {
+                console.log(error.response)
                 notification.error({
                     message: error.response && error.response.data
                 })
             }
         }
-        return {
-            isSignedIn: true
-        }
     },
     setUserName: (name: string) => set((state: IAuthPageStore) => ({
         ...state,
-        currentUser: {
-            ...state.currentUser,
-            name
-        }
+        login: name
     })),
     setUserPassword: (password: string) => set((state: IAuthPageStore) => ({
         ...state,
-        currentUser: {
-            ...state.currentUser,
-            password
-        }
+        password
     }))
 })))

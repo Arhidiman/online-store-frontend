@@ -1,17 +1,27 @@
 import {Card, Form, Input, Button} from "antd";
-import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts";
+import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
+import {useGlobalStore} from "@/store/useGlobalStore.ts";
 import {useNavigate} from "react-router-dom";
 import type {SyntheticEvent} from "react";
 import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
+
+
+
     const {
         switchAuthReg,
         setUserName,
         setUserPassword,
-        signIn
+        signIn,
+        authUser
     } = useAuthPageStore()
+
+
+    console.log(authUser, 'auth user')
+
+    // const {currentUser,setCurrentUser} = useGlobalStore()
 
     const navigate = useNavigate()
     const setName = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -30,7 +40,9 @@ export const AuthCard = () =>  {
     const submitAuth = async () => {
         try {
             const user = await form.validateFields()
-            signIn(user, navigate)
+            console.log(user)
+
+            await signIn(user, navigate)
         } catch (error) {
             console.log(error)
         }
@@ -39,7 +51,7 @@ export const AuthCard = () =>  {
     return (
         <Card className='auth-card' title='Вход'>
             <Form className='auth-card-form' form={form}>
-                <Form.Item rules={inputRules} name='name'>
+                <Form.Item rules={inputRules} name='username'>
                     <div className='input-item' >
                         <span className="label">Имя пользователя</span>
                         <Input className='input' placeholder='имя' onChange={setName}/>
