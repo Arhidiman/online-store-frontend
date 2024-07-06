@@ -6,7 +6,6 @@ import {BASE_URL} from "@/common/constants/baseUrl.ts";
 import {apiUrls} from "@/pages/AuthPage/constants/urls.ts";
 import type {NavigateFunction} from "react-router-dom";
 import {routes} from "@/common/constants/routes.ts";
-import {saveToLocalStorage} from "@/common/lib/saveToLocalStorage.ts";
 
 export interface IAuthPageStore {
     isAuth: boolean,
@@ -15,7 +14,7 @@ export interface IAuthPageStore {
     login: string,
     password: string
     switchAuthReg: () => void,
-    signUpNewUser: (user: IUser, navigate: NavigateFunction) => void,
+    signUpNewUser: (user: {username: string, password: string}, navigate: NavigateFunction) => void,
     signIn: (data: {username: string, password: string}, navigate: NavigateFunction) => Promise<void>,
     setUserName: (name: string) => void,
     setUserPassword: (name: string) => void
@@ -23,7 +22,7 @@ export interface IAuthPageStore {
 
 interface IUser {
     username: string,
-    user_id: string,
+    user_id ? : string,
     user_role ? : string,
     jwt_token ? : string
 }
@@ -37,19 +36,27 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     switchAuthReg: () => set((state: IAuthPageStore) => ({
         isAuth: !state.isAuth
     })),
-    signUpNewUser: async (user: IUser, navigate: NavigateFunction) => {
+    signUpNewUser: async (user: {username: string, password: string}, navigate : NavigateFunction) => {
         try {
             const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_UP, user)
-            saveToLocalStorage('name', response.data.name)
-            saveToLocalStorage('_id', response.data._id)
-            navigate(routes.goods)
             console.log(response)
             notification.success({
                 message: 'User successfully signed up'
             })
-            return {
-                isSignedIn: true
-            }
+
+            const {username, user_id, user_role, jwt_token} = response.data
+
+            console.log(response.data, 'reg user')
+
+            set((state: IAuthPageStore) => ({
+                ...state,
+                isSignedIn: true,
+                authUser: {username, user_id, user_role, jwt_token}
+            }))
+
+            navigate(routes.goods)
+
+
         } catch (error) {
             if(axios.isAxiosError(error)) {
                 notification.error({
@@ -62,10 +69,6 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
         try {
             const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_IN, data)
             console.log(response.data, 'res data')
-
-            saveToLocalStorage('name', response.data.name)
-            saveToLocalStorage('_id', response.data._id)
-
             const {username, user_id, user_role, jwt_token} = response.data
 
             set((state: IAuthPageStore) => ({

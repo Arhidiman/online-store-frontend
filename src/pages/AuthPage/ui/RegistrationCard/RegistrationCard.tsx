@@ -1,17 +1,21 @@
 import {Card, Form, Input, Button} from "antd";
-import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts";
+import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
+import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import {useNavigate} from "react-router-dom";
-import type {SyntheticEvent} from "react";
+import {SyntheticEvent, useEffect} from "react";
 import './RegistrationCard.scss'
 
 
 export const RegistrationCard = () =>  {
 
+    const {setCurrentUser} = useGlobalStore()
+
     const {
         switchAuthReg,
         setUserName,
         setUserPassword,
-        signUpNewUser
+        signUpNewUser,
+        authUser
     } = useAuthPageStore()
 
     const navigate = useNavigate()
@@ -26,23 +30,30 @@ export const RegistrationCard = () =>  {
         setUserPassword(element.value)
     }
 
+
     const [form] = Form.useForm()
     const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     const submitRegistration = async () => {
         try {
             const user = await form.validateFields()
-            signUpNewUser(user, navigate)
-            console.log(user)
+            await signUpNewUser(user, navigate)
         } catch (error) {
             console.log(error)
         }
     }
 
+
+    useEffect(() => {
+
+        setCurrentUser(authUser)
+        console.log(authUser)
+    }, [authUser])
+
     return (
         <Card className='registration-card' title='Регистрация'>
             <Form className='registration-card-form' form={form}>
-                <Form.Item rules={inputRules} name='name'>
+                <Form.Item rules={inputRules} name='username'>
                     <div className='input-item' >
                         <span className="label">Имя пользователя</span>
                         <Input className='input' placeholder='имя' onChange={setName}/>

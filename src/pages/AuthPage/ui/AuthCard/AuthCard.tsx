@@ -1,13 +1,16 @@
 import {Card, Form, Input, Button} from "antd";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
-import {useGlobalStore} from "@/store/useGlobalStore.ts";
 import {useNavigate} from "react-router-dom";
-import type {SyntheticEvent} from "react";
+import {SyntheticEvent, useEffect} from "react";
+import { useGlobalStore} from "@/store/useGlobalStore.ts";
+
 import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
 
+
+    const {setCurrentUser} = useGlobalStore()
 
 
     const {
@@ -22,6 +25,8 @@ export const AuthCard = () =>  {
     console.log(authUser, 'auth user')
 
     // const {currentUser,setCurrentUser} = useGlobalStore()
+
+
 
     const navigate = useNavigate()
     const setName = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -40,13 +45,19 @@ export const AuthCard = () =>  {
     const submitAuth = async () => {
         try {
             const user = await form.validateFields()
-            console.log(user)
-
             await signIn(user, navigate)
         } catch (error) {
             console.log(error)
         }
     }
+
+
+    useEffect(() => {
+
+        setCurrentUser(authUser)
+        console.log(authUser)
+
+    }, [authUser])
 
     return (
         <Card className='auth-card' title='Вход'>
