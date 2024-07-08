@@ -58,9 +58,10 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
 
 
         } catch (error) {
+            console.log(error, 'reg err')
             if(axios.isAxiosError(error)) {
                 notification.error({
-                    message: error.message
+                    message: error.response ? error.response.data : error.message
                 })
             }
         }
@@ -87,7 +88,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
             if(axios.isAxiosError(error)) {
                 console.log(error.response)
                 notification.error({
-                    message: error.response && error.response.data
+                    message: error.response ? error.response.data : error.message
                 })
             }
         }
