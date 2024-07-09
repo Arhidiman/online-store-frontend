@@ -3,5 +3,8 @@
 }
 
 .goods-container {
-
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(5, 1fr);
+    min-width: 70%;
 }
