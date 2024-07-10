@@ -9,7 +9,7 @@ export const AppRouter = () => {
         <Router>
             <Routes>
                 <Route path={routes.main} element={<AuthPage/>}/>
-                <Route path={routes.goods} element={<Main/>}/>
+                <Route path={routes.products} element={<Main/>}/>
             </Routes>
         </Router>
     )

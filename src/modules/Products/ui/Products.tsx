@@ -1,10 +1,10 @@
 import {useState} from "react"
 import Modal from "@/components/Modal/Modal.tsx";
 import {getLocalstorageItem} from "@/common/lib/getLocalstorageItem.ts";
-import {ProductCard} from "@/modules/Goods/ui/ProductCard/ProductCard.tsx";
-import "./Goods.scss"
+import {ProductCard} from "@/components/ProductCard/ProductCard.tsx"
+import "./Products.scss"
 
-export function Goods() {
+export function Products() {
 
     const [userId] = useState<string | null>(getLocalstorageItem('_id'))
     const [isModalOpen, setIsModalOpen] = useState(false)

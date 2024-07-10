@@ -54,7 +54,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
                 authUser: {username, user_id, user_role, jwt_token}
             }))
 
-            navigate(routes.goods)
+            navigate(routes.products)
 
 
         } catch (error) {
@@ -80,7 +80,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
                 }
             }))
 
-            navigate(routes.goods)
+            navigate(routes.products)
             notification.success({
                 message: 'User successfully signed in'
             })

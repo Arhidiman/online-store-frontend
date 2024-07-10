@@ -1,13 +1,13 @@
 import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
 
-interface IGoodsStore {
+interface IProductsStore {
     username: string | null,
     user_id: string | null,
     goods: string[]
 }
 
-export const goodsStore = create(devtools<IGoodsStore>(() => ({
+export const productsStore = create(devtools<IProductsStore>(() => ({
     username: null,
     user_id: null,
     goods: [],

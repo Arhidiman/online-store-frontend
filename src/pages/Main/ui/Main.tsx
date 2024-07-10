@@ -1,9 +1,9 @@
-import {Goods} from "@/modules/Goods/index.ts"
+import {Products} from "@/modules/Products";
 
 export const Main = () =>  {
     return (
         <>
-            <Goods/>
+            <Products/>
         </>
     )
 }
