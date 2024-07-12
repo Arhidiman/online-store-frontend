@@ -2,7 +2,7 @@ import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
 // import axios from "axios";
 // import {notification} from "antd";
-// import {BASE_URL} from "@/common/constants/baseUrl.ts";
+// import {BASE_URL} from "@/common/constants.ts/baseUrl.ts";
 // import {apiUrls} from "@/api/apiUrls.ts";
 
 
