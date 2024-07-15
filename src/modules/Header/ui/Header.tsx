@@ -5,7 +5,6 @@ import './Header.scss'
 import  { useState } from "react";
 import type {SwitchChangeEventHandler} from "antd/es/switch";
 import {type MenuTheme, Switch} from "antd";
-
 export const Header = () =>  {
     const [theme, setTheme] = useState<MenuTheme>('dark');
 
@@ -13,7 +12,9 @@ export const Header = () =>  {
 
     console.log(authUser)
 
-    const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  => <Switch className="side-menu-theme-switcher" checked={theme === 'dark'} onChange={changeTheme}/>
+    const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
+        <Switch className="side-menu-theme-switcher" checked={theme === 'dark'} onChange={changeTheme} theme={theme}/>
+
     const changeTheme = (value: boolean) => {
         setTheme(value ? 'dark' : 'light');
     }
@@ -23,7 +24,7 @@ export const Header = () =>  {
             <div className='header-container'>
 
                 <div className='header-user'>
-                    <UserOutlined/>
+                    <UserOutlined />
                     <p>{authUser.username}</p>
                     <LogoutOutlined/>
                 </div>

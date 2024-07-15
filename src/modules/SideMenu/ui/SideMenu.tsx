@@ -13,8 +13,8 @@ const circle = <span className="side-menu-circle"></span>
 
 export const  SideMenu: React.FC = () => {
 
-    const [collapsed, setCollapsed] = useState(false);
-    const [theme] = useState<MenuTheme>('dark');
+    const [collapsed, setCollapsed] = useState(true);
+    const [theme] = useState<MenuTheme>('light');
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
     }
@@ -24,6 +24,8 @@ export const  SideMenu: React.FC = () => {
         <CollapseButton collapsed={collapsed}
         toggler={toggleCollapsed}/>,
       )
+
+    console.log(collapsed, 'colapsed')
 
     return (        
       <div className="side-menu" style={{ width: 242}}>

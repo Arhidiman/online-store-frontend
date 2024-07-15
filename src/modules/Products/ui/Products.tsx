@@ -2,6 +2,7 @@ import {useState} from "react"
 import Modal from "@/components/Modal/Modal.tsx";
 import {getLocalstorageItem} from "@/common/lib/getLocalstorageItem.ts";
 import {ProductCard} from "@/components/ProductCard/ProductCard.tsx"
+import mockProduct from '../mock/mockProduct.jpg'
 import "./Products.scss"
 
 export function Products() {
@@ -27,9 +28,10 @@ export function Products() {
                     {
                         mockCards.map(() =>
                             <ProductCard
-                                name ='name'
-                                description = 'description'
+                                name='Продам кота'
+                                description='description'
                                 cardSign={<span>+</span>}
+                                content={<img alt='product image' src={mockProduct}/>}
                             />
                         )
                     }

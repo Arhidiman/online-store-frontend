@@ -1,6 +1,7 @@
-import {Checkbox, Collapse} from "antd";
+import {Checkbox, Collapse, Slider} from "antd";
 import type { CollapseProps } from 'antd';
 import './Filters.scss'
+import {SyntheticEvent, useState} from "react";
 
 
 const prices = [
@@ -32,14 +33,26 @@ const categoriesItems: CollapseProps['items'] = [
     }
 ]
 
+
+
 export const Filters = () => {
+
+
+    const [price, setPrice] = useState<number>(5000)
+
+    const updatePrice = (e: number) => {
+
+        setPrice(e)
+    }
+
+    console.log(price)
 
     return (
         <div className="filters">
             <h2>Фильтры</h2>
             <div className='filters-container'>
-                <Collapse items={pricesItems}/>
-                <Collapse items={categoriesItems}/>
+                <Slider defaultValue={500} className='filters-slider' onChange={updatePrice} min={0} max={1000000}/>
+                <p>до {price} Р</p>
             </div>
         </div>
     )
