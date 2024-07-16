@@ -8,12 +8,19 @@ import './index.css'
 
 const themeConfig = {
     token: {
-        colorPrimary: '#1DA57A',
-        colorLink: '#1890ff',
+        colorPrimary: '#009bf5',
+        colorLink: 'black',
         borderRadiusBase: '8px',
         fontSizeBase: '16px',
         fontFamily: 'Arial, sans-serif',
     },
+    components: {
+        Menu: {
+            itemBg: '#535bf2',
+            darkItemBg: '#4727bb',
+            subMenuItemBg: 'lightgrey'
+        }
+    }
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

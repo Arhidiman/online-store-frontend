@@ -1,2 +1,2 @@
 
-export {Header} from './ui/Header.tsx'
+export {AppHeader} from './ui/Header.tsx'

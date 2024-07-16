@@ -3,18 +3,20 @@ import { addTitleToPopup } from "..//lib/addTitleToPopup";
 import { menuItems } from "../mock/sideMenuItems";
 import { addClassnameByItemNum } from "../lib/addClassnameByItemNum";
 import { Menu } from "antd";
-import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx";
+import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx"
+import { useGlobalStore } from "@/store/useGlobalStore";
 import type { MenuTheme } from 'antd';
 import type { TMenuItem } from "..//mock/sideMenuItems";
 import "./SideMenu.scss"
     
 const circle = <span className="side-menu-circle"></span>
 
-
 export const  SideMenu: React.FC = () => {
 
-    const [collapsed, setCollapsed] = useState(true);
-    const [theme] = useState<MenuTheme>('light');
+    const {theme, switchTheme} = useGlobalStore()
+
+    const [collapsed, setCollapsed] = useState(true)
+    
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
     }

@@ -5,22 +5,30 @@ import './Header.scss'
 import  { useState } from "react";
 import type {SwitchChangeEventHandler} from "antd/es/switch";
 import {type MenuTheme, Switch} from "antd";
-export const Header = () =>  {
-    const [theme, setTheme] = useState<MenuTheme>('dark');
+import { Header } from "antd/es/layout/layout";
+
+
+
+
+export const AppHeader = () =>  {
+
+
+
+
+    const {theme, switchTheme} = useGlobalStore()
+
 
     const {authUser} = useAuthPageStore()
 
     console.log(authUser)
 
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
-        <Switch className="side-menu-theme-switcher" checked={theme === 'dark'} onChange={changeTheme} theme={theme}/>
+        <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
 
-    const changeTheme = (value: boolean) => {
-        setTheme(value ? 'dark' : 'light');
-    }
+    console.log(theme, theme)
 
     return (
-        <header className='header'>
+        <Header className='header'>
             <div className='header-container'>
 
                 <div className='header-user'>
@@ -28,9 +36,9 @@ export const Header = () =>  {
                     <p>{authUser.username}</p>
                     <LogoutOutlined/>
                 </div>
-                {themeSwitcher(theme, changeTheme)}
+                {themeSwitcher(theme, switchTheme)}
             </div>
-        </header>
+        </Header>
     )
 }
 
