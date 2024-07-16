@@ -1,10 +1,20 @@
-.goods-title {
+.products-title {
 
 }
 
-.goods-container {
-    display: grid;
-    grid-gap: 30px;
-    grid-template-columns: repeat(5, 1fr);
-    min-width: 70%;
+.products {
+
+    &-content {
+       width: 100%;
+    }
+    &-cards {
+        display: grid;
+        grid-gap: 30px;
+        grid-template-columns: repeat(5, 1fr);
+        min-width: 70%;
+    }
+    &_show-more {
+        margin-top: 50px;
+        width: 100%;
+    }
 }
