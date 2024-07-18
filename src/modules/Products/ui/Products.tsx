@@ -48,10 +48,7 @@ export function Products() {
                         }
                     </div>
                     <Button className="products_show-more" type="primary">Показать ещё</Button>
-
                 </div>
-             
-
             </div>
             <Modal
                 confirmHandler={closeModal}

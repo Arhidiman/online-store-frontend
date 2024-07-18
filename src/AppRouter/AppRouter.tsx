@@ -3,10 +3,12 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {AuthPage} from "@/pages/AuthPage";
 import {Main} from "@/pages/Main";
 import {routes} from "@/common/constants/routes.ts";
+import {AppHeader} from "@/modules/Header"
 
 export const AppRouter = () => {
     return (
         <Router>
+            <AppHeader></AppHeader>
             <Routes>
                 <Route path={routes.main} element={<AuthPage/>}/>
                 <Route path={routes.products} element={<Main/>}/>
