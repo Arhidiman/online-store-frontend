@@ -5,7 +5,6 @@ import { addClassnameByItemNum } from "../lib/addClassnameByItemNum";
 import { Menu } from "antd";
 import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx"
 import { useGlobalStore } from "@/store/useGlobalStore";
-import type { MenuTheme } from 'antd';
 import type { TMenuItem } from "..//mock/sideMenuItems";
 import "./SideMenu.scss"
     
@@ -25,7 +24,7 @@ export const  SideMenu: React.FC = () => {
     const items: TMenuItem[] = menuItems(
         <CollapseButton collapsed={collapsed}
         toggler={toggleCollapsed}/>,
-      )
+    )
 
     console.log(collapsed, 'colapsed')
 

@@ -38,12 +38,17 @@ export const AppHeader = () =>  {
                 theme: theme
             },
             {
-                label: 'Вход',
-                key: routes.main,
+                label: 'Корзина',
+                key: routes.cart,
+                theme: theme
             },
             {
-                label: 'Личный кабинет',
-                key: '3',
+                label: 'История покупок',
+                key: routes.buyings,
+            },
+            {
+                label: 'Вход',
+                key: routes.main,
             }
         ]
 
