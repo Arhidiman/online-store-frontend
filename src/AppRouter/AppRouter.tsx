@@ -3,7 +3,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {AuthPage} from "@/pages/AuthPage";
 import {AppHeader} from "@/modules/Header"
 import {Main} from "@/pages/Main";
-import { CartPage } from "@/pages/CartPage/CartPage";
+import { CartPage } from "@/pages/CartPage";
 import { BuyingsPage } from "@/pages/BuyingsPage/BuyingsPage";
 import {routes} from "@/common/constants/routes.ts";
 

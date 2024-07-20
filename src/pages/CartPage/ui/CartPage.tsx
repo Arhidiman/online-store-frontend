@@ -1,8 +1,15 @@
-import './CartPage.scss'
+import { Space } from 'antd'
 import { Products } from '@/modules/Products'
+import { CartProduct } from '@/components/CartProduct/CartProduct'
+import './CartPage.scss'
+
+
+
 
 
 export const CartPage = () => {
+
+
     return (
 
         <div className="cart-page">
@@ -11,7 +18,13 @@ export const CartPage = () => {
                     Ваша корзина
                 </h2>
                 <div className="cart-page-content">
-                    <Products></Products>
+                    <Space direction='vertical' size={30}>
+                        <CartProduct/>
+                        <CartProduct/>
+                        <CartProduct/>
+                        <CartProduct/>
+                        <CartProduct/>
+                    </Space>
                 </div>
             </div>
         </div>
