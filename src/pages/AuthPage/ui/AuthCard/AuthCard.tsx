@@ -8,10 +8,7 @@ import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
-
-
     const {setCurrentUser} = useGlobalStore()
-
 
     const {
         switchAuthReg,
@@ -25,8 +22,6 @@ export const AuthCard = () =>  {
     console.log(authUser, 'auth user')
 
     // const {currentUser,setCurrentUser} = useGlobalStore()
-
-
 
     const navigate = useNavigate()
     const setName = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -51,12 +46,9 @@ export const AuthCard = () =>  {
         }
     }
 
-
     useEffect(() => {
-
         setCurrentUser(authUser)
         console.log(authUser)
-
     }, [authUser])
 
     return (
