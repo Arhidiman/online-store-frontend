@@ -1,8 +1,18 @@
 import { Button } from 'antd'
 import './PayCard.scss'
+import { Dispatch } from 'react'
 
 
-export const PayCard = () => {
+interface IPayCard {
+    switchPaymentModal: Dispatch<boolean>
+}
+
+
+export const PayCard = ({switchPaymentModal}: IPayCard) => {
+
+
+    const openModal = () => switchPaymentModal(true)
+
     return (
 
         <div className='pay-card'>
@@ -10,7 +20,9 @@ export const PayCard = () => {
                 <h2 className='pay-card_title'>Стоимость заказа: 10000р</h2>
                 <p>Скидка 100р</p>
                 <p>К оплате 9900р</p>
-                <Button type='primary'>Перейти к оплате</Button>
+                <Button type='primary' onClick={openModal}>
+                    Перейти к оплате
+                </Button>
             </div>
         </div>
     )
