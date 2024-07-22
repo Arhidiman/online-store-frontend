@@ -3,6 +3,10 @@
         width: 90%;
         margin: 0 auto
     }
+    &-content {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
   

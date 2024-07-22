@@ -1,0 +1,15 @@
+.pay-card {
+    position: fixed;
+    top: 200px;
+    right: 200px;
+    min-width: 700px;
+    max-width: 900px;
+    height: 350px;
+    border: solid grey 2px;
+    border-radius: 15px;
+    background: linear-gradient(to bottom right, #00f729, #9c00f7 );
+    &-container {
+        width: 80%;
+        margin: 0 auto
+    }
+}

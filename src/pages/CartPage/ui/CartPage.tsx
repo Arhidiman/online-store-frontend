@@ -1,6 +1,7 @@
 import { Space } from 'antd'
 import { Products } from '@/modules/Products'
 import { CartProduct } from '@/components/CartProduct/CartProduct'
+import { PayCard } from '@/modules/PayCard'
 import './CartPage.scss'
 
 
@@ -25,6 +26,7 @@ export const CartPage = () => {
                         <CartProduct/>
                         <CartProduct/>
                     </Space>
+                    <PayCard/>
                 </div>
             </div>
         </div>
