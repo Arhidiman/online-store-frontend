@@ -36,12 +36,7 @@ export function Products() {
 
     const mockCards = [1,2,3,4,]
 
-    const cardContent = (url: string, price: number) => <div>
-        <img alt='product image' src={url}/>
-        <p>Цена: {price} Р</p>       
-        <p>Котяра необыкновенный</p>
-        <Button>Убрать в корзину</Button>
-    </div>
+ 
 
     return (
 
@@ -56,9 +51,11 @@ export function Products() {
                                 <ProductCard
                                     key={product_id}
                                     name={name}
+                                    product_id={product_id}
+                                    price={price}
+                                    image={image}
                                     description='description'
                                     cardSign={<span>+</span>}
-                                    content={cardContent(image, price)}
                                 />
                             )
                         }

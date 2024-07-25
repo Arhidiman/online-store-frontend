@@ -1,8 +1,17 @@
 .product-card {
   &-custom {
-
+    .ant-card-body {
+      padding: 0
+    }
+  }
+  &-content-bottom {
+    width: 80%;
+    margin: 0 auto;
   }
   &-content-container {
+    margin: 0 auto;
+    padding-bottom: 20px;
+    background: lightgrey;
     img {
       object-fit: cover;
       width: 100%;
@@ -10,6 +19,11 @@
     }
 
   }
+ 
+}
+
+.ant-card {
+    min-width: 310px;
 }
 
 
