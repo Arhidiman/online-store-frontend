@@ -3,27 +3,31 @@
     .ant-card-body {
       padding: 0
     }
+    .ant-card-head {
+      background: linear-gradient(to bottom, #6504f9, #6504f9, #c852ff)
+    }
   }
   &-content-bottom {
-    width: 80%;
-    margin: 0 auto;
+    background: linear-gradient(to bottom, #c852ff, #6504f9, #6504f9);
+    &-container {
+      width: 80%;
+      margin: 0 auto;
+      padding-bottom: 20px;
+    }
   }
   &-content-container {
     margin: 0 auto;
-    padding-bottom: 20px;
-    background: lightgrey;
+    padding: 0;
     img {
-      object-fit: cover;
+      display: block;
       width: 100%;
-      height:100%
+      height:340px;
     }
-
   }
- 
 }
 
 .ant-card {
-    min-width: 310px;
+    min-width: 300px;
 }
 
 

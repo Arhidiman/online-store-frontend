@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {Card, Button} from 'antd'
+import {Card, Button, Space} from 'antd'
 import './ProductCard.scss'
 
 
@@ -17,9 +17,13 @@ const cardContent = (url: string, price: number, description: string) =>
     <div>
         <img alt='product image' src={url}/>
         <div className="product-card-content-bottom">
-            <p>Цена: {price} Р</p>       
-            <p>{description}</p>
-            <Button>Убрать в корзину</Button> 
+            <div className="product-card-content-bottom-container">
+                <Space size={50}>
+                    <p>Цена: {price} Р</p>     
+                    <Button>В корзину</Button>
+                </Space>
+                <p>{description}</p>
+            </div>
         </div>
     </div>
 
