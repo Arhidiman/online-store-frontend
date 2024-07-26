@@ -8,6 +8,7 @@ import type {SwitchChangeEventHandler} from "antd/es/switch";
 import {type MenuTheme, Switch, Tabs} from "antd";
 import { Header } from "antd/es/layout/layout";
 import { routes } from "@/common/constants/routes"
+import {COLORS} from '@/common/constants/themeColors'
 
 
 
@@ -18,10 +19,7 @@ export const AppHeader = () =>  {
 
 
     const navigate = useNavigate()
-
-
     const {theme, switchTheme} = useGlobalStore()
-
 
     const {authUser} = useAuthPageStore()
 
@@ -30,6 +28,13 @@ export const AppHeader = () =>  {
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
 
+
+    const headerColor = () => {
+        const color = theme === 'light' ? COLORS.light.header : COLORS.dark.header
+        return {
+            background: color
+        }
+    }
 
     const tabItems = [
             {
@@ -55,7 +60,7 @@ export const AppHeader = () =>  {
     console.log(theme, theme)
 
     return (
-        <Header className='header'>
+        <Header className='header' style={headerColor()}>
             <div className='header-container'>
                 <Tabs
                     items={tabItems}

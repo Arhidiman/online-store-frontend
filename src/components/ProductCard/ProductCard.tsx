@@ -18,8 +18,8 @@ const cardContent = (url: string, price: number, description: string) =>
         <img alt='product image' src={url}/>
         <div className="product-card-content-bottom">
             <div className="product-card-content-bottom-container">
-                <Space size={50}>
-                    <p>Цена: {price} Р</p>     
+                <Space size={30}>
+                    <p className="product-card-content-bottom-price">Цена: {price} Р</p>     
                     <Button>В корзину</Button>
                 </Space>
                 <p>{description}</p>

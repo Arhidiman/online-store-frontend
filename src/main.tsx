@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {ConfigProvider} from "antd";
+import {COLORS} from './common/constants/themeColors.ts'
 import App from './App.tsx'
 import './index.css'
 
@@ -8,7 +9,7 @@ import './index.css'
 
 const themeConfig = {
     token: {
-        colorPrimary: '#009bf5',
+        colorPrimary: COLORS.common.light,
         colorLink: 'black',
         borderRadiusBase: '8px',
         fontSizeBase: '16px',
@@ -16,9 +17,12 @@ const themeConfig = {
     },
     components: {
         Menu: {
-            itemBg: '#535bf2',
-            darkItemBg: '#4727bb',
+            itemBg: COLORS.common.light,
+            darkItemBg: COLORS.common.dark,
             subMenuItemBg: 'lightgrey'
+        },
+        Button: {
+            defaultBg: '#780eff'
         }
     }
 };

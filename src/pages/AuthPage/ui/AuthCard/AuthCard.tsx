@@ -1,14 +1,14 @@
 import {Card, Form, Input, Button} from "antd";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
+import { useGlobalStore} from "@/store/useGlobalStore.ts";
 import {useNavigate} from "react-router-dom";
 import {SyntheticEvent, useEffect} from "react";
-import { useGlobalStore} from "@/store/useGlobalStore.ts";
 
 import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
-    const {setCurrentUser} = useGlobalStore()
+    const {setCurrentUser, theme} = useGlobalStore()
 
     const {
         switchAuthReg,
@@ -20,6 +20,9 @@ export const AuthCard = () =>  {
 
 
     console.log(authUser, 'auth user')
+
+    const themeSwitcher = () => theme === 'dark' ? 'default' : 'primary'
+    
 
     // const {currentUser,setCurrentUser} = useGlobalStore()
 
@@ -66,13 +69,13 @@ export const AuthCard = () =>  {
                         <Input className='input' placeholder='Пароль' onChange={setPassword}/>
                     </div>
                 </Form.Item>
-                <Button className='auth-button' type='primary' onClick={submitAuth}>
+                <Button className='auth-button' type={themeSwitcher()} onClick={submitAuth}>
                     Войти
                 </Button>
             </Form>
             <div className='auth-message'>
                 <span>Нет аккаунта?</span>
-                <Button type='primary' onClick={switchAuthReg}>Зарегистрироваться</Button>
+                <Button type={themeSwitcher()} onClick={switchAuthReg}>Зарегистрироваться</Button>
             </div>
         </Card>
     )
