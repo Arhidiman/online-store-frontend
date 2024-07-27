@@ -11,23 +11,16 @@ import { routes } from "@/common/constants/routes"
 import {COLORS} from '@/common/constants/themeColors'
 
 
-
-
-
 export const AppHeader = () =>  {
 
-
-
     const navigate = useNavigate()
+
     const {theme, switchTheme} = useGlobalStore()
 
     const {authUser} = useAuthPageStore()
 
-    console.log(authUser)
-
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
-
 
     const headerColor = () => {
         const color = theme === 'light' ? COLORS.light.header : COLORS.dark.header

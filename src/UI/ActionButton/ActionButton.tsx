@@ -1,18 +1,24 @@
-import {PlusOutlined, EditOutlined, CheckOutlined, DeleteOutlined, ArrowDownOutlined} from "@ant-design/icons";
-import {Button} from "antd";
+import {PlusOutlined, EditOutlined, CheckOutlined, DeleteOutlined, ArrowDownOutlined} from "@ant-design/icons"
+import {Button} from "antd"
+import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
 import './ActionButton.scss'
 
 type TActions = 'add' | 'edit' | 'check' | 'delete' | 'complete'
+
 interface IActionButton {
     className?: string
     text?: string
     actionHandler: MouseEventHandler<HTMLElement>
-    type: TActions
+    type?: TActions
 }
-function ActionButton({className, text, actionHandler, type}: IActionButton) {
+export const ActionButton = ({className, text, actionHandler, type}: IActionButton) =>  {
 
-    const getActionIcon = (type: TActions) => {
+    const {theme} = useGlobalStore()
+
+    const themeSwitcher = () => theme === 'dark' ? 'default' : 'primary'
+
+    const getActionIcon = (type: TActions | undefined) => {
         switch (type) {
             case 'add': return <PlusOutlined/>
             case 'edit': return <EditOutlined/>
@@ -25,6 +31,7 @@ function ActionButton({className, text, actionHandler, type}: IActionButton) {
     return (
         <Button
             className={`action-button ${className && className}`}
+            type={themeSwitcher()}
             onClick={actionHandler}
         >
             {text}
@@ -32,5 +39,3 @@ function ActionButton({className, text, actionHandler, type}: IActionButton) {
         </Button>
     )
 }
-
-export default ActionButton

@@ -1,7 +1,7 @@
 import {ReactNode} from "react";
 import {Card, Button, Space} from 'antd'
+import { ActionButton } from "@/UI/ActionButton";
 import './ProductCard.scss'
-
 
 interface IProductCard {
     name: string
@@ -12,7 +12,6 @@ interface IProductCard {
     cardSign: ReactNode
 }
 
-
 const cardContent = (url: string, price: number, description: string) => 
     <div>
         <img alt='product image' src={url}/>
@@ -20,7 +19,7 @@ const cardContent = (url: string, price: number, description: string) =>
             <div className="product-card-content-bottom-container">
                 <Space size={30}>
                     <p className="product-card-content-bottom-price">Цена: {price} Р</p>     
-                    <Button>В корзину</Button>
+                    <ActionButton text="В корзину" actionHandler={() => console.log('to cart')}/>
                 </Space>
                 <p>{description}</p>
             </div>

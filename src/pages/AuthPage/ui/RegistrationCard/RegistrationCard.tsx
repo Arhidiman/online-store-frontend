@@ -2,6 +2,7 @@ import {Card, Form, Input, Button} from "antd";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import {useNavigate} from "react-router-dom";
+import { ActionButton } from "@/UI/ActionButton";
 import {SyntheticEvent, useEffect} from "react";
 import './RegistrationCard.scss'
 
@@ -65,13 +66,11 @@ export const RegistrationCard = () =>  {
                         <Input className='input' placeholder='Пароль' onChange={setPassword}/>
                     </div>
                 </Form.Item>
-                <Button className='registration-button' type='primary' onClick={submitRegistration}>
-                    Зарегистрироваться
-                </Button>
+                <ActionButton className="registration-button" actionHandler={submitRegistration} text="Зарегистрироваться"/>
             </Form>
             <div className='auth-message'>
                 <span>Уже зарегистрированы?</span>
-                <Button type='primary' onClick={switchAuthReg}>Войти</Button>
+                <ActionButton actionHandler={switchAuthReg} text="Войти"/>
             </div>
         </Card>
     )
