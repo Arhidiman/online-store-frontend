@@ -1,17 +1,18 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
+import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
 
 interface IFiltersStore {
     filters: {
         priceLess: number,
-        options: string[]
+        options: CheckboxValueType[]
     },
-    sorters: {options: string[]},
+    sorters: {options: CheckboxValueType[]},
     setPriceLess: (value: number) => void,
-    setFiltersOptions: (filters: string[]) => void,
-    setSortersOptions: (filters: string[]) => void
+    setFiltersOptions: (filters: CheckboxValueType[]) => void,
+    setSortersOptions: (filters: CheckboxValueType[]) => void
 }
 
 
@@ -29,7 +30,7 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
             }
         })
     } ,
-    setFiltersOptions: (filters: string[]) => {
+    setFiltersOptions: (filters: CheckboxValueType[]) => {
         set((state: IFiltersStore) => {
             return {
                 ...state, 
@@ -37,7 +38,7 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
             }
         })
     },
-    setSortersOptions: (sorters: string[]) => {
+    setSortersOptions: (sorters: CheckboxValueType[]) => {
         set((state: IFiltersStore) => {
             return {
                 ...state, 
