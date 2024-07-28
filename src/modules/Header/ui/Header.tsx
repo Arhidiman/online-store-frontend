@@ -32,7 +32,7 @@ export const AppHeader = () =>  {
     const tabItems = [
             {
                 label: 'Главная',
-                key: routes.products,
+                key: routes.main,
                 theme: theme
             },
             {
@@ -46,7 +46,7 @@ export const AppHeader = () =>  {
             },
             {
                 label: 'Вход',
-                key: routes.main,
+                key: routes.auth,
             }
         ]
 

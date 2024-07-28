@@ -1,7 +1,5 @@
-import mockProduct from './mock/mockProduct.jpg'
 import { ActionButton } from '@/UI/ActionButton'
 import './CartProduct.scss'
-
 
 export const CartProduct = () => 
     <div className='cart-product'>

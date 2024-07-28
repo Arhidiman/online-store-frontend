@@ -143,14 +143,7 @@ interface DataType {
     }
   ];
 
-
 export const BuyingsPage = () =>  {
-
-
-    const [currentPage, setCurrentPage] = useState(1)
-
-
-    console.log(currentPage, 'currentPage')
 
     return (
         <div className='buyings-page-container'>
@@ -158,8 +151,7 @@ export const BuyingsPage = () =>  {
                 dataSource={data}  
                 columns={columns}
                 pagination={{pageSize: 10, total: data.length}}
-                
-                >
+            >
 
            </Table>
         </div>

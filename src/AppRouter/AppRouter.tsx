@@ -12,8 +12,8 @@ export const AppRouter = () => {
         <Router>
             <AppHeader></AppHeader>
             <Routes>
-                <Route path={routes.main} element={<AuthPage/>}/>
-                <Route path={routes.products} element={<Main/>}/>
+                <Route path={routes.main} element={<Main/>}/>
+                <Route path={routes.auth} element={<AuthPage/>}/>
                 <Route path={routes.cart} element={<CartPage/>}/>
                 <Route path={routes.buyings} element={<BuyingsPage/>}/>
             </Routes>

@@ -13,7 +13,6 @@ const sorters = [
     { label: 'Рейтинг', value: 'rating' },
 ]
 
-
 export const Filters = () => {
 
     const [price, setPrice] = useState<number>(5000)
