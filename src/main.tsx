@@ -5,8 +5,6 @@ import {COLORS} from './common/constants/themeColors.ts'
 import App from './App.tsx'
 import './index.css'
 
-
-
 const themeConfig = {
     token: {
         colorPrimary: COLORS.common.light,

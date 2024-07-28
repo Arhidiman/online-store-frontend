@@ -39,14 +39,11 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     signUpNewUser: async (user: {username: string, password: string}, navigate : NavigateFunction) => {
         try {
             const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_UP, user)
-            console.log(response)
             notification.success({
                 message: 'User successfully signed up'
             })
 
             const {username, user_id, user_role, jwt_token} = response.data
-
-            console.log(response.data, 'reg user')
 
             set((state: IAuthPageStore) => ({
                 ...state,
@@ -54,9 +51,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
                 authUser: {username, user_id, user_role, jwt_token}
             }))
 
-            navigate(routes.products)
-
-
+            navigate(routes.main)
         } catch (error) {
             console.log(error, 'reg err')
             if(axios.isAxiosError(error)) {
@@ -80,7 +75,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
                 }
             }))
 
-            navigate(routes.products)
+            navigate(routes.main)
             notification.success({
                 message: 'User successfully signed in'
             })

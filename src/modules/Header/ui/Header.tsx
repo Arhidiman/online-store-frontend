@@ -2,13 +2,12 @@ import { useNavigate } from "react-router-dom"
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import {UserOutlined, LogoutOutlined} from "@ant-design/icons"
 import {useGlobalStore} from "@/store/useGlobalStore.ts"
-import './Header.scss'
-import  { useState } from "react";
 import type {SwitchChangeEventHandler} from "antd/es/switch";
-import {type MenuTheme, Switch, Tabs} from "antd";
+import {Switch, Tabs} from "antd";
 import { Header } from "antd/es/layout/layout";
 import { routes } from "@/common/constants/routes"
 import {COLORS} from '@/common/constants/themeColors'
+import './Header.scss'
 
 
 export const AppHeader = () =>  {

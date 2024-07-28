@@ -12,6 +12,7 @@ interface IActionButton {
     actionHandler: MouseEventHandler<HTMLElement>
     type?: TActions
 }
+
 export const ActionButton = ({className, text, actionHandler, type}: IActionButton) =>  {
 
     const {theme} = useGlobalStore()

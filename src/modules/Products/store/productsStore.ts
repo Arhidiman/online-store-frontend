@@ -2,7 +2,7 @@ import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
 import { BASE_URL } from '@/common/constants/baseUrl';
 import {notification} from "antd";
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const PRODUCTS_URL = BASE_URL+'/api/goods'
 
@@ -29,30 +29,16 @@ export const useProductsStore = create(devtools<IProductsStore>((set) => ({
     getProducts: async () => {
 
         try {
-            notification.success({message: 'Данные товаров получены'})
-            const products: IProduct[] = await axios.get(PRODUCTS_URL)
+            const products: AxiosResponse = await axios.get(PRODUCTS_URL)
 
             set((state: IProductsStore) => ({
                 ...state, 
                 products: products.data
             }))
+            notification.success({message: 'Данные товаров получены'})
+
         } catch (err) {
-            notification.error({message: 'Ошибка получения товаров'})
+            notification.error({message: 'Ошибка при загрузке списка товаров'})
         }
-
-       
-
     }
-
-    // getProducts: async () => {
-    //     try {
-    //         const response = await axios.get(PRODUCTS_URL);
-    //         set((state) => ({
-    //             ...state,
-    //             products: response.data
-    //         }));
-    //     } catch (error) {
-    //         console.error('Error fetching products:', error);
-    //     }
-    // }
 })))
