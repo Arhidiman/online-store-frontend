@@ -2,7 +2,6 @@ import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
 import axios from "axios";
 import {notification} from "antd";
-import {BASE_URL} from "@/common/constants/baseUrl.ts";
 import {apiUrls} from "@/pages/AuthPage/constants/urls.ts";
 import type {NavigateFunction} from "react-router-dom";
 import {routes} from "@/common/constants/routes.ts";
@@ -38,7 +37,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     })),
     signUpNewUser: async (user: {username: string, password: string}, navigate : NavigateFunction) => {
         try {
-            const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_UP, user)
+            const response = await axios.post(apiUrls.USER_SIGN_UP, user)
             notification.success({
                 message: 'User successfully signed up'
             })
@@ -63,7 +62,7 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     },
     signIn: async (data: {username: string, password: string}, navigate: NavigateFunction) => {
         try {
-            const response = await axios.post(BASE_URL+apiUrls.USER_SIGN_IN, data)
+            const response = await axios.post(apiUrls.USER_SIGN_IN, data)
             console.log(response.data, 'res data')
             const {username, user_id, user_role, jwt_token} = response.data
 

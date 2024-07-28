@@ -3,8 +3,7 @@ import {devtools} from "zustand/middleware";
 import { BASE_URL } from '@/common/constants/baseUrl';
 import {notification} from "antd";
 import axios, { AxiosResponse } from 'axios';
-
-const PRODUCTS_URL = BASE_URL+'/api/goods'
+import { apiUrls } from '../constants/urls';
 
 
 interface IProduct {
@@ -29,7 +28,7 @@ export const useProductsStore = create(devtools<IProductsStore>((set) => ({
     getProducts: async () => {
 
         try {
-            const products: AxiosResponse = await axios.get(PRODUCTS_URL)
+            const products: AxiosResponse = await axios.get(apiUrls.PRODUCTS)
 
             set((state: IProductsStore) => ({
                 ...state, 

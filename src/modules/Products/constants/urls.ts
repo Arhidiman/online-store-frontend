@@ -1,5 +1,5 @@
+import { BASE_URL } from "@/common/constants/baseUrl"
+
 export const apiUrls = {
-    USER_SIGN_UP: '/api/user/sign-up',
-    USER_SIGN_IN: '/api/user/sign-in',
-    USER_GET: '/api/user/get',
+    PRODUCTS: BASE_URL+'/api/goods'
 }

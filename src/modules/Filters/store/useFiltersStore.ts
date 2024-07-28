@@ -3,7 +3,6 @@ import { devtools } from "zustand/middleware"
 import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
-
 interface IFiltersStore {
     filters: {
         priceLess: number,

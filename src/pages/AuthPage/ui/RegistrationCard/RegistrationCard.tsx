@@ -1,4 +1,4 @@
-import {Card, Form, Input, Button} from "antd";
+import {Card, Form, Input} from "antd";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import {useNavigate} from "react-router-dom";
