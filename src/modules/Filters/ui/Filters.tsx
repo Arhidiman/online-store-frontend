@@ -1,42 +1,20 @@
-import {Checkbox, Collapse, Slider} from "antd";
-import type { CollapseProps } from 'antd';
+import {Checkbox, Slider, Space} from "antd";
 import './Filters.scss'
-import {SyntheticEvent, useState} from "react";
+import {useState} from "react";
 
 
-const prices = [
-    { label: 'До 10000', value: '10000' },
-    { label: 'До 50000', value: '50000' },
-    { label: 'До 100000', value: '100000' },
+const checkBoxFilters = [
+    { label: 'Со скидкой', value: 'discount' },
+    { label: 'В наличии', value: '' },
 ]
 
-const categories = [
-    { label: 'Бытовая техника', value: 'Бытовая техника' },
-    { label: 'Одежда', value: 'Одежда' },
-    { label: 'Инструменты', value: 'Инструменты' },
-];
-
-
-const pricesItems: CollapseProps['items'] = [
-    {
-        key: '1',
-        label: 'Цены',
-        children:  <Checkbox.Group options={prices}/>,
-    }
+const sorters = [
+    { label: 'Цена', value: 'price' },
+    { label: 'Рейтинг', value: 'rating' },
 ]
-
-const categoriesItems: CollapseProps['items'] = [
-    {
-        key: '2',
-        label: 'Категории',
-        children:  <Checkbox.Group options={categories}/>,
-    }
-]
-
 
 
 export const Filters = () => {
-
 
     const [price, setPrice] = useState<number>(5000)
 
@@ -45,14 +23,23 @@ export const Filters = () => {
         setPrice(e)
     }
 
-    console.log(price)
-
     return (
         <div className="filters">
-            <h2>Фильтры</h2>
             <div className='filters-container'>
-                <Slider defaultValue={500} className='filters-slider' onChange={updatePrice} min={0} max={1000000}/>
-                <p>до {price} Р</p>
+                <div>
+                    <h2>Фильтры</h2>
+                    <Space direction="vertical">
+                        <Space>
+                            <Slider defaultValue={500} className='filters-slider' onChange={updatePrice} min={0} max={1000000}/>
+                            <p>до {price} Р</p>
+                        </Space>
+                        <Checkbox.Group options={checkBoxFilters}/>
+                    </Space>
+                </div>
+                <div>
+                    <h2>Сортировка</h2>
+                    <Checkbox.Group options={sorters}/>
+                </div> 
             </div>
         </div>
     )

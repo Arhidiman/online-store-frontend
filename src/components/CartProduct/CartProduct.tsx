@@ -1,6 +1,5 @@
 import mockProduct from './mock/mockProduct.jpg'
-import { Button } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
+import { ActionButton } from '@/UI/ActionButton'
 import './CartProduct.scss'
 
 
@@ -13,7 +12,7 @@ export const CartProduct = () =>
             <p>Название товара</p>
             <p>Цена: 1000000р</p>   
         </div>
-        <Button><DeleteOutlined/></Button>
+        <ActionButton type='delete' actionHandler={() => console.log('delete from cart')}/>
     </div>
 
 

@@ -43,7 +43,7 @@ export function Products() {
 
         <>
             <div>
-                <h2 className='products-title'>Products</h2>
+                <h2 className='products-title'>Товары</h2>
                 <div className="products-content">
                     <div className='products-cards'>
                         {
