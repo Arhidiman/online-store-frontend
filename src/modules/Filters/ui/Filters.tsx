@@ -16,9 +16,11 @@ const sorters = [
 
 export const Filters = () => {
 
-    const {setPriceMax, setFiltersOptions, setSortersOptions} = useFiltersStore()
+    const {setPriceMax, setFiltersOptions, setSortersOptions, filtersData} = useFiltersStore()
 
     const [price] = useState<number>(5000)
+
+    const {filters} = filtersData
 
     return (
         <div className="filters">
@@ -27,8 +29,8 @@ export const Filters = () => {
                     <h2>Фильтры</h2>
                     <Space direction="vertical">
                         <Space>
-                            <Slider defaultValue={500} className='filters-slider' onChange={setPriceMax} min={0} max={1000000}/>
-                            <p>до {price} Р</p>
+                            <Slider defaultValue={50000} className='filters-slider' onChange={setPriceMax} min={0} max={50000}/>
+                            <p>до {filters && filters.priceMax ? filters.priceMax : ''} Р</p>
                         </Space>
                         <Checkbox.Group options={checkBoxFilters} onChange={setFiltersOptions}/>
                     </Space>

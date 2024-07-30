@@ -19,6 +19,8 @@ export function Products() {
     }
 
     useEffect(() => {
+
+        console.log(filtersData, 'filters')
         getProducts(filtersData)
     }, [filtersData])
 

@@ -21,7 +21,7 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
 
     filtersData: {
         filters: {
-            priceMax: 1000000,
+            priceMax: 50000,
             options: []
         },
         sorters: {options: []},
@@ -29,7 +29,7 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
     setPriceMax: (value) => {
         set((state: IFiltersStore) => {
             return {...state,
-                filters: {...state.filtersData, 
+                filtersData: {...state.filtersData, 
                     filters: {
                         ...state.filtersData.filters, priceMax: value
                     }   
