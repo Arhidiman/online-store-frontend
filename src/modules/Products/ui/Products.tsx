@@ -2,12 +2,15 @@ import {useEffect, useState} from "react"
 import Modal from "@/components/Modal/Modal.tsx";
 import {ProductCard} from "@/components/ProductCard/ProductCard.tsx"
 import { useProductsStore } from "../store/productsStore";
-import "./Products.scss"
+import { useFiltersStore } from "@/modules/Filters"
 import { Button } from "antd";
+import "./Products.scss"
 
 export function Products() {
 
     const {products, getProducts} = useProductsStore()
+    const {filtersData} = useFiltersStore()
+
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -16,9 +19,8 @@ export function Products() {
     }
 
     useEffect(() => {
-        getProducts()
-
-    }, [])
+        getProducts(filtersData)
+    }, [filtersData])
 
 
     return (

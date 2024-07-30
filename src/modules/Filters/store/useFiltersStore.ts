@@ -4,12 +4,14 @@ import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
 interface IFiltersStore {
-    filters: {
-        priceLess: number,
-        options: CheckboxValueType[]
+    filtersData: {
+        filters: {
+            priceMax: number,
+            options: CheckboxValueType[]
+        },
+        sorters: {options: CheckboxValueType[]}        
     },
-    sorters: {options: CheckboxValueType[]},
-    setPriceLess: (value: number) => void,
+    setPriceMax: (value: number) => void,
     setFiltersOptions: (filters: CheckboxValueType[]) => void,
     setSortersOptions: (filters: CheckboxValueType[]) => void
 }
@@ -17,15 +19,21 @@ interface IFiltersStore {
 
 export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
 
-    filters: {
-        priceLess: 5000,
-        options: []
+    filtersData: {
+        filters: {
+            priceMax: 1000000,
+            options: []
+        },
+        sorters: {options: []},
     },
-    sorters: {options: []},
-    setPriceLess: (value) => {
+    setPriceMax: (value) => {
         set((state: IFiltersStore) => {
             return {...state,
-                filters: {...state.filters, priceLess: value}
+                filters: {...state.filtersData, 
+                    filters: {
+                        ...state.filtersData.filters, priceMax: value
+                    }   
+                }
             }
         })
     } ,
@@ -33,7 +41,7 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
         set((state: IFiltersStore) => {
             return {
                 ...state, 
-                filters: {...state.filters, options: filters}
+                filtersData: {...state.filtersData, filters: {...state.filtersData.filters, options: filters}}
             }
         })
     },
@@ -41,12 +49,8 @@ export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
         set((state: IFiltersStore) => {
             return {
                 ...state, 
-                sorters: {...state.sorters, options: sorters}
+                filtersData: {...state.filtersData, sorters: {...state.filtersData.sorters, options: sorters}}
             }
         })
     }
-    
-
-
-
 }))))

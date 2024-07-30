@@ -1,9 +1,9 @@
 import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
-import { BASE_URL } from '@/common/constants/baseUrl';
 import {notification} from "antd";
 import axios, { AxiosResponse } from 'axios';
 import { apiUrls } from '../constants/urls';
+import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
 interface IProduct {
@@ -17,7 +17,16 @@ interface IProductsStore {
     username: string | null,
     user_id: string | null,
     products: IProduct[],
-    getProducts: () => Promise<void>
+    getProducts: (payload: IFiltersPayload) => Promise<void>
+}
+
+
+interface IFiltersPayload {
+    filters: {
+        priceMax: number,
+        options: CheckboxValueType[]
+    },
+    sorters: {options: CheckboxValueType[]},
 }
 
 export const useProductsStore = create(devtools<IProductsStore>((set) => ({
@@ -25,17 +34,13 @@ export const useProductsStore = create(devtools<IProductsStore>((set) => ({
     user_id: null,
     products: [],
 
-    getProducts: async () => {
-
+    getProducts: async (payload: IFiltersPayload) => {
         try {
-            const products: AxiosResponse = await axios.get(apiUrls.PRODUCTS)
-
+            const products: AxiosResponse = await axios.post(apiUrls.PRODUCTS, payload)
             set((state: IProductsStore) => ({
                 ...state, 
                 products: products.data
             }))
-            notification.success({message: 'Данные товаров получены'})
-
         } catch (err) {
             notification.error({message: 'Ошибка при загрузке списка товаров'})
         }
