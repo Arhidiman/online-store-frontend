@@ -45,11 +45,9 @@ export const AppHeader = () =>  {
             },
             {
                 label: 'Вход',
-                key: routes.auth,
+                key: routes.auth
             }
         ]
-
-    console.log(theme, theme)
 
     return (
         <Header className='header' style={headerColor()}>

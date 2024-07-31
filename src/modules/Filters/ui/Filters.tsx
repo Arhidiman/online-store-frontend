@@ -1,8 +1,6 @@
 import {Checkbox, Slider, Space} from "antd";
-import {useState} from "react"
 import { useFiltersStore } from "../store/useFiltersStore";
 import './Filters.scss'
-
 
 const checkBoxFilters = [
     { label: 'Со скидкой', value: 'discount' },
@@ -18,8 +16,6 @@ export const Filters = () => {
 
     const {setPriceMax, setFiltersOptions, setSortersOptions, filtersData} = useFiltersStore()
 
-    const [price] = useState<number>(5000)
-
     const {filters} = filtersData
 
     return (
@@ -30,7 +26,7 @@ export const Filters = () => {
                     <Space direction="vertical">
                         <Space>
                             <Slider defaultValue={50000} className='filters-slider' onChange={setPriceMax} min={0} max={50000}/>
-                            <p>до {filters && filters.priceMax ? filters.priceMax : ''} Р</p>
+                            <p>до {filters && filters.priceMax ? filters.priceMax : ''} ₽</p>
                         </Space>
                         <Checkbox.Group options={checkBoxFilters} onChange={setFiltersOptions}/>
                     </Space>
