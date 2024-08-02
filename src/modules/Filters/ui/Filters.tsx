@@ -1,6 +1,6 @@
 import {Checkbox, Slider, Space} from "antd";
 import { useFiltersStore } from "../store/useFiltersStore";
-import './Filters.scss'
+import './FIlters.scss'
 
 const checkBoxFilters = [
     { label: 'Со скидкой', value: 'discount' },

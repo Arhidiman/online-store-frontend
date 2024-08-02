@@ -1,0 +1,38 @@
+.carousel {
+    min-width: 800px;
+    border: solid grey 2px;
+    border-radius: 7px;
+    overflow: hidden;
+    &-container {
+        width: 90%;
+        margin: auto;
+        h3 {
+            margin: 0
+        }
+    }
+
+   
+}
+
+
+.slide-enter {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  .slide-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 700ms, transform 700ms;
+  }
+  
+  .slide-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .slide-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 700ms, transform 700ms;
+  }
