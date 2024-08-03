@@ -9,7 +9,7 @@
         width: 16px;
         height: 16px;
         border-radius: 1000px;
-        background: #7B7B7B;
+        background: #ffffff;
     }
     &-button {
         margin: 0 0 0 -4px;
@@ -74,13 +74,13 @@
     width: 100px;
 }
 
-.ant-menu-item > .ant-menu-title-content  {
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 22px;
-    letter-spacing: 0em;
-}
+// .ant-menu-item > .ant-menu-title-content  {
+//     font-family: Montserrat;
+//     font-size: 14px;
+//     font-weight: 400;
+//     line-height: 22px;
+//     letter-spacing: 0em;
+// }
 
 .ant-menu-item, .ant-menu-submenu-title {
     padding-left: 17px !important;

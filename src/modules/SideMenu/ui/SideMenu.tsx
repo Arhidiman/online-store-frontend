@@ -20,13 +20,33 @@ export const  SideMenu: React.FC = () => {
       setCollapsed(!collapsed);
     }
 
+    const itemsData: TMenuItem[] = menuItems()
 
-    const items: TMenuItem[] = menuItems(
-        <CollapseButton collapsed={collapsed}
-        toggler={toggleCollapsed}/>,
-    )
+    const collapseMenuItem = () => {
+      return (
+          <Menu.Item 
+              className='collapse-logo-item'
+              title='Свернуть меню'
+              icon={<CollapseButton collapsed={collapsed} toggler={toggleCollapsed}/>}
+            >
+          </Menu.Item>
+      )
+    }
 
-    console.log(collapsed, 'colapsed')
+    const items = (itemsData: TMenuItem[]) => {
+        return (
+          itemsData && itemsData.map((item: TMenuItem) => 
+              <Menu.Item 
+                  key={item.key}
+                  title={item.title} 
+                  icon={circle}
+                >
+                {item.label}
+              </Menu.Item>
+          )
+        )
+    }
+
 
     return (        
       <div className="side-menu" style={{ width: 242}}>
@@ -37,32 +57,7 @@ export const  SideMenu: React.FC = () => {
             forceSubMenuRender   
         >
           {
-            items && items.map((item: TMenuItem, i: number) => 
-                item.children
-                ?
-                <Menu.SubMenu
-                  key={item.key} 
-                  icon={circle} 
-                  title={item.label} 
-                  popupClassName={item.popupClassName}
-                  onTitleMouseEnter={() => addTitleToPopup(item.label as string, item.popupClassName as string)}
-                >
-                    {item.children.map((submenuItem: TMenuItem) =>
-                        <Menu.Item key={submenuItem.key}>
-                            {submenuItem.label}
-                        </Menu.Item>
-                    )}
-                </Menu.SubMenu>
-                :
-                <Menu.Item 
-                    key={item.key}
-                    className={addClassnameByItemNum(i, items.length)}
-                    title={item.title} 
-                    icon={item.icon}
-                  >
-                  {item.label}
-                </Menu.Item>
-            )
+            [collapseMenuItem(), ...items(itemsData)]
           }     
         </Menu>
       </div>
