@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { images } from "../mockData/images"
 import './CustomCarousel.scss'
 
 export const CustomCarousel = () =>  {
@@ -26,9 +27,10 @@ export const CustomCarousel = () =>  {
         <div className="carousel">
             <div className="carousel-container">
                 <SwitchTransition>
-                    <CSSTransition key={currentPage} timeout={700} classNames="slide" mountOnEnter unmountOnExit>
+                    <CSSTransition key={currentPage} timeout={700} classNames="fade" mountOnEnter unmountOnExit>
                         {
-                            <h3 style={{fontSize: '100px'}}>{`Content ${currentPage}`}</h3>
+                            <img className='carousel-image' src = {images[currentPage]} alt="banner"/>
+                            // <h3 style={{fontSize: '100px'}}>{`Content ${currentPage}`}</h3>
                         }
                     </CSSTransition>
                 </SwitchTransition>
