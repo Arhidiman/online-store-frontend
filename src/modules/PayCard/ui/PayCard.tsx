@@ -20,9 +20,6 @@ export const PayCard = ({switchPaymentModal}: IPayCard) => {
                 <h2 className='pay-card_title'>Стоимость заказа: 10000р</h2>
                 <p>Скидка 100р</p>
                 <p>К оплате 9900р</p>
-                <Button type='primary' onClick={openModal}>
-                    Перейти к оплате
-                </Button>
             </div>
         </div>
     )
