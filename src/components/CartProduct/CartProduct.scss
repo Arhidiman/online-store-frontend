@@ -3,19 +3,36 @@
     gap: 20px;
     align-items: center;
     justify-content: space-between;
-    max-width: 500px;
+    min-width: 700px;
     padding-right: 20px;
-    border: solid lightslategray 2px;
     border-radius: 10px;
-    background: linear-gradient(to right, #009ff7, #f700f7);
     img {
         object-fit: cover;
         width: 100%;
-        height:100%
+        height:100%;
+        border-radius: 10px
     }
     &-image {
         width: 100px;
         height: 150px;
     }
-    
+    &_name {
+        color: #222222;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 24px;
+    }
+    &_price {
+        color: #222222;
+        font-family: Montserrat;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    &-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
 }

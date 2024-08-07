@@ -29,6 +29,8 @@ body {
   margin: 0;
   place-items: center;
   justify-content: center;
+  background: #ececec;
+
 }
 
 h1 {

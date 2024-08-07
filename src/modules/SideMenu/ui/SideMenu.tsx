@@ -12,7 +12,7 @@ const circle = <span className="side-menu-circle"></span>
 
 export const  SideMenu: React.FC = () => {
 
-    const {theme, switchTheme} = useGlobalStore()
+    const {theme} = useGlobalStore()
 
     const [collapsed, setCollapsed] = useState(true)
     
