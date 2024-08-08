@@ -20,7 +20,6 @@ export const CartPage = () => {
     const [isModalOpened, setIsModalOpened] = useState(false)
     const closeModal = () => setIsModalOpened(false)
 
-
     return (
         <>
             <Modal
@@ -36,7 +35,7 @@ export const CartPage = () => {
                     <div className="cart-page-content">
                         <Cart/>
                         <PayCard switchPaymentModal={setIsModalOpened}/>
-                        <DeliveryForm/>
+                        <DeliveryForm confirmHandler={setIsModalOpened}/>
                     </div>
                 </div>
             </div>
