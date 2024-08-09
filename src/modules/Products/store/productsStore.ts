@@ -3,7 +3,6 @@ import {devtools} from "zustand/middleware";
 import {notification} from "antd";
 import axios, { AxiosResponse } from 'axios';
 import { apiUrls } from '../constants/urls';
-import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
 interface IProduct {
