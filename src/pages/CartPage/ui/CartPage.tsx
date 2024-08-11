@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Space, Modal } from 'antd'
 import { useForm } from "antd/es/form/Form"
-import { PayCard } from '@/modules/PayCard'
+import { OrderCard } from '@/modules/OrderCard'
 import { DeliveryForm } from '@/modules/DeliveryForm'
 import { PaymentForm } from '@/modules/PaymentForm'
 import { Cart } from '@/modules/Cart'
@@ -34,7 +34,7 @@ export const CartPage = () => {
                 <div className="cart-page-container">
                     <div className="cart-page-content">
                         <Cart/>
-                        <PayCard switchPaymentModal={setIsModalOpened}/>
+                        <OrderCard/>
                         <DeliveryForm confirmHandler={setIsModalOpened}/>
                     </div>
                 </div>

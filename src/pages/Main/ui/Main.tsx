@@ -20,7 +20,7 @@ export const Main = () =>  {
 
     return (
         <div className='main-container'>
-            <SideMenu/>
+            <SideMenu itemsData={categories}/>
             <div className="main-top">
                 <Filters/>
                 <CustomCarousel/>

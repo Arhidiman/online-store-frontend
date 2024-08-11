@@ -24,7 +24,7 @@ export const DeliveryForm = ({confirmHandler}: IDeliveryForm) => {
 
     return (
         <div className="delivery-form">
-            <h2>Введите данные для доставки заказа</h2>
+            <h2 className="delivery-form_title">Введите данные для доставки заказа</h2>
             <Form form={form}>
                 <Form.Item rules={validationRules} name='city'>
                     <Input placeholder="Город"/>

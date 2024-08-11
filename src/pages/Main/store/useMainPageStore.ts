@@ -5,7 +5,7 @@ import {devtools} from "zustand/middleware";
 import { apiUrls } from '../constants/urls'
 
 interface IMainPage {
-    categories: string[],
+    categories: {category_id: number, name: string}[],
     getCategories: () => Promise<void>
 }
 

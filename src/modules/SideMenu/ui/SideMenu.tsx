@@ -5,12 +5,22 @@ import { addClassnameByItemNum } from "../lib/addClassnameByItemNum";
 import { Menu } from "antd";
 import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx"
 import { useGlobalStore } from "@/store/useGlobalStore";
-import type { TMenuItem } from "..//mock/sideMenuItems";
+// import type { TMenuItem } from "..//mock/sideMenuItems";
 import "./SideMenu.scss"
+
+
+type TMenuItem = {
+  category_id: number,  
+  name: string
+}
+
+interface ISideMenu {
+  itemsData: TMenuItem[]
+}
     
 const circle = <span className="side-menu-circle"></span>
 
-export const  SideMenu: React.FC = () => {
+export const  SideMenu = ({itemsData}: ISideMenu) => {
 
     const {theme} = useGlobalStore()
 
@@ -20,7 +30,7 @@ export const  SideMenu: React.FC = () => {
       setCollapsed(!collapsed);
     }
 
-    const itemsData: TMenuItem[] = menuItems()
+    // const itemsData: TMenuItem[] = menuItems()
 
     const collapseMenuItem = () => {
       return (
@@ -33,15 +43,27 @@ export const  SideMenu: React.FC = () => {
       )
     }
 
+    const firstMenuItem = () => {
+      return (
+          <Menu.Item 
+              title='Все категории'
+              icon={circle}
+            >
+            Все категории
+          </Menu.Item>
+      )
+    }
+
     const items = (itemsData: TMenuItem[]) => {
         return (
           itemsData && itemsData.map((item: TMenuItem) => 
               <Menu.Item 
-                  key={item.key}
-                  title={item.title} 
+                  key={item.category_id}
+                  title={item.name} 
                   icon={circle}
+                  // onChange={() => console.log()}
                 >
-                {item.label}
+                {item.name}
               </Menu.Item>
           )
         )
@@ -55,9 +77,12 @@ export const  SideMenu: React.FC = () => {
             mode="inline"
             inlineCollapsed={collapsed} 
             forceSubMenuRender   
+            onChange={(e) => console.log(e)}
+            onClick={(e)=>console.log(e)}
+
         >
           {
-            [collapseMenuItem(), ...items(itemsData)]
+            [collapseMenuItem(), [firstMenuItem(), ...items(itemsData)]]
           }     
         </Menu>
       </div>

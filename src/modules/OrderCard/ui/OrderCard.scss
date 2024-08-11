@@ -1,15 +1,27 @@
-.pay-card {
+.order-card {
     position: fixed;
     top: 150px;
     right: 150px;
     min-width: 700px;
     max-width: 900px;
-    height: 250px;
+    height: 150px;
     border: solid grey 2px;
     border-radius: 15px;
     background: linear-gradient(to bottom right, #00f729, #9c00f7 );
     &-container {
-        width: 80%;
+        width: 95%;
         margin: 0 auto
+    }
+    &_title {
+        margin: 10px 0px;
+        color: #000000
+    }
+    &_discount {
+        font-size: 20px;
+        color: #000000
+    }
+    &_price {
+        font-size: 20px;
+        color: #000000
     }
 }
