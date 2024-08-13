@@ -5,6 +5,7 @@
     left: 0;
     width: 242px;
     height: 100vh;
+    pointer-events: none;
     &-circle {
         width: 16px;
         height: 16px;
@@ -186,4 +187,11 @@
     text-overflow: ellipsis;
     font-size: 16px;
     color: lightgray
+}
+
+
+.side-menu {
+    .ant-menu {
+        pointer-events: auto !important;
+    }
 }

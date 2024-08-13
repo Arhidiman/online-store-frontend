@@ -12,29 +12,26 @@ interface IProductCard {
     cardSign: ReactNode
 }
 
-const cardContent = (url: string, price: number, description: string) => 
-    <div>
+const cardContent = (url: string, price: number) => 
+    <div className="product-card">
         <img alt='product image' src={url}/>
         <div className="product-card-content-bottom">
             <div className="product-card-content-bottom-container">
-                <Space size={30}>
-                    <p className="product-card-content-bottom-price">Цена: {price} Р</p>     
-                    <ActionButton text="В корзину" actionHandler={() => console.log('to cart')}/>
-                </Space>
-                <p>{description}</p>
+                <p className="product-card-content-bottom-price">{price} Р</p>     
+                <ActionButton className="product-card_button" text="В корзину" actionHandler={() => console.log('to cart')}/>
             </div>
         </div>
     </div>
 
-export const ProductCard = ({name, product_id, image, price, description, cardSign}: IProductCard) => {
+export const ProductCard = ({name, product_id, image, price, description}: IProductCard) => {
     return <Card
+        key={product_id}
         title={name}
         content={description}
-        extra={cardSign}
         className='product-card-custom'
     >
         <div className='product-card-content-container'>
-            {cardContent(image, price, description)}
+            {cardContent(image, price)}
         </div>
     </Card>
 }

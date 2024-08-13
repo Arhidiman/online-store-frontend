@@ -27,8 +27,8 @@ export function Products() {
 
     return (
         <>
-            <div>
-                <h2 className='products-title'>Товары</h2>
+            <div className="products">
+                <h2 className='products_title'>Товары</h2>
                 <div className="products-content">
                     <div className='products-cards'>
                         {
