@@ -14,9 +14,10 @@ const sorters = [
 
 export const Filters = () => {
 
-    const {setPriceMax, setFiltersOptions, setSortersOptions, filtersData} = useFiltersStore()
+    // const {setPriceMax, setFiltersOptions, setSortersOptions, filtersData} = useFiltersStore()
+    const { filters, setFilters } = useFiltersStore()
 
-    const {filters} = filtersData
+    const {price} = filters
 
     return (
         <div className="filters">
@@ -25,15 +26,15 @@ export const Filters = () => {
                     <h2>Фильтры</h2>
                     <Space direction="vertical">
                         <Space>
-                            <Slider defaultValue={50000} className='filters-slider' onChange={setPriceMax} min={0} max={50000}/>
-                            <p>до {filters && filters.priceMax ? filters.priceMax : ''} ₽</p>
+                            <Slider defaultValue={50000} className='filters-slider' onChange={(price: number) => setFilters({ price }) } min={0} max={50000}/>
+                            <p>до {price || ''} ₽</p>
                         </Space>
-                        <Checkbox.Group options={checkBoxFilters} onChange={setFiltersOptions}/>
+                        <Checkbox.Group options={checkBoxFilters} onChange={(checkboxes) => console.log(checkboxes, 'checkboxes')}/>
                     </Space>
                 </div>
                 <div>
                     <h2>Сортировка</h2>
-                    <Checkbox.Group options={sorters} onChange={setSortersOptions}/>
+                    {/* <Checkbox.Group options={sorters} onChange={setSortersOptions}/> */}
                 </div> 
             </div>
         </div>

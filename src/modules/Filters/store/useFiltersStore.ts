@@ -1,56 +1,30 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
-import type { CheckboxValueType } from "antd/es/checkbox/Group"
 
 
-interface IFiltersStore {
-    filtersData: {
-        filters: {
-            priceMax: number,
-            options: CheckboxValueType[]
-        },
-        sorters: {options: CheckboxValueType[]}        
-    },
-    setPriceMax: (value: number) => void,
-    setFiltersOptions: (filters: CheckboxValueType[]) => void,
-    setSortersOptions: (filters: CheckboxValueType[]) => void
+export type ProductsFiltersDto = {
+    price?: number,
+    in_stock?: boolean,
+    discount?: boolean,
+    priceSort?: 'ASC' | 'DESC'
+    ratingSort?: 'ASC' | 'DESC',
+    showCount?: number
+}
+
+export type ProductsFiltersStore = {
+    filters: ProductsFiltersDto,
+    setFilters: Function
 }
 
 
-export const useFiltersStore = create(devtools<IFiltersStore>((set => ({
+export const useFiltersStore = create(devtools<ProductsFiltersStore>((set => ({
 
-    filtersData: {
-        filters: {
-            priceMax: 50000,
-            options: []
-        },
-        sorters: {options: []},
-    },
-    setPriceMax: (value) => {
-        set((state: IFiltersStore) => {
-            return {...state,
-                filtersData: {...state.filtersData, 
-                    filters: {
-                        ...state.filtersData.filters, priceMax: value
-                    }   
-                }
-            }
-        })
-    } ,
-    setFiltersOptions: (filters: CheckboxValueType[]) => {
-        set((state: IFiltersStore) => {
-            return {
-                ...state, 
-                filtersData: {...state.filtersData, filters: {...state.filtersData.filters, options: filters}}
-            }
-        })
-    },
-    setSortersOptions: (sorters: CheckboxValueType[]) => {
-        set((state: IFiltersStore) => {
-            return {
-                ...state, 
-                filtersData: {...state.filtersData, sorters: {...state.filtersData.sorters, options: sorters}}
-            }
-        })
+    filters: {},
+    setFilters: (filters: Partial<ProductsFiltersDto> ) => {
+        set((state: ProductsFiltersStore) => ({
+            ...state, filters
+        }))
+
     }
+
 }))))

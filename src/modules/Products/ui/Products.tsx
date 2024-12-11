@@ -1,29 +1,24 @@
 import {useEffect, useState} from "react"
-import Modal from "@/components/Modal/Modal.tsx";
 import {ProductCard} from "@/components/ProductCard/ProductCard.tsx"
-import { useProductsStore } from "../store/productsStore";
 import { useFiltersStore } from "@/modules/Filters"
 import { Button } from "antd";
+import { useQuery } from '@apollo/client'
+import { GET_SORTED_PRODUCTS } from "../api/queries";
 import "./Products.scss"
+
+import type { ProductDto } from "../api/dto";
+
 
 export function Products() {
 
-    const {products, getProducts} = useProductsStore()
-    const {filtersData} = useFiltersStore()
-
-
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const closeModal = () => {
-        console.log('delete todo')
-    }
+    const { filters } = useFiltersStore()
+    const [products, setProducts] = useState<ProductDto[] | []>([])
+    const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
 
     useEffect(() => {
-
-        console.log(filtersData, 'filters')
-        getProducts(filtersData)
-    }, [filtersData])
-
+        const { sortedProducts: products } = data || []
+        setProducts(products as ProductDto[])
+    }, [data])
 
     return (
         <>
@@ -32,11 +27,11 @@ export function Products() {
                 <div className="products-content">
                     <div className='products-cards'>
                         {
-                            products.map(({name, product_id, price, image}) =>
+                            products && products.map(({id, name, price, image}: ProductDto) =>
                                 <ProductCard
-                                    key={product_id}
+                                    key={id}
                                     name={name}
-                                    product_id={product_id}
+                                    product_id={id}
                                     price={price}
                                     image={image}
                                     description='description'
@@ -48,12 +43,6 @@ export function Products() {
                     <Button className="products_show-more" type="primary">Показать ещё</Button>
                 </div>
             </div>
-            <Modal
-                confirmHandler={closeModal}
-                cancelHandler={() => setIsModalOpen(false)}
-                title={'Подтвердите удаление задачи'}
-                isOpen={isModalOpen}
-            />
         </>
 
     )

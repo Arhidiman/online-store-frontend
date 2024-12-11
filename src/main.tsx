@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {ConfigProvider} from "antd";
+import { ApolloClient, InMemoryCache , ApolloProvider } from '@apollo/client';
 import {COLORS} from './common/constants/themeColors.ts'
 import App from './App.tsx'
 import './index.css'
@@ -25,12 +26,30 @@ const themeConfig = {
     }
 };
 
+
+export const apolloClient = new ApolloClient({uri: 'http://localhost:7000', cache: new InMemoryCache(
+
+    {
+        typePolicies: {
+            User: {
+                keyFields: ["id"]
+            }
+        }
+    }
+)})
+
+
+
+
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
       <ConfigProvider
           theme={themeConfig}
       >
-          <App />
+        <ApolloProvider client={apolloClient}>
+            <App />
+        </ApolloProvider>
       </ConfigProvider>
   </React.StrictMode>,
 )

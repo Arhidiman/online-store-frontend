@@ -5,7 +5,6 @@ import { addClassnameByItemNum } from "../lib/addClassnameByItemNum";
 import { Menu } from "antd";
 import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx"
 import { useGlobalStore } from "@/store/useGlobalStore";
-// import type { TMenuItem } from "..//mock/sideMenuItems";
 import "./SideMenu.scss"
 
 
@@ -29,8 +28,6 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
     }
-
-    // const itemsData: TMenuItem[] = menuItems()
 
     const collapseMenuItem = () => {
       return (
