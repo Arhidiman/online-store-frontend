@@ -1,5 +1,6 @@
 import {Checkbox, Slider, Space} from "antd";
 import { useFiltersStore } from "../store/useFiltersStore";
+import { Select } from "antd";
 import './FIlters.scss'
 
 const checkBoxFilters = [
@@ -8,16 +9,38 @@ const checkBoxFilters = [
 ]
 
 const sorters = [
-    { label: 'Цена', value: 'price' },
-    { label: 'Рейтинг', value: 'rating' },
+    { label: 'Сначала дешёвые', value: 'priceSort' },
+    { label: 'С высоким рейтингом', value: 'ratingSort' },
 ]
+
 
 export const Filters = () => {
 
-    // const {setPriceMax, setFiltersOptions, setSortersOptions, filtersData} = useFiltersStore()
     const { filters, setFilters } = useFiltersStore()
-
     const {price} = filters
+
+    const setCheckBoxFilters = (e: string[]) => {
+        setFilters({
+            in_stock: e.includes('in_stock') ? true : false,
+            discount: e.includes('discount') ? true : false
+        })
+    }
+
+    const setCheckBoxSorters = (e: string) => {
+
+        const sorters: {priceSort?: string, ratingSort?: string} = {}
+        
+        if(e.includes('priceSort')) {
+            sorters.priceSort = 'ASC'
+            sorters.ratingSort = undefined
+        }
+        if(e.includes('ratingSort')) {
+            sorters.ratingSort = 'DESC'
+            sorters.priceSort = undefined
+        }
+
+        setFilters(sorters)
+    }
 
     return (
         <div className="filters">
@@ -29,12 +52,12 @@ export const Filters = () => {
                             <Slider defaultValue={50000} className='filters-slider' onChange={(price: number) => setFilters({ price }) } min={0} max={50000}/>
                             <p>до {price || ''} ₽</p>
                         </Space>
-                        <Checkbox.Group options={checkBoxFilters} onChange={(checkboxes) => console.log(checkboxes, 'checkboxes')}/>
+                        <Checkbox.Group options={checkBoxFilters} onChange={setCheckBoxFilters}/>
                     </Space>
                 </div>
                 <div>
                     <h2>Сортировка</h2>
-                    {/* <Checkbox.Group options={sorters} onChange={setSortersOptions}/> */}
+                    <Select defaultValue="Выберите сортировку" style={{ width: 250 }} onChange={setCheckBoxSorters} options={ sorters }/>
                 </div> 
             </div>
         </div>

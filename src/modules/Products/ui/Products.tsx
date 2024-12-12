@@ -15,6 +15,10 @@ export function Products() {
     const [products, setProducts] = useState<ProductDto[] | []>([])
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
 
+
+
+    console.log(filters, 'FILTERS IN PRODUCTS COMPONENT')
+
     useEffect(() => {
         const { sortedProducts: products } = data || []
         setProducts(products as ProductDto[])
