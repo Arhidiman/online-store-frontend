@@ -1,32 +1,47 @@
 import React, { useState } from "react"
-import { addTitleToPopup } from "..//lib/addTitleToPopup";
-import { menuItems } from "../mock/sideMenuItems";
-import { addClassnameByItemNum } from "../lib/addClassnameByItemNum";
 import { Menu } from "antd";
 import { CollapseButton } from "@/modules/SideMenu/ui/CollapseButton/CollapseButton.tsx"
-import { useGlobalStore } from "@/store/useGlobalStore";
+import { useGlobalStore } from "@/store/useGlobalStore"
+import { useFiltersStore } from "../../Filters";
+import type { FormEvent, FormEventHandler } from "react";
+import type { MenuInfo } from "rc-menu/lib/interface"; // Тип для объекта события
+
 import "./SideMenu.scss"
 
 
+type TMenuInfo = {
+  key: string,
+  [key: string]: unknown
+}
+
 type TMenuItem = {
-  category_id: number,  
+  id: number,  
   name: string
 }
 
 interface ISideMenu {
-  itemsData: TMenuItem[]
+  itemsData: TMenuItem[] | []
 }
+
     
 const circle = <span className="side-menu-circle"></span>
 
 export const  SideMenu = ({itemsData}: ISideMenu) => {
 
     const {theme} = useGlobalStore()
-
+    const { filters, setFilters } = useFiltersStore()
     const [collapsed, setCollapsed] = useState(true)
     
     const toggleCollapsed = () => {
-      setCollapsed(!collapsed);
+      setCollapsed(!collapsed)
+    }
+
+    const setCategoryFilter = (e: MenuInfo) => {
+      setFilters({ ...filters, category: Number(e.key)})
+    }
+
+    const resetCategoriesFilter = () => {
+      setFilters({ ...filters, category: null})
     }
 
     const collapseMenuItem = () => {
@@ -45,26 +60,28 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
           <Menu.Item 
               title='Все категории'
               icon={circle}
+              onClick={resetCategoriesFilter}
             >
             Все категории
           </Menu.Item>
       )
     }
 
-    const items = (itemsData: TMenuItem[]) => {
+    const items = (itemsData: TMenuItem[] | []) => {
         return (
-          itemsData && itemsData.map((item: TMenuItem) => 
+          itemsData && itemsData.map(({id, name}: TMenuItem) => 
               <Menu.Item 
-                  key={item.category_id}
-                  title={item.name} 
+                  key={id}
+                  title={name} 
                   icon={circle}
-                  // onChange={() => console.log()}
+                  onClick={setCategoryFilter}
                 >
-                {item.name}
+                {name}
               </Menu.Item>
           )
         )
     }
+
 
 
     return (        
@@ -74,12 +91,11 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
             mode="inline"
             inlineCollapsed={collapsed} 
             forceSubMenuRender   
-            onChange={(e) => console.log(e)}
             onClick={(e)=>console.log(e)}
 
         >
           {
-            [collapseMenuItem(), [firstMenuItem(), ...items(itemsData)]]
+            [collapseMenuItem(), [firstMenuItem(), ...items(itemsData) || []]]
           }     
         </Menu>
       </div>

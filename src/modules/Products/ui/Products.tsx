@@ -11,18 +11,21 @@ import type { ProductDto } from "../api/dto";
 
 export function Products() {
 
-    const { filters } = useFiltersStore()
+    const { filters, setFilters } = useFiltersStore()
     const [products, setProducts] = useState<ProductDto[] | []>([])
+    const [showMore] = useState<number>(6)
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
 
-
-
-    console.log(filters, 'FILTERS IN PRODUCTS COMPONENT')
 
     useEffect(() => {
         const { sortedProducts: products } = data || []
         setProducts(products as ProductDto[])
     }, [data])
+
+
+    const showMoreProducts = () => {
+        setFilters({ ...filters, showCount: filters.showCount + showMore})
+    }
 
     return (
         <>
@@ -44,7 +47,7 @@ export function Products() {
                             )
                         }
                     </div>
-                    <Button className="products_show-more" type="primary">Показать ещё</Button>
+                    <Button className="products_show-more" type="primary" onClick={showMoreProducts}>Показать ещё</Button>
                 </div>
             </div>
         </>
