@@ -1,12 +1,14 @@
 import {useEffect, useState} from "react"
-import {ProductCard} from "@/components/ProductCard/ProductCard.tsx"
-import { useFiltersStore } from "@/modules/Filters"
 import { Button } from "antd";
 import { useQuery } from '@apollo/client'
-import { GET_SORTED_PRODUCTS } from "../api/queries";
+import {ProductCard} from "@/components/ProductCard/ui/ProductCard"
+import { useFiltersStore } from "@/modules/Filters"
+import { useGlobalStore } from "@/store/useGlobalStore"
+import { GET_SORTED_PRODUCTS } from "../api/queries"
+import { GET_CURRENT_ORDER } from "@/queries/queries"
+import type { ProductDto } from "../api/dto";
 import "./Products.scss"
 
-import type { ProductDto } from "../api/dto";
 
 
 export function Products() {
@@ -14,7 +16,13 @@ export function Products() {
     const { filters, setFilters } = useFiltersStore()
     const [products, setProducts] = useState<ProductDto[] | []>([])
     const [showMore] = useState<number>(6)
+
+
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
+    const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: 102 }})
+
+    const { orderData, setOrderData } = useGlobalStore()
+
 
 
     useEffect(() => {
@@ -22,10 +30,38 @@ export function Products() {
         setProducts(products as ProductDto[])
     }, [data])
 
+    useEffect(() => {
+
+        if (orderGQLData) {
+
+            console.log(orderGQLData, 'orderGQLData' )
+
+            const { getCurrentOrderByUserId: order } = orderGQLData
+
+            const { id } = order || {}
+
+            setOrderData({ ...orderData, order: { id } })
+
+            console.log(order, 'current order')        
+        }
+
+    }, [orderGQLData])
+
+
 
     const showMoreProducts = () => {
         setFilters({ ...filters, showCount: filters.showCount + showMore})
     }
+
+
+    
+
+
+
+
+
+   
+
 
     return (
         <>

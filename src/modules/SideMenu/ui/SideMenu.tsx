@@ -5,14 +5,8 @@ import { useGlobalStore } from "@/store/useGlobalStore"
 import { useFiltersStore } from "../../Filters";
 import type { FormEvent, FormEventHandler } from "react";
 import type { MenuInfo } from "rc-menu/lib/interface"; // Тип для объекта события
-
 import "./SideMenu.scss"
 
-
-type TMenuInfo = {
-  key: string,
-  [key: string]: unknown
-}
 
 type TMenuItem = {
   id: number,  

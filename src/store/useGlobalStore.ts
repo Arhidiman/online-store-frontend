@@ -18,7 +18,7 @@ export interface IGlobalStore {
     setOrderData: (order: Partial<TOrderData>) => void
 }
 
-type TOrderData = { order: OrderDto | {}, items: OrderDto[] | []}
+type TOrderData = { order: OrderDto, items: OrderDto[] | []}
 
 interface IUser {
     username: string,

@@ -6,6 +6,6 @@ export type OrderItemDto = {
 }
 
 export type OrderDto = {
-    id: number,
-    user_id: number
+    id?: number,
+    user_id?: number,
 }
