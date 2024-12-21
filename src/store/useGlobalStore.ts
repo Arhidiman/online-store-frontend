@@ -18,7 +18,7 @@ export interface IGlobalStore {
     setOrderData: (order: Partial<TOrderData>) => void
 }
 
-type TOrderData = { order: OrderDto, items: OrderDto[] | []}
+type TOrderData = { order: OrderDto, items: OrderItemDto[] | []}
 
 interface IUser {
     username: string,
@@ -27,7 +27,7 @@ interface IUser {
     jwt_token ? : string,
 }
 
-export const useGlobalStore = create(devtools<IGlobalStore>((set, state) => ({
+export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
     currentUser: {} as IUser,
     theme: 'light',

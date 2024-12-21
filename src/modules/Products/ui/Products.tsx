@@ -33,16 +33,9 @@ export function Products() {
     useEffect(() => {
 
         if (orderGQLData) {
-
-            console.log(orderGQLData, 'orderGQLData' )
-
             const { getCurrentOrderByUserId: order } = orderGQLData
-
             const { id } = order || {}
-
             setOrderData({ ...orderData, order: { id } })
-
-            console.log(order, 'current order')        
         }
 
     }, [orderGQLData])
