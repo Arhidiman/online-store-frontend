@@ -30,17 +30,15 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
     const [ createOrder, { data: createOrderData }] = useMutation(CREATE_ORDER)
     const [ addOrderItem, { data: addOrderItemData }] = useMutation(ADD_ORDER_ITEM)
 
-    if (orderData.order.id) {
 
-        console.log(orderData.order.id, product_id)
-    }
-
-    const { data: orderItemData } = useQuery(GET_ORDER_ITEM, { variables: { order_id: orderData.order.id, product_id} })
-
-
+    const { data: orderItemData } = useQuery(
+        GET_ORDER_ITEM, 
+        { 
+            variables: { order_id: orderData.order.id, product_id},
+            fetchPolicy: "network-only"
+        }
+    )
    
-
-
     const createOrderHandler = () => {
         createOrder({ variables: { user_id: mockUser, product_id,  product_count: initialProductCount } })
     }
@@ -62,22 +60,29 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
     useEffect(() => {
         if (addOrderItemData) {
             const data = addOrderItemData && addOrderItemData.addOrderItem
-            const { id } = data || {}
-            setOrderData({ ...orderData, ...( id && {items: { id }} )   })
+            const { id, product_id } = data || {}
+            setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
         }
     }, [addOrderItemData, inCart])
 
 
     useEffect(() => {
-
-        if (orderItemData) {
-            const { product_id: orderProductId } = orderItemData.orderItem || {}
-
-
-            console.log(orderProductId, product_id)
-            setInCart(product_id === orderProductId)
+        if (orderData) {
+            const orderItem = orderData.items.find(item => item.product_id === product_id)
+            const inCart = (orderItem && orderItem.product_id === product_id) || false
+            setInCart(inCart)
+            console.log(orderItem, 'orderItem')
         }
-    }, [orderItemData, orderData])
+    }, [orderData])
+
+    useEffect(() => {
+        if (orderItemData) {
+            const { id, product_id: orderProductId } = orderItemData.orderItem || {}
+            setInCart(product_id === orderProductId)
+            setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
+
+        }
+    }, [orderItemData])
 
 
     return <Card
