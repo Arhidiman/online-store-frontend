@@ -20,7 +20,6 @@ export function Products() {
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
     const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: 102 }})
 
-
     const { sortedProducts: products } = data || []
 
     useEffect(() => {
@@ -38,32 +37,30 @@ export function Products() {
     }
 
     return (
-            <div className="products">
-                <h2 className='products_title'>Товары</h2>
-                <div className="products-content">
-                    <div className='products-cards'>
-                        {
-                            products && products.map(({id, name, price, image}: ProductDto) =>
-                                <ProductCard
-                                    key={id}
-                                    name={name}
-                                    product_id={id}
-                                    price={price}
-                                    image={image}
-                                    description='description'
-                                    cardSign={<span>+</span>}
-                                />
-                            )
-                        }
-                    </div>
+        <div className="products">
+            <h2 className='products_title'>Товары</h2>
+            <div className="products-content">
+                <div className='products-cards'>
                     {
-                        products 
-                            && products.length > 0
-                            && <ActionButton className="products_show-more" type="down" text = 'Показать ещё' actionHandler={showMoreProducts}/>
+                        products && products.map(({id, name, price, image}: ProductDto) =>
+                            <ProductCard
+                                key={id}
+                                name={name}
+                                product_id={id}
+                                price={price}
+                                image={image}
+                                description='description'
+                                cardSign={<span>+</span>}
+                            />
+                        )
                     }
                 </div>
+                {
+                    products 
+                        && products.length > 0
+                        && <ActionButton className="products_show-more" type="down" text = 'Показать ещё' actionHandler={showMoreProducts}/>
+                }
             </div>
-    
-
+        </div>
     )
 }

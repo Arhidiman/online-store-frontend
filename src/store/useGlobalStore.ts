@@ -16,20 +16,20 @@ export interface IGlobalStore {
 type TOrderData = { order: OrderDto, items: OrderItemDto[] | []}
 
 interface IUser {
-    username: string,
-    user_id ? : string,
+    username?: string,
+    user_id ? : number,
     user_role ? : string,
     jwt_token ? : string,
 }
 
 export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
-    currentUser: {} as IUser,
+    currentUser: { user_id: 102 },
     theme: 'light',
     orderData: { order: {}, items: [] }, 
     switchTheme: () => set((state: IGlobalStore) => ({
             ...state,
-            theme: state.theme === 'dark' ? 'light' : 'light' ? 'dark' : 'dark'
+            theme: state.theme === 'dark' ? 'light' : 'dark'
     })),
     setCurrentUser: async (user: IUser) => {
         return {
