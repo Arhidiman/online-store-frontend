@@ -11,7 +11,7 @@ import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
 import './ActionButton.scss'
 
-type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete'
+type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down'
 
 interface IActionButton {
     className?: string
@@ -33,7 +33,7 @@ export const ActionButton = ({className, text, actionHandler, type}: IActionButt
             case 'edit': return <EditOutlined/>
             case 'check': return <CheckOutlined/>
             case 'delete': return <DeleteOutlined/>
-            case 'complete': return <ArrowDownOutlined/>
+            case 'down': return <ArrowDownOutlined/>
         }
     }
 

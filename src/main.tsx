@@ -39,9 +39,6 @@ export const apolloClient = new ApolloClient({uri: 'http://localhost:7000', cach
 )})
 
 
-
-
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
       <ConfigProvider

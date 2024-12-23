@@ -41,6 +41,7 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
     const collapseMenuItem = () => {
       return (
           <Menu.Item 
+              key={'collapse'}
               className='collapse-logo-item'
               title='Свернуть меню'
               icon={<CollapseButton collapsed={collapsed} toggler={toggleCollapsed}/>}
@@ -52,6 +53,7 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
     const firstMenuItem = () => {
       return (
           <Menu.Item 
+              key={'all'}
               title='Все категории'
               icon={circle}
               onClick={resetCategoriesFilter}

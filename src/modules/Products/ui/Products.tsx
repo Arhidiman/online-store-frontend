@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react"
-import { Button } from "antd";
 import { useQuery } from '@apollo/client'
+import { ActionButton } from "@/UI/ActionButton";
 import {ProductCard} from "@/components/ProductCard/ui/ProductCard"
 import { useFiltersStore } from "@/modules/Filters"
 import { useGlobalStore } from "@/store/useGlobalStore"
@@ -10,28 +10,20 @@ import type { ProductDto } from "../api/dto";
 import "./Products.scss"
 
 
-
 export function Products() {
 
     const { filters, setFilters } = useFiltersStore()
-    const [products, setProducts] = useState<ProductDto[] | []>([])
-    const [showMore] = useState<number>(6)
+    const { orderData, setOrderData } = useGlobalStore()
 
+    const [showMore] = useState<number>(6)
 
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
     const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: 102 }})
 
-    const { orderData, setOrderData } = useGlobalStore()
 
-
-
-    useEffect(() => {
-        const { sortedProducts: products } = data || []
-        setProducts(products as ProductDto[])
-    }, [data])
+    const { sortedProducts: products } = data || []
 
     useEffect(() => {
-
         if (orderGQLData) {
             const { getCurrentOrderByUserId: order } = orderGQLData
             const { id } = order || {}
@@ -41,23 +33,11 @@ export function Products() {
     }, [orderGQLData])
 
 
-
     const showMoreProducts = () => {
         setFilters({ ...filters, showCount: filters.showCount + showMore})
     }
 
-
-    
-
-
-
-
-
-   
-
-
     return (
-        <>
             <div className="products">
                 <h2 className='products_title'>Товары</h2>
                 <div className="products-content">
@@ -76,10 +56,14 @@ export function Products() {
                             )
                         }
                     </div>
-                    <Button className="products_show-more" type="primary" onClick={showMoreProducts}>Показать ещё</Button>
+                    {
+                        products 
+                            && products.length > 0
+                            && <ActionButton className="products_show-more" type="down" text = 'Показать ещё' actionHandler={showMoreProducts}/>
+                    }
                 </div>
             </div>
-        </>
+    
 
     )
 }

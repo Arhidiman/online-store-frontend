@@ -1,12 +1,7 @@
 import {create} from 'zustand'
 import {devtools} from "zustand/middleware";
-import { theme, type MenuTheme } from 'antd';
+import { type MenuTheme } from 'antd';
 import type { OrderDto, OrderItemDto } from './dto';
-
-// import axios from "axios";
-// import {notification} from "antd";
-// import {BASE_URL} from "@/common/constants.ts/baseUrl.ts";
-// import {apiUrls} from "@/api/apiUrls.ts";
 
 
 export interface IGlobalStore {

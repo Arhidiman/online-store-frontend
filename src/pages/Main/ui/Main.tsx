@@ -11,13 +11,8 @@ import './Main.scss'
 
 export const Main = () =>  {
 
-
-
-
     const [categories, setCategories] = useState<CategoriesDto[] | []>([])
     const { data } = useQuery(queries.GET_CATEGORIES)
-
-    console.log(data, 'categories data')
 
  
     useEffect(() => {

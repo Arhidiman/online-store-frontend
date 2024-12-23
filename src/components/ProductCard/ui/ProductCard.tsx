@@ -30,12 +30,12 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
     const [ createOrder, { data: createOrderData }] = useMutation(CREATE_ORDER)
     const [ addOrderItem, { data: addOrderItemData }] = useMutation(ADD_ORDER_ITEM)
 
-
     const { data: orderItemData } = useQuery(
         GET_ORDER_ITEM, 
         { 
             variables: { order_id: orderData.order.id, product_id},
-            fetchPolicy: "network-only"
+            fetchPolicy: "network-only",
+            skip: !orderData.order.id
         }
     )
    
@@ -54,7 +54,7 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
             const { id } = createOrderData.createOrder
             setOrderData({ ...orderData, order: { id }})
         }
-    }, [createOrderData, addOrderItemData])
+    }, [createOrderData])
 
 
     useEffect(() => {
@@ -71,7 +71,6 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
             const orderItem = orderData.items.find(item => item.product_id === product_id)
             const inCart = (orderItem && orderItem.product_id === product_id) || false
             setInCart(inCart)
-            console.log(orderItem, 'orderItem')
         }
     }, [orderData])
 
@@ -80,7 +79,6 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
             const { id, product_id: orderProductId } = orderItemData.orderItem || {}
             setInCart(product_id === orderProductId)
             setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
-
         }
     }, [orderItemData])
 
