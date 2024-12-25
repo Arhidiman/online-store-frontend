@@ -27,7 +27,7 @@ export const Cart = () => {
                     return <CartProduct
                                 key={id}
                                 id={id}
-                                name={name}
+                                name={name} 
                                 image={image}
                                 product_count={product_count}
                                 order_id={order_id}

@@ -18,9 +18,10 @@ interface IActionButton {
     text?: string
     actionHandler?: MouseEventHandler<HTMLElement>
     type?: TActions
+    disabled?: boolean
 }
 
-export const ActionButton = ({className, text, actionHandler, type}: IActionButton) =>  {
+export const ActionButton = ({className, text, actionHandler, type, disabled}: IActionButton) =>  {
 
     const {theme} = useGlobalStore()
 
@@ -42,6 +43,7 @@ export const ActionButton = ({className, text, actionHandler, type}: IActionButt
             className={`action-button ${className && className}`}
             type={themeSwitcher()}
             onClick={actionHandler}
+            disabled={disabled}
         >
             {text}
             {getActionIcon(type)}
