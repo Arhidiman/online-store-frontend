@@ -44,6 +44,11 @@
     &_button {
         width: 70px;
         height: 40px;
+        &_count {
+            width: 40px;
+            height: 40px;
+            background: #ff3764;
+        }
     }
     &-content {
         display: flex;

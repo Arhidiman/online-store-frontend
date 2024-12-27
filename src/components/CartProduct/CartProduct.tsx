@@ -28,9 +28,9 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
                      
                     <Space direction='horizontal' align='center'>
                         <Space direction='horizontal' align='center'>
-                            <ActionButton className='cart-product_button' type='reduce' actionHandler={ reduceItems } disabled={ count === 1 }/>
+                            <ActionButton className='cart-product_button_count' type='reduce' actionHandler={ reduceItems } disabled={ count === 1 }/>
                             <p className='cart-product_count'>{ count }</p> 
-                            <ActionButton className='cart-product_button' type='add' actionHandler={ addItem }/>
+                            <ActionButton className='cart-product_button_count' type='add' actionHandler={ addItem }/>
                             <ActionButton className='cart-product_button' type='delete' actionHandler={() => console.log('delete from cart')}/>
                         </Space>
                     </Space>
