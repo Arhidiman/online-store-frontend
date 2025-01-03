@@ -27,7 +27,7 @@ const themeConfig = {
 };
 
 
-export const apolloClient = new ApolloClient({uri: 'http://localhost:7000', cache: new InMemoryCache(
+export const apolloClient = new ApolloClient({uri: 'http://localhost:10000', cache: new InMemoryCache(
 
     {
         typePolicies: {
