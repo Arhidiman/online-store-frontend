@@ -14,7 +14,6 @@ export const Main = () =>  {
     const [categories, setCategories] = useState<CategoriesDto[] | []>([])
     const { data } = useQuery(queries.GET_CATEGORIES)
 
- 
     useEffect(() => {
         const { categories } = data || []
         setCategories(categories as CategoriesDto[])

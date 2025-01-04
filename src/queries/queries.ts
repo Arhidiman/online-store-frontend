@@ -7,3 +7,11 @@ export const GET_CURRENT_ORDER = gql`
         }
     }
 `
+
+export const VALIDATE_JWT = gql`
+    query validate ($jwt_token: String!) {
+        validate(jwt_token: $jwt_token) {
+            username, id
+        }
+    }
+`

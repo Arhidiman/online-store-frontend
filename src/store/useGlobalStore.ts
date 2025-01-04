@@ -24,7 +24,7 @@ interface IUser {
 
 export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
-    currentUser: { user_id: 102 },
+    currentUser: {},
     theme: 'light',
     orderData: { order: {}, items: [] }, 
     switchTheme: () => set((state: IGlobalStore) => ({

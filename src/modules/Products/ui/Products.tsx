@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react"
 import { useQuery } from '@apollo/client'
 import { ActionButton } from "@/UI/ActionButton";
-import {ProductCard} from "@/components/ProductCard/ui/ProductCard"
+import { ProductCard } from "@/components/ProductCard/ui/ProductCard"
 import { useFiltersStore } from "@/modules/Filters"
 import { useGlobalStore } from "@/store/useGlobalStore"
 import { GET_SORTED_PRODUCTS } from "../api/queries"
 import { GET_CURRENT_ORDER } from "@/queries/queries"
+import { VALIDATE_JWT } from "@/queries/queries";
 import type { ProductDto } from "../api/dto";
 import "./Products.scss"
 
@@ -14,13 +15,20 @@ export function Products() {
 
     const { filters, setFilters } = useFiltersStore()
     const { orderData, setOrderData } = useGlobalStore()
+    const [ userId, setUserId ] = useState<number | undefined>()
 
     const [showMore] = useState<number>(6)
 
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
-    const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: 102 }})
+    const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: userId }, skip: !userId})
 
     const { sortedProducts: products } = data || []
+
+    const jwt_token: string | null = localStorage.getItem('token')
+    const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token})
+
+
+    console.log(validUserData, 'validUserData')
 
     useEffect(() => {
         if (orderGQLData) {
@@ -30,6 +38,15 @@ export function Products() {
         }
 
     }, [orderGQLData])
+
+    useEffect(() => {
+        if (validUserData) {
+            const { validate } = validUserData
+            const { id: user_id } = validate || {}
+            setUserId(user_id)
+        }
+
+    }, [validUserData])
 
 
     const showMoreProducts = () => {
@@ -49,8 +66,8 @@ export function Products() {
                                 product_id={id}
                                 price={price}
                                 image={image}
+                                userId={userId}
                                 description='description'
-                                cardSign={<span>+</span>}
                             />
                         )
                     }

@@ -1,29 +1,24 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from 'antd'
-import {  useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { ActionButton } from "@/UI/ActionButton"
 import { useGlobalStore } from "@/store/useGlobalStore"
 import { CREATE_ORDER, ADD_ORDER_ITEM, GET_ORDER_ITEM } from "../queries";
-
-import type { CreateOrderDto, AddOrderItemDto } from "../dto";
-
 import './ProductCard.scss'
 
 interface IProductCard {
-    name: string
+    name: string,
     product_id: number,
-    image: string
-    price: number
+    image: string,
+    price: number,
+    userId: number | undefined,
     description: string
-    cardSign: ReactNode
 }
 
 
-export const ProductCard = ({name, product_id, image, price, description}: IProductCard) => {
+export const ProductCard = ({name, product_id, image, price, userId, description}: IProductCard) => {
 
-    const mockUser = 102
-
-    const { currentUser, orderData, setOrderData } = useGlobalStore()
+    const { orderData, setOrderData } = useGlobalStore()
     const [ initialProductCount ] = useState<number>(1)
     const [ inCart, setInCart ] = useState<boolean>(false)
 
@@ -38,13 +33,14 @@ export const ProductCard = ({name, product_id, image, price, description}: IProd
             skip: !orderData.order.id
         }
     )
+
    
     const createOrderHandler = () => {
-        createOrder({ variables: { user_id: mockUser, product_id,  product_count: initialProductCount } })
+        userId && createOrder({ variables: { user_id: userId, product_id,  product_count: initialProductCount } })
     }
     
     const addOrderItemHandler = () => {
-        addOrderItem({ variables: { order_id: Number(orderData.order.id), product_id,  product_count: 1 } })
+        userId && addOrderItem({ variables: { order_id: Number(orderData.order.id), product_id,  product_count: 1 } })
     }
 
     const addItemClickHandler = !orderData.order.id ? createOrderHandler : addOrderItemHandler
