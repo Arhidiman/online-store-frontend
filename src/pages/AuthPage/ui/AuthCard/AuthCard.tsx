@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { Card, Form, Input, notification } from "antd";
 import { useAuthPageStore } from "@/pages/AuthPage/store/useAuthPageStore.ts"
+import { headerStore } from "@/modules/Header/store/headerStore";
 import { useNavigate } from "react-router-dom";
 import { ActionButton } from "@/UI/ActionButton";
-import { useMutation, useQuery } from "@apollo/client"
-import { SIGN_IN } from "../../queries";
+import { useMutation } from "@apollo/client"
+import { routes } from "@/common/constants/routes";
+import { SIGN_IN } from "@/pages/AuthPage/queries";
 import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
     const { switchAuthReg } = useAuthPageStore()
+    const { setCurrentTab } = headerStore()
 
     const navigate = useNavigate()
 
@@ -43,7 +46,8 @@ export const AuthCard = () =>  {
             localStorage.setItem('token', jwt_token)
             localStorage.setItem('username', username)
             notification.success({ message: `Аутентификация прошла успешно\n Вы вошли как ${ username }`})
-            navigate('/')
+            navigate(routes.main)
+            setCurrentTab(routes.main)
         }
 
         if (error) {
@@ -52,6 +56,8 @@ export const AuthCard = () =>  {
         }
 
     }, [data, error])
+
+
 
     return (
         <Card className='auth-card' title='Вход'>

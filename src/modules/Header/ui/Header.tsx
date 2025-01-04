@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import {UserOutlined, LogoutOutlined} from "@ant-design/icons"
@@ -5,6 +6,7 @@ import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import type {SwitchChangeEventHandler} from "antd/es/switch";
 import {Switch, Tabs} from "antd";
 import { Header } from "antd/es/layout/layout";
+import { headerStore } from "../store/headerStore";
 import { routes } from "@/common/constants/routes"
 import {COLORS} from '@/common/constants/themeColors'
 import './Header.scss'
@@ -15,8 +17,9 @@ export const AppHeader = () =>  {
     const navigate = useNavigate()
 
     const {theme, switchTheme} = useGlobalStore()
+    const { currentTab, setCurrentTab } = headerStore()
+    const [ username, setUsername] = useState<String | null>('')
 
-    const {authUser} = useAuthPageStore()
 
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
@@ -37,7 +40,7 @@ export const AppHeader = () =>  {
             {
                 label: 'Корзина',
                 key: routes.cart,
-                theme: theme
+                theme: theme,
             },
             {
                 label: 'История покупок',
@@ -49,17 +52,31 @@ export const AppHeader = () =>  {
             }
         ]
 
+    useEffect(() => {
+        setUsername(localStorage.getItem('username') || "")
+    }, [currentTab])
+
+    useEffect(() => {
+        navigate(currentTab)
+    }, [currentTab])
+
+    const navigateByTab = (tab: string) => {
+        navigate(tab)
+        setCurrentTab(tab)
+    }
+
     return (
         <Header className='header' style={headerColor()}>
             <div className='header-container'>
                 <Tabs
                     items={tabItems}
-                    onChange={(key) => navigate(key)}
+                    onChange={navigateByTab}
+                    activeKey={currentTab}
                 />
                 <div className="header-right">
                     <div className='header-user'>
                         <UserOutlined />
-                        <p>{authUser.username}</p>
+                        <p>{ username }</p>
                         <LogoutOutlined/>
                     </div>
                     {themeSwitcher(theme, switchTheme)}
