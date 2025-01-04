@@ -3,7 +3,7 @@ import { Card, Form, Input, notification } from "antd";
 import { useAuthPageStore } from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import { useNavigate } from "react-router-dom";
 import { ActionButton } from "@/UI/ActionButton";
-import { useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { SIGN_IN } from "../../queries";
 import './AuthCard.scss'
 
@@ -14,9 +14,8 @@ export const AuthCard = () =>  {
     const navigate = useNavigate()
 
     const [ username, setUsername ] = useState<string>('')
-    const [ password, setPassword ] = useState<string>('')
-
     const [form] = Form.useForm()
+
     const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     const submitAuth = async () => {
@@ -25,28 +24,25 @@ export const AuthCard = () =>  {
             const { username, password } = userData
             
             setUsername(username)
-            setPassword(password)
+
+            authenticate({ variables: { username, password}})
 
         } catch (error) {
             console.log(error)
         }
     }
 
-    const { data, error } = useQuery(SIGN_IN, 
-        { 
-            variables: { username, password },
-            skip: !username || !password 
-        }
-    )
+    const [authenticate, { data, error }] = useMutation(SIGN_IN)
 
     useEffect(() => {
         const { signIn } = data || {}
 
         if (signIn) {
-            const { username, jwt_token } = signIn
-            notification.success({ message: `Аутентификация прошла успешно\n Вы вошли как ${ username }`})
+            const { jwt_token } = signIn
+    
             localStorage.setItem('token', jwt_token)
             localStorage.setItem('username', username)
+            notification.success({ message: `Аутентификация прошла успешно\n Вы вошли как ${ username }`})
             navigate('/')
         }
 

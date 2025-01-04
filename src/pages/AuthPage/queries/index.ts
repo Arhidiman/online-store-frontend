@@ -2,9 +2,9 @@ import { gql } from "@apollo/client"
 
 
 export const SIGN_IN = gql`
-    query signIn ($username: String!, $password: String!) {
+    mutation signIn ($username: String!, $password: String!) {
         signIn(username: $username, password: $password) {
-            username, id, jwt_token
+            jwt_token
         }
     }
 `
