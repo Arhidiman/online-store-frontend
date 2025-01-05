@@ -7,10 +7,9 @@ import { DELETE_ORDER_ITEM, GET_ORDER_ITEMS } from '../queries'
 import type { OrderItemsInfoDto } from '@/modules/Cart/dto'
 import './CartProduct.scss'
 
-export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDto) => {
+export const CartProduct = ({ id, name, image, price, product_count }: OrderItemsInfoDto) => {
 
     const [ count, setCount ] = useState<number>(product_count || 1)
-    const [ mockPrice ] = useState<number>(1000)
 
     const addItem = () => setCount(count + 1)
     const reduceItems = () => setCount(count === 1 ? count : count - 1)
@@ -18,6 +17,7 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
 
     const { orderData, setOrderData} = useGlobalStore()
 
+    console.log(name, price, product_count)
 
     const [ deleteItem, { data, error }] = useMutation(DELETE_ORDER_ITEM, 
         
@@ -29,24 +29,21 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
 
     const { data: orderItemsData } = useQuery(GET_ORDER_ITEMS, { variables: { order_id: orderData.order.id }, skip: !orderData.order.id, fetchPolicy: 'network-only' })
 
-
     const deleteOrderItem = () => {
         deleteItem( { variables: { id }, fetchPolicy: 'network-only' })
     }
 
-    // if (error) {
-    //     notification.error(error)
-    // }
-
-
-    // console.log(data, 'data')
-    // console.log(error, 'error')
-    // console.log(orderData.items, 'items')
-    // console.log(orderItemsData, 'orderItemsData')
+    if (error) {
+        notification.error(error)
+    }
 
     useEffect(() => {
         if (orderItemsData) {
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = orderItemsData || {}
+
+            console.log(orderItems, 'orderItems')
+
+
             setOrderData({ ...orderData, items: orderItems})
         }
 
@@ -64,7 +61,7 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
                         <p className='cart-product_name'>{name}</p>
                         <p className='cart-product_description'>Описание описание описание описание описание описание описание описание описание</p>
                     </Space>
-                    <p className='cart-product_price'>{ count*mockPrice} ₽</p>   
+                    <p className='cart-product_price'>{ count*price} ₽</p>   
                      
                     <Space direction='horizontal' align='center'>
                         <Space direction='horizontal' align='center'>

@@ -44,23 +44,28 @@ export const Cart = () => {
         if (data) {
 
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = data || {}
+
+
+            // console.log(orderItems, 'orderItems')
+
             setOrderData({ ...orderData, items: orderItems})
         }
 
     }, [data])
 
-    console.log(orderData.items, 'orderData.items')
-    
+    // console.log(orderData, 'orderData')
+
     return (
         <div className="cart">
             <h2 className="cart-title">Корзина</h2>
             {
-                orderData.items && orderData.items.map(({ id, name, image, product_count, order_id }: OrderItemsInfoDto) =>{
+                orderData.items && orderData.items.map(({ id, name, image, price, product_count, order_id }: OrderItemsInfoDto) =>{
                     return <CartProduct
                                 key={id}
                                 id={id}
                                 name={name} 
                                 image={image}
+                                price={price}
                                 product_count={product_count}
                                 order_id={order_id}
                             />

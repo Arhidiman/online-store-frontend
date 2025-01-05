@@ -12,7 +12,7 @@ export const GET_ORDER_ITEMS = gql`
         getOrderItemsInfo(order_id: $order_id) {
             order_id,
             product_count,
-            id, name, image
+            id, name, image, price
         }
     }
 `
