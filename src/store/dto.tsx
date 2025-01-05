@@ -1,8 +1,12 @@
+
+
 export type OrderItemDto = {
-    id: number,
-    order_id?: number,
+    order_id: number,
     product_id?: number,
-    product_count?: number
+    product_count?: number,
+    id: number,
+    name: string,
+    image: string
 }
 
 export type OrderDto = {

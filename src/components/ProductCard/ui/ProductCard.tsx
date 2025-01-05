@@ -33,7 +33,6 @@ export const ProductCard = ({name, product_id, image, price, userId, description
             skip: !orderData.order.id
         }
     )
-
    
     const createOrderHandler = () => {
         userId && createOrder({ variables: { user_id: userId, product_id,  product_count: initialProductCount } })
@@ -57,7 +56,11 @@ export const ProductCard = ({name, product_id, image, price, userId, description
         if (addOrderItemData) {
             const data = addOrderItemData && addOrderItemData.addOrderItem
             const { id, product_id } = data || {}
-            setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
+
+            if (orderData.items.every(item => item.id != id)) {
+                setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
+            }
+
         }
     }, [addOrderItemData, inCart])
 
@@ -74,7 +77,11 @@ export const ProductCard = ({name, product_id, image, price, userId, description
         if (orderItemData) {
             const { id, product_id: orderProductId } = orderItemData.orderItem || {}
             setInCart(product_id === orderProductId)
-            setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
+
+            if (orderData.items.every(item => item.id != id)) {
+                setOrderData({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
+            }
+
         }
     }, [orderItemData])
 

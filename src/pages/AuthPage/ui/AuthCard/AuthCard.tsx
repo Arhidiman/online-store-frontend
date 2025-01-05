@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Form, Input, notification } from "antd";
+import { useGlobalStore } from "@/store/useGlobalStore";
 import { useAuthPageStore } from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import { headerStore } from "@/modules/Header/store/headerStore";
 import { useNavigate } from "react-router-dom";
@@ -11,15 +12,17 @@ import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
+    const { setOrderData } = useGlobalStore()
     const { switchAuthReg } = useAuthPageStore()
     const { setCurrentTab } = headerStore()
-
-    const navigate = useNavigate()
 
     const [ username, setUsername ] = useState<string>('')
     const [form] = Form.useForm()
 
-    const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
+    const [authenticate, { data, error }] = useMutation(SIGN_IN)
+
+    const navigate = useNavigate()
+
 
     const submitAuth = async () => {
         try {
@@ -27,15 +30,12 @@ export const AuthCard = () =>  {
             const { username, password } = userData
             
             setUsername(username)
-
             authenticate({ variables: { username, password}})
-
         } catch (error) {
             console.log(error)
         }
     }
 
-    const [authenticate, { data, error }] = useMutation(SIGN_IN)
 
     useEffect(() => {
         const { signIn } = data || {}
@@ -48,6 +48,8 @@ export const AuthCard = () =>  {
             notification.success({ message: `Аутентификация прошла успешно\n Вы вошли как ${ username }`})
             navigate(routes.main)
             setCurrentTab(routes.main)
+            setOrderData({ items: [] })
+            setOrderData({ order: {} })
         }
 
         if (error) {
@@ -57,7 +59,7 @@ export const AuthCard = () =>  {
 
     }, [data, error])
 
-
+    const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     return (
         <Card className='auth-card' title='Вход'>

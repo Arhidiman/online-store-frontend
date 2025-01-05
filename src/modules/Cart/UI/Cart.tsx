@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { CartProduct } from "@/components/CartProduct/CartProduct"
+import { CartProduct } from "@/components/CartProduct/UI/CartProduct"
 import { useQuery } from "@apollo/client"
 import { GET_ORDER_ITEMS } from "../queries"
 import { GET_CURRENT_ORDER } from "@/queries/queries"
@@ -17,8 +17,6 @@ export const Cart = () => {
     const { data } = useQuery(GET_ORDER_ITEMS, { variables: { order_id: orderData.order.id }, skip: !orderData.order.id, fetchPolicy: 'network-only' })
     const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: userId }, skip: !userId, fetchPolicy: 'network-only'})
 
-
-    const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = data || {}
 
     const jwt_token: string | null = localStorage.getItem('token')
     const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token})
@@ -42,16 +40,22 @@ export const Cart = () => {
 
     }, [orderGQLData])
 
+    useEffect(() => {
+        if (data) {
 
-    console.log(orderItems, orderData.order.id, 'orderGQLData cart')
+            const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = data || {}
+            setOrderData({ ...orderData, items: orderItems})
+        }
+
+    }, [data])
+
+    console.log(orderData.items, 'orderData.items')
     
     return (
-
         <div className="cart">
             <h2 className="cart-title">Корзина</h2>
-
             {
-                orderItems && orderItems.map(({ id, name, image, product_count, order_id }: OrderItemsInfoDto) =>{
+                orderData.items && orderData.items.map(({ id, name, image, product_count, order_id }: OrderItemsInfoDto) =>{
                     return <CartProduct
                                 key={id}
                                 id={id}
@@ -62,8 +66,6 @@ export const Cart = () => {
                             />
                 })
             }
-
         </div>
-
     )
 }

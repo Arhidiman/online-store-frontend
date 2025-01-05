@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import { Space, Divider, notification } from 'antd'
+import { useQuery, useMutation } from '@apollo/client'
 import { ActionButton } from '@/UI/ActionButton'
-import { Space, Divider } from 'antd'
+import { useGlobalStore } from '@/store/useGlobalStore'
+import { DELETE_ORDER_ITEM, GET_ORDER_ITEMS } from '../queries'
 import type { OrderItemsInfoDto } from '@/modules/Cart/dto'
 import './CartProduct.scss'
 
@@ -10,7 +13,44 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
     const [ mockPrice ] = useState<number>(1000)
 
     const addItem = () => setCount(count + 1)
-    const reduceItems = () => setCount(count === 1 ? count :count - 1)
+    const reduceItems = () => setCount(count === 1 ? count : count - 1)
+
+
+    const { orderData, setOrderData} = useGlobalStore()
+
+
+    const [ deleteItem, { data, error }] = useMutation(DELETE_ORDER_ITEM, 
+        
+        {
+            fetchPolicy: 'network-only',
+            refetchQueries: [{ query: GET_ORDER_ITEMS, variables: { order_id: orderData.order.id } }],
+        }
+    )
+
+    const { data: orderItemsData } = useQuery(GET_ORDER_ITEMS, { variables: { order_id: orderData.order.id }, skip: !orderData.order.id, fetchPolicy: 'network-only' })
+
+
+    const deleteOrderItem = () => {
+        deleteItem( { variables: { id }, fetchPolicy: 'network-only' })
+    }
+
+    // if (error) {
+    //     notification.error(error)
+    // }
+
+
+    // console.log(data, 'data')
+    // console.log(error, 'error')
+    // console.log(orderData.items, 'items')
+    // console.log(orderItemsData, 'orderItemsData')
+
+    useEffect(() => {
+        if (orderItemsData) {
+            const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = orderItemsData || {}
+            setOrderData({ ...orderData, items: orderItems})
+        }
+
+    }, [orderItemsData])
 
     return (
         <Space direction='vertical'>
@@ -31,7 +71,7 @@ export const CartProduct = ({ id, name, image, product_count }: OrderItemsInfoDt
                             <ActionButton className='cart-product_button_count' type='reduce' actionHandler={ reduceItems } disabled={ count === 1 }/>
                             <p className='cart-product_count'>{ count }</p> 
                             <ActionButton className='cart-product_button_count' type='add' actionHandler={ addItem }/>
-                            <ActionButton className='cart-product_button' type='delete' actionHandler={() => console.log('delete from cart')}/>
+                            <ActionButton className='cart-product_button' type='delete' actionHandler={deleteOrderItem}/>
                         </Space>
                     </Space>
                 </div>
