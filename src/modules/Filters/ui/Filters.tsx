@@ -1,29 +1,40 @@
 import {Checkbox, Slider, Space} from "antd";
 import { useFiltersStore } from "../store/useFiltersStore";
 import { Select } from "antd";
+import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import './FIlters.scss'
-
-const checkBoxFilters = [
-    { label: 'Со скидкой', value: 'discount' },
-    { label: 'В наличии', value: 'in_stock' },
-]
-
-const sorters = [
-    { label: 'Сначала дешёвые', value: 'priceSort' },
-    { label: 'С высоким рейтингом', value: 'ratingSort' },
-]
-
 
 export const Filters = () => {
 
     const { filters, setFilters } = useFiltersStore()
-    const {price} = filters
+    const { price, maxPrice, in_stock, discount } = filters
 
-    const setCheckBoxFilters = (e: string[]) => {
-        setFilters({
-            in_stock: e.includes('in_stock') ? true : false,
-            discount: e.includes('discount') ? true : false
-        })
+    const checkBoxFilters = [
+        { label: 'Со скидкой', value: 'discount', checked: discount === true },
+        { label: 'В наличии', value: 'in_stock', checked: in_stock === true },
+    ]
+    
+    const sorters = [
+        { label: 'Сначала дешёвые', value: 'priceSort' },
+        { label: 'С высоким рейтингом', value: 'ratingSort' },
+    ]
+
+
+    const setCheckBoxFilters = (e: CheckboxChangeEvent) => {
+
+        const target = e.target
+
+        if (target.value.includes('in_stock')) {
+            setFilters({
+                in_stock: in_stock ? false : true
+            })
+        }
+
+        if (target.value.includes('discount')) {
+            setFilters({
+                discount: discount ? false : true
+            })
+        }
     }
 
     const setCheckBoxSorters = (e: string) => {
@@ -38,7 +49,6 @@ export const Filters = () => {
             sorters.ratingSort = 'DESC'
             sorters.priceSort = undefined
         }
-
         setFilters(sorters)
     }
 
@@ -49,10 +59,16 @@ export const Filters = () => {
                     <h2>Фильтры</h2>
                     <Space direction="vertical">
                         <Space>
-                            <Slider defaultValue={50000} className='filters-slider' onChange={(price: number) => setFilters({ price }) } min={0} max={50000}/>
-                            <p>до {price || ''} ₽</p>
+                            <Slider value={price} defaultValue={maxPrice} className='filters-slider' onChange={(price: number) => setFilters({ price }) } min={0} max={maxPrice}/>
+                            <p>до {price || maxPrice} ₽</p>
                         </Space>
-                        <Checkbox.Group options={checkBoxFilters} onChange={setCheckBoxFilters}/>
+
+                        <Space>
+                            { checkBoxFilters && checkBoxFilters.map(filter => 
+                                    <Checkbox checked={filter.checked} value={filter.value} onChange={setCheckBoxFilters}>{ filter.label}</Checkbox>
+                                )
+                            }
+                        </Space>
                     </Space>
                 </div>
                 <div>
