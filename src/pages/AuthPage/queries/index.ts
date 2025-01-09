@@ -7,3 +7,11 @@ export const SIGN_IN = gql`
         }
     }
 `
+
+export const SIGN_UP = gql`
+    mutation signUp ($username: String!, $password: String!) {
+        signUp(username: $username, password: $password) {
+            jwt_token
+        }
+    }
+`

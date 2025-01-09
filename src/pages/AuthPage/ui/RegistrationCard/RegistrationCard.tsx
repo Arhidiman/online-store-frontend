@@ -1,44 +1,36 @@
-import {Card, Form, Input} from "antd";
+
+import { useEffect, useState } from "react";
+import {Card, Form, Input, notification} from "antd";
+import { useMutation } from "@apollo/client";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
-import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import {useNavigate} from "react-router-dom";
 import { ActionButton } from "@/UI/ActionButton";
-import {SyntheticEvent, useEffect} from "react";
+import { useGlobalStore } from "@/store/useGlobalStore.ts";
+import { headerStore } from "@//modules/Header/store/headerStore";
+import { SIGN_UP } from "../../queries";
+import { routes } from "@/common/constants/routes";
 import './RegistrationCard.scss'
-
 
 export const RegistrationCard = () =>  {
 
-    const {setCurrentUser} = useGlobalStore()
+    const { setOrderData } = useGlobalStore()
+    const { switchAuthReg } = useAuthPageStore()
+    const { setCurrentTab } = headerStore()
 
-    const {
-        switchAuthReg,
-        setUserName,
-        setUserPassword,
-        signUpNewUser,
-        authUser
-    } = useAuthPageStore()
+    const [ username, setUsername ] = useState<string>('')
+    const [form] = Form.useForm()
+
+    const [register, { data, error }] = useMutation(SIGN_UP)
 
     const navigate = useNavigate()
 
-    const setName = (e: SyntheticEvent<HTMLInputElement>) => {
-        const element = e.target as HTMLInputElement
-        console.log(element.value)
-        setUserName(element.value)
-    }
-    const setPassword = (e: SyntheticEvent<HTMLInputElement>) => {
-        const element = e.target as HTMLInputElement
-        setUserPassword(element.value)
-    }
-
-
-    const [form] = Form.useForm()
-    const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
-
     const submitRegistration = async () => {
         try {
-            const user = await form.validateFields()
-            await signUpNewUser(user, navigate)
+            const userData = await form.validateFields()
+            const { username, password } = userData
+            
+            setUsername(username)
+            register({ variables: { username, password}})
         } catch (error) {
             console.log(error)
         }
@@ -46,10 +38,28 @@ export const RegistrationCard = () =>  {
 
 
     useEffect(() => {
+        const { signUp } = data || {}
 
-        setCurrentUser(authUser)
-        console.log(authUser)
-    }, [authUser])
+        if (signUp) {
+            const { jwt_token } = signUp
+    
+            localStorage.setItem('token', jwt_token)
+            localStorage.setItem('username', username)
+            notification.success({ message: `Аутентификация прошла успешно\n Вы вошли как ${ username }`})
+            navigate(routes.main)
+            setCurrentTab(routes.main)
+            setOrderData({ items: [] })
+            setOrderData({ order: {} })
+        }
+
+        if (error) {
+            console.log(error)
+            notification.error(error)
+        }
+
+    }, [data, error])
+
+    const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     return (
         <Card className='registration-card' title='Регистрация'>
@@ -57,13 +67,13 @@ export const RegistrationCard = () =>  {
                 <Form.Item rules={inputRules} name='username'>
                     <div className='input-item' >
                         <span className="label">Имя пользователя</span>
-                        <Input className='input' placeholder='имя' onChange={setName}/>
+                        <Input className='input' placeholder='имя'/>
                     </div>
                 </Form.Item>
                 <Form.Item rules={inputRules} name='password'>
                     <div className='input-item' >
                         <span className="label">Пароль</span>
-                        <Input className='input' placeholder='Пароль' onChange={setPassword}/>
+                        <Input className='input' placeholder='Пароль'/>
                     </div>
                 </Form.Item>
                 <ActionButton className="registration-button" actionHandler={submitRegistration} text="Зарегистрироваться"/>
