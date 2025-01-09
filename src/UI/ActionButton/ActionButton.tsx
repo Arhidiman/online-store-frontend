@@ -4,24 +4,27 @@ import {
     EditOutlined, 
     CheckOutlined, 
     DeleteOutlined, 
-    ArrowDownOutlined
+    ArrowDownOutlined,
+    ArrowLeftOutlined
 } from "@ant-design/icons"
 import {Button} from "antd"
 import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
 import './ActionButton.scss'
 
-type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down'
+type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left'
 
 interface IActionButton {
     className?: string
     text?: string
     actionHandler?: MouseEventHandler<HTMLElement>
-    type?: TActions
-    disabled?: boolean
+    type?: TActions,
+    disabled?: boolean,
+    size?: 'large' | 'middle' | 'small',
+    ghost?: boolean
 }
 
-export const ActionButton = ({className, text, actionHandler, type, disabled}: IActionButton) =>  {
+export const ActionButton = ({className, text, actionHandler, type, disabled, size, ghost}: IActionButton) =>  {
 
     const {theme} = useGlobalStore()
 
@@ -35,6 +38,7 @@ export const ActionButton = ({className, text, actionHandler, type, disabled}: I
             case 'check': return <CheckOutlined/>
             case 'delete': return <DeleteOutlined/>
             case 'down': return <ArrowDownOutlined/>
+            case 'left': return <ArrowLeftOutlined/>
         }
     }
 
@@ -44,6 +48,8 @@ export const ActionButton = ({className, text, actionHandler, type, disabled}: I
             type={themeSwitcher()}
             onClick={actionHandler}
             disabled={disabled}
+            size={size}
+            ghost={ghost}
         >
             {text}
             {getActionIcon(type)}

@@ -16,7 +16,7 @@ export const AppHeader = () =>  {
 
     const navigate = useNavigate()
 
-    const {theme, switchTheme} = useGlobalStore()
+    const { theme, switchTheme, currentUser, setCurrentUser } = useGlobalStore()
     const { currentTab, setCurrentTab } = headerStore()
     const [ username, setUsername] = useState<String | null>('')
 
@@ -30,6 +30,8 @@ export const AppHeader = () =>  {
             background: color
         }
     }
+
+    // console.log(currentUser, 'current user')
 
     const tabItems = [
             {
@@ -53,7 +55,10 @@ export const AppHeader = () =>  {
         ]
 
     useEffect(() => {
-        setUsername(localStorage.getItem('username') || "")
+
+        // console.log(localStorage.getItem('username'), 'localStorage.getItem(username)')
+
+        setCurrentUser(localStorage.getItem('username') || "")
     }, [currentTab])
 
     useEffect(() => {
@@ -76,7 +81,7 @@ export const AppHeader = () =>  {
                 <div className="header-right">
                     <div className='header-user'>
                         <UserOutlined />
-                        <p>{ username }</p>
+                        <p>{ currentUser }</p>
                         <LogoutOutlined/>
                     </div>
                     {themeSwitcher(theme, switchTheme)}

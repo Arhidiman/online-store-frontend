@@ -5,36 +5,34 @@ import type { OrderDto, OrderItemDto } from './dto';
 
 
 export interface IGlobalStore {
-    currentUser: IUser,
+    currentUser: string,
     theme: MenuTheme,
     orderData: TOrderData
     switchTheme: () => void
-    setCurrentUser: (user: IUser) => void
+    setCurrentUser: (user: string) => void
     setOrderData: (order: Partial<TOrderData>) => void
 }
 
 type TOrderData = { order: OrderDto, items: OrderItemDto[] | []}
 
-interface IUser {
-    username?: string,
-    user_id ? : number,
-    user_role ? : string,
-    jwt_token ? : string,
-}
+
 
 export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
-    currentUser: {},
+    currentUser: '',
     theme: 'light',
     orderData: { order: {}, items: [] }, 
     switchTheme: () => set((state: IGlobalStore) => ({
             ...state,
             theme: state.theme === 'dark' ? 'light' : 'dark'
     })),
-    setCurrentUser: async (user: IUser) => {
-        return {
-            currentUser: user
-        }
+    setCurrentUser: async (user: string) => {
+        set((state: IGlobalStore) => {
+            return {
+                ...state,
+                currentUser: user
+            }
+        })        
     },
     setOrderData: (order: Partial<TOrderData>) => set((state: IGlobalStore) => ({
         ...state, orderData: { ...state.orderData, ...order}
