@@ -43,6 +43,10 @@ export function Products() {
             setUserId(user_id)
         }
 
+        if (!validUserData) {
+            setOrderData({ order: {}, items:[]})
+        }
+
     }, [validUserData])
 
 

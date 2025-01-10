@@ -46,7 +46,7 @@ export const Cart = () => {
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = data || {}
 
 
-            // console.log(orderItems, 'orderItems')
+            console.log(orderItems, 'orderItems')
 
             setOrderData({ ...orderData, items: orderItems})
         }
