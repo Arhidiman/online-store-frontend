@@ -18,8 +18,6 @@ export const AppHeader = () =>  {
 
     const { theme, switchTheme, currentUser, setCurrentUser } = useGlobalStore()
     const { currentTab, setCurrentTab } = headerStore()
-    const [ username, setUsername] = useState<String | null>('')
-
 
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
@@ -30,8 +28,6 @@ export const AppHeader = () =>  {
             background: color
         }
     }
-
-    // console.log(currentUser, 'current user')
 
     const tabItems = [
             {
@@ -55,9 +51,6 @@ export const AppHeader = () =>  {
         ]
 
     useEffect(() => {
-
-        // console.log(localStorage.getItem('username'), 'localStorage.getItem(username)')
-
         setCurrentUser(localStorage.getItem('username') || "")
     }, [currentTab])
 

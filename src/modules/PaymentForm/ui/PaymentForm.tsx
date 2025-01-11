@@ -1,4 +1,6 @@
 import { Form, Input } from "antd"
+import { useQuery } from "@apollo/client"
+import { useGlobalStore } from "../../../store/useGlobalStore"
 import type { FormInstance } from 'antd'
 
 const cardNumRules = [{required: true, message: 'Поле не может быть пустым'}]
@@ -10,6 +12,9 @@ interface IPaymentForm {
 }
 
 export const PaymentForm = ({form}: IPaymentForm) => { 
+
+
+    const { orderData } = useGlobalStore()
 
     return (
 

@@ -5,10 +5,10 @@
     min-width: 700px;
     max-width: 900px;
     padding-bottom: 15px;
-    border-bottom: solid grey 2px;
     &-container {
         width: 95%;
-        margin: 0 auto
+        margin: 0 auto;
+        border-bottom: solid grey 2px;
     }
     &_title {
         margin: 10px 0px;

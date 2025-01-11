@@ -10,7 +10,7 @@ import './Cart.scss'
 
 export const Cart = () => {
 
-    const { orderData, setOrderData } = useGlobalStore()
+    const { orderData, setOrderData, setOrderItems, setOrderId } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
 
@@ -35,25 +35,20 @@ export const Cart = () => {
         if (orderGQLData) {
             const { getCurrentOrderByUserId: order } = orderGQLData
             const { id } = order || {}
-            setOrderData({ ...orderData, order: { id } })
+            setOrderId(id)
         }
 
     }, [orderGQLData])
 
     useEffect(() => {
         if (data) {
-
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = data || {}
-
-
-            console.log(orderItems, 'orderItems')
-
-            setOrderData({ ...orderData, items: orderItems})
+            setOrderItems(orderItems)
         }
 
     }, [data])
 
-    // console.log(orderData, 'orderData')
+    console.log(orderData.items, 'orderData')
 
     return (
         <div className="cart">

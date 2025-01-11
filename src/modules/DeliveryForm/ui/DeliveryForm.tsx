@@ -1,8 +1,8 @@
+import { Dispatch } from "react"
 import { Form, Input } from "antd"
 import { useForm } from "antd/es/form/Form"
 import { ActionButton } from "@/UI/ActionButton"
 import './DeliveryForm.scss'
-import { Dispatch } from "react"
 
 
 interface IDeliveryForm {

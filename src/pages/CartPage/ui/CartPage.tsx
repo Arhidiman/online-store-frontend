@@ -28,7 +28,7 @@ export const CartPage = () => {
                 onOk={validateFields}
                 title='Форма оплаты заказа'    
             >
-                <PaymentForm form={form}/>
+            <PaymentForm form={form}/>
             </Modal>
             <div className="cart-page">
                 <div className="cart-page-container">
