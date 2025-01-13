@@ -48,22 +48,27 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
         notification.error(error)
     }
 
+    
+    console.log(orderItemsData, 'orderItemsData')
+
     useEffect(() => {
         if (orderItemsData) {
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = orderItemsData || {}
+
+            // console.log(orderItems)
             setOrderItems(orderItems)
         }
 
     }, [orderItemsData])
 
-    useEffect(() => {
-        const orderItem = orderData.items.find(item => item.id === id)
-        setCount(orderItem && orderItem?.product_count ? orderItem.product_count : 1)
+    // useEffect(() => {
+    //     const orderItem = orderData.items.find(item => item.id === id)
+    //     setCount(orderItem && orderItem?.product_count ? orderItem.product_count : 1)
 
-        console.log(orderData.items)
+    //     console.log(orderData.items)
 
-        setFullPrice()
-    }, [JSON.stringify(orderData.items)])
+    //     setFullPrice()
+    // }, [JSON.stringify(orderData.items)])
 
     return (
         <Space direction='vertical' key={JSON.stringify(orderData.items)}>

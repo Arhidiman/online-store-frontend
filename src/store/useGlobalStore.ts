@@ -37,7 +37,7 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
             }
         })        
     },
-    
+
     setOrderData: (data: Partial<TOrderData>) => set((state: IGlobalStore) => {
         return {
             ...state, orderData: { ...state.orderData, ...data}
@@ -47,7 +47,7 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
     setOrderId: (id: number) => set((state: IGlobalStore) => {
 
         return {
-            ...state, orderData: { ...state.orderData, id}
+            ...state, orderData: { ...state.orderData, order: {...state.orderData.order, id}}
         }        
     }),
 

@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react"
 import { CartProduct } from "@/components/CartProduct/UI/CartProduct"
 import { useQuery } from "@apollo/client"
-import { GET_ORDER_ITEMS } from "../queries"
-import { GET_CURRENT_ORDER } from "@/queries/queries"
 import { useGlobalStore } from "../../../store/useGlobalStore"
+import { GET_CURRENT_ORDER } from "@/queries/queries"
 import { VALIDATE_JWT } from "@/queries/queries"
+import { GET_ORDER_ITEMS } from "../queries"
 import type { OrderItemsInfoDto } from "../dto"
 import './Cart.scss'
 
 export const Cart = () => {
 
-    const { orderData, setOrderData, setOrderItems, setOrderId } = useGlobalStore()
+    const { orderData, setOrderData, setOrderItems, setOrderId, setFullPrice } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
 
@@ -19,7 +19,7 @@ export const Cart = () => {
 
 
     const jwt_token: string | null = localStorage.getItem('token')
-    const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token})
+    const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token, fetchPolicy: 'network-only'} )
 
 
     useEffect(() => {
@@ -32,13 +32,14 @@ export const Cart = () => {
     }, [validUserData])
 
     useEffect(() => {
+
         if (orderGQLData) {
             const { getCurrentOrderByUserId: order } = orderGQLData
             const { id } = order || {}
             setOrderId(id)
         }
 
-    }, [orderGQLData])
+    }, [orderGQLData, userId])
 
     useEffect(() => {
         if (data) {
@@ -48,8 +49,12 @@ export const Cart = () => {
 
     }, [data])
 
-    console.log(orderData.items, 'orderData')
 
+    useEffect(() => {
+        setFullPrice()
+    }, [orderData.items])
+
+    
     return (
         <div className="cart">
             <h2 className="cart-title">Корзина</h2>
