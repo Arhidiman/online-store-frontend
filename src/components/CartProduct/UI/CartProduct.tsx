@@ -61,14 +61,10 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
 
     }, [orderItemsData])
 
-    // useEffect(() => {
-    //     const orderItem = orderData.items.find(item => item.id === id)
-    //     setCount(orderItem && orderItem?.product_count ? orderItem.product_count : 1)
-
-    //     console.log(orderData.items)
-
-    //     setFullPrice()
-    // }, [JSON.stringify(orderData.items)])
+    useEffect(() => {
+        const orderItem = orderData.items.find(item => item.id === id)
+        setCount(orderItem && orderItem?.product_count ? orderItem.product_count : 1)
+    }, [JSON.stringify(orderData.items)])
 
     return (
         <Space direction='vertical' key={JSON.stringify(orderData.items)}>
