@@ -14,7 +14,7 @@ export interface IGlobalStore {
     setOrderItems: (items: OrderItemDto[]) => void,
     addItem: (item: OrderItemDto) => void,
     removeItem: (id: number) => void,
-    setOrderId: (id: number) => void,
+    setOrderId: (id: number | undefined) => void,
     setFullPrice: () => void
 }
 
@@ -44,7 +44,7 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
         }        
     }),
 
-    setOrderId: (id: number) => set((state: IGlobalStore) => {
+    setOrderId: (id: number | undefined) => set((state: IGlobalStore) => {
 
         return {
             ...state, orderData: { ...state.orderData, order: {...state.orderData.order, id}}
@@ -66,11 +66,7 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
     setFullPrice: () => set((state: IGlobalStore) => {
 
         const calculateFullPrice: () => number = () =>  {
-            console.log(state.orderData.items)
-
             if (state.orderData.items.length === 0) {
-
-                console.log(state.orderData.items)
                 return 0
             }
 

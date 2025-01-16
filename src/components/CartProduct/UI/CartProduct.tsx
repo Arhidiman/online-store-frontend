@@ -49,8 +49,6 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
     }
 
     
-    console.log(orderItemsData, 'orderItemsData')
-
     useEffect(() => {
         if (orderItemsData) {
             const { getOrderItemsInfo: orderItems }: { getOrderItemsInfo: OrderItemsInfoDto[]} = orderItemsData || {}

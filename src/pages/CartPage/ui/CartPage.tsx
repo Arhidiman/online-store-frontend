@@ -10,12 +10,10 @@ import './CartPage.scss'
 
 export const CartPage = () => {
 
-    const [form] = useForm()
+    const [paymentForm] = useForm()
+    const [deliveryForm] = useForm()
     
-    const validateFields = async () => {
-        await form.validateFields()
-        setIsModalOpened(false)
-    }
+
 
     const [isModalOpened, setIsModalOpened] = useState(false)
     const closeModal = () => setIsModalOpened(false)
@@ -25,17 +23,17 @@ export const CartPage = () => {
             <Modal
                 open={isModalOpened}
                 onCancel={closeModal}
-                onOk={validateFields}
-                title='Форма оплаты заказа'    
+                title='Форма оплаты заказа'  
+                footer={null}  
             >
-            <PaymentForm form={form}/>
+                <PaymentForm cancelHandler={closeModal}/>
             </Modal>
             <div className="cart-page">
                 <div className="cart-page-container">
                     <div className="cart-page-content">
                         <Cart/>
                         <OrderCard/>
-                        <DeliveryForm confirmHandler={setIsModalOpened}/>
+                        <DeliveryForm confirmHandler={setIsModalOpened} form={deliveryForm}/>
                     </div>
                 </div>
             </div>

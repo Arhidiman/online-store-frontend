@@ -5,14 +5,15 @@ import {
     CheckOutlined, 
     DeleteOutlined, 
     ArrowDownOutlined,
-    ArrowLeftOutlined
+    ArrowLeftOutlined,
+    MoneyCollectFilled
 } from "@ant-design/icons"
 import {Button} from "antd"
 import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
 import './ActionButton.scss'
 
-type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left'
+type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left' | 'pay'
 
 interface IActionButton {
     className?: string
@@ -39,6 +40,7 @@ export const ActionButton = ({className, text, actionHandler, type, disabled, si
             case 'delete': return <DeleteOutlined/>
             case 'down': return <ArrowDownOutlined/>
             case 'left': return <ArrowLeftOutlined/>
+            case 'pay': return <MoneyCollectFilled/>
         }
     }
 

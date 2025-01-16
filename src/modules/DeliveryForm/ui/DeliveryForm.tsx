@@ -2,25 +2,24 @@ import { Dispatch } from "react"
 import { Form, Input } from "antd"
 import { useForm } from "antd/es/form/Form"
 import { ActionButton } from "@/UI/ActionButton"
+import type { FormInstance } from "antd/es/form/Form"
 import './DeliveryForm.scss'
 
 
 interface IDeliveryForm {
-    confirmHandler: Dispatch<boolean>
+    confirmHandler: Dispatch<boolean>,
+    form: FormInstance
 }
 
 
-const validationRules = [{required: true, message: 'Поле не может быть пустым'}]
+const validationRules = [{ required: true, message: 'Поле не может быть пустым' }]
 
-export const DeliveryForm = ({confirmHandler}: IDeliveryForm) => { 
-
-    const [form] = useForm()
+export const DeliveryForm = ({ confirmHandler, form }: IDeliveryForm) => { 
     
     const validateFields = async () => {
         await form.validateFields()
         confirmHandler(true)
     }
-
 
     return (
         <div className="delivery-form">
