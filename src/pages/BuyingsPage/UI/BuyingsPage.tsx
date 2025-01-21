@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Table, Tag, Space, Pagination } from 'antd'
+import { useQuery } from '@apollo/client'
+import { GET_ALL_TRANSACTIONS } from '../queries';
 import type { TableProps } from 'antd';
+import type { GetAllTransactionsDto, TransactionsDataDto } from '../dto';
 import './BuyingsPage.scss'
+
 
 
 interface DataType {
@@ -144,6 +148,12 @@ interface DataType {
   ];
 
 export const BuyingsPage = () =>  {
+
+
+    const jwt_token = localStorage.getItem('token')
+    const { data: transactions } = useQuery(GET_ALL_TRANSACTIONS, { variables: { jwt_token }, skip: !jwt_token, fetchPolicy: 'network-only' })
+
+    console.log(transactions, 'transactions data')
 
     return (
         <div className='buyings-page-container'>
