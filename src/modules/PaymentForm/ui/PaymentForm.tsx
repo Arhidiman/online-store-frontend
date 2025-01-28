@@ -16,9 +16,13 @@ const CVVCodeRules = [{required: true, message: 'Поле не может быт
 interface IPaymentForm {
     confirmHandler?: Function,
     cancelHandler: Dispatch<boolean>
+    onChange?: (value: string) => void,
+    value?: string
 }
 
-export const PaymentForm = ({ cancelHandler }: IPaymentForm) => { 
+export const PaymentForm = ({ cancelHandler, onChange, value }: IPaymentForm) => { 
+
+
 
     const { orderData, setOrderItems, setOrderId } = useGlobalStore()
     const { order, items, full_price } = orderData || {}
@@ -48,13 +52,13 @@ export const PaymentForm = ({ cancelHandler }: IPaymentForm) => {
 
         <Form form={form}>
             <Form.Item rules={cardNumRules} name='cardNum'>
-                <Input placeholder="Номер карты" value={1}/>
+                <Input placeholder="Номер карты"/>
             </Form.Item>
             <Form.Item rules={cardHolderRules} name='cardHolder'>
-                <Input placeholder="Имя владельца карты" value={1}/>
+                <Input placeholder="Имя владельца карты"/>
             </Form.Item>
             <Form.Item rules={CVVCodeRules} name='cardCode'>
-                <Input placeholder="cvv код" defaultValue={1} value={1}/>
+                <Input placeholder="cvv код"/>
             </Form.Item>
             <Space size={15}>
                 <ActionButton text="Оплатить" type="pay" actionHandler={() => payOrder()}/>

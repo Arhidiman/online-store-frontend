@@ -18,8 +18,6 @@ interface IProductCard {
 
 export const ProductCard = ({name, product_id, image, price, userId, description}: IProductCard) => {
 
-
-
     const { orderData, setOrderData, setOrderItems, addItem } = useGlobalStore()
     const [ initialProductCount ] = useState<number>(1)
     const [ inCart, setInCart ] = useState<boolean>(false)
