@@ -4,33 +4,26 @@ import { useForm } from "antd/es/form/Form"
 import { OrderCard } from '@/modules/OrderCard'
 import { DeliveryForm } from '@/modules/DeliveryForm'
 import { PaymentForm } from '@/modules/PaymentForm'
+import { BaseModal } from '@/components/BaseModal/BaseModal'
 import { Cart } from '@/modules/Cart'
 import './CartPage.scss'
 
 
 export const CartPage = () => {
 
-    const [ cartForm ] = useForm()
 
     const [isModalOpened, setIsModalOpened] = useState(false)
     const closeModal = () => setIsModalOpened(false)
 
-    const validateCart = async () => {
-        const data = await cartForm.validateFields()
-        console.log(data, 'cart page data')
-    }
-
+ 
     return (
         <>
-            <Modal
-                open={isModalOpened}
+            <BaseModal
                 title='Форма оплаты заказа'  
-                onOk={validateCart}
-                footer={null}
             >
                 <PaymentForm />
                  
-            </Modal>
+            </BaseModal>
             <div className="cart-page">
                 <div className="cart-page-container">
                     <div className="cart-page-content">

@@ -10,6 +10,7 @@ import { CREATE_TRANSACTION, GET_ORDER_ITEMS } from "../queries"
 import type { Dispatch } from "react"
 import type { IBaseControlForm } from "@/components/ControlledForm/BaseControlForm"
 import type { OrderItemsInfoDto } from "../../Cart/dto"
+import type { IActionButton } from "@/UI/ActionButton/ActionButton"
 
 const cardNumRules = [{required: true, message: 'Поле не может быть пустым'}]
 const cardHolderRules = [{required: true, message: 'Поле не может быть пустым'}]
@@ -19,8 +20,6 @@ type IPaymentForm = Omit<IBaseControlForm, 'children'>
 
 
 export const PaymentForm = () => { 
-
-
 
     const { orderData, setOrderItems, setOrderId } = useGlobalStore()
     const { order, items, full_price } = orderData || {}
@@ -43,9 +42,16 @@ export const PaymentForm = () => {
         }
     )
 
+
+    const confirmButton: Omit<IActionButton, 'actionHandler'> = { 
+        className: 'delivery-form_confirm-button',
+        text: 'Оплатить',
+        type: 'pay'
+    }
+
     return (
 
-        <BaseControlForm extraConfirmHandlers={[() => payOrder()]}>
+        <BaseControlForm extraConfirmHandlers={[() => payOrder()]} confirmButton={confirmButton}>
                 <>
                     <Form.Item rules={cardNumRules} name='cardNum'>
                         <Input placeholder="Номер карты"/>
@@ -57,8 +63,8 @@ export const PaymentForm = () => {
                         <Input placeholder="cvv код"/>
                     </Form.Item>
                     <Space size={15}>
-                        <ActionButton text="Оплатить" type="pay" actionHandler={() => payOrder()}/>
-                        <ActionButton text="Отмена"/>
+                        {/* <ActionButton text="Оплатить" type="pay" actionHandler={() => payOrder()}/>
+                        <ActionButton text="Отмена"/> */}
                     </Space>
                 </>
         </BaseControlForm>
