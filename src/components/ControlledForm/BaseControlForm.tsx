@@ -2,38 +2,55 @@ import { Dispatch, useState } from "react"
 import { Form, Input } from "antd"
 import { useForm } from "antd/es/form/Form"
 import { ActionButton } from "@/UI/ActionButton"
-import type { ReactElement } from "react"
+import type { ReactElement, ReactNode } from "react"
+import type { TActions, IActionButton } from "@//UI/ActionButton/ActionButton"
 import type { FormInstance } from "antd/es/form/Form"
 
 
 export interface IBaseControlForm {
-    onConfirm: Function,
-    extraConfirmHandler?: Function,
-    children: ReactElement
+    onConfirm?: (data?: any) => any,
+    extraConfirmHandlers?: Function[],
+    children: ReactElement,
+    title?: string,
+    className?: string
+    confirmButton?: IActionButton
+    cancelButton?: IActionButton
 }
+
+
 
 export const BaseControlForm = ({ 
     onConfirm,
-    extraConfirmHandler,
-    children
+    extraConfirmHandlers,
+    children,
+    title,
+    confirmButton,
+    cancelButton
 }: IBaseControlForm) => { 
 
     const [ form ] = useForm()
 
     const validateFields = async () => {
-        await form.validateFields()
-        onConfirm?.()
-        extraConfirmHandler?.()
+        const data = await form.validateFields()
+        onConfirm?.(data)
+
+        extraConfirmHandlers?.forEach(handler => handler())
     }
 
+    const ConfirmButton =  () => confirmButton ?  <ActionButton  { ...confirmButton } actionHandler={validateFields}/> : null
+    const CancelButton =  () => cancelButton ?  <ActionButton  { ...cancelButton }/> : null
+
     return (
-        <div className="delivery-form">
-            <h2 className="delivery-form_title">Введите данные для доставки заказа</h2>
-                <Form form={form}>
+        <div className="base-form">
+            <h2 className="delivery-form_title">{title || ''}</h2>
+                <Form form={form} style={{width: '80%'}}>
                     {children}
                 </Form>
-                
-            <ActionButton className='delivery-form_confirm-button' actionHandler={validateFields} text="Перейти к оплате заказа"/>
+
+            
+                <ConfirmButton/>
+                <CancelButton/>
+            {/* <ActionButton className='delivery-form_confirm-button' actionHandler={validateFields} text="Перейти к оплате заказа"/> */}
         </div>
     )
 }

@@ -24,12 +24,11 @@ export const CartPage = () => {
         <>
             <Modal
                 open={isModalOpened}
-                onCancel={closeModal}
                 title='Форма оплаты заказа'  
-                // footer={null}  
                 onOk={validateCart}
+                footer={null}
             >
-                <PaymentForm cancelHandler={closeModal}/>
+                <PaymentForm />
                  
             </Modal>
             <div className="cart-page">
@@ -38,8 +37,8 @@ export const CartPage = () => {
                         <Cart/>
                         <OrderCard/>
                         <DeliveryForm 
-                            onConfirm={() => console.log('validated form values')} 
-                            extraConfirmHandler={() => setIsModalOpened(true)} 
+                            onConfirm={(data: any) => console.log(data,'validated form values')} // TODO: проработать onConfirm
+                            extraConfirmHandlers={[() => setIsModalOpened(true)]} 
                         />
                     </div>
                 </div>

@@ -13,9 +13,9 @@ import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
 import './ActionButton.scss'
 
-type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left' | 'pay'
+export type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left' | 'pay'
 
-interface IActionButton {
+export interface IActionButton {
     className?: string
     text?: string
     actionHandler?: MouseEventHandler<HTMLElement>
