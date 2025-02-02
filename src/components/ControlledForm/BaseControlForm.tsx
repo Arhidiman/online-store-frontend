@@ -46,11 +46,8 @@ export const BaseControlForm = ({
                 <Form form={form} style={{width: '80%'}}>
                     {children}
                 </Form>
-
-            
                 <ConfirmButton/>
                 <CancelButton/>
-            {/* <ActionButton className='delivery-form_confirm-button' actionHandler={validateFields} text="Перейти к оплате заказа"/> */}
         </div>
     )
 }

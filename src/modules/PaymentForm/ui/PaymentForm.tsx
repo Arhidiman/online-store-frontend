@@ -15,7 +15,7 @@ const CVVCodeRules = [{required: true, message: 'Поле не может быт
 
 interface IPaymentForm extends IBaseControlForm {
     isOpen: boolean, 
-    closeForm: Dispatch<boolean>
+    closeForm: () => void
 }
 
 export const PaymentForm = ({ isOpen, closeForm, onConfirm }: IPaymentForm) => { 
@@ -48,8 +48,13 @@ export const PaymentForm = ({ isOpen, closeForm, onConfirm }: IPaymentForm) => {
     }
 
     return (
-        <BaseModal isOpen={isOpen}>
-            <BaseControlForm extraConfirmHandlers={[() => payOrder(), closeForm]} confirmButton={confirmButton}>
+        <BaseModal isOpen={isOpen} onCancel={closeForm}>
+            <BaseControlForm 
+                extraConfirmHandlers={[() => payOrder(), closeForm]} 
+                confirmButton={confirmButton}
+                onConfirm={onConfirm}
+                
+            >
                 <>
                     <Form.Item rules={cardNumRules} name='cardNum'>
                         <Input placeholder="Номер карты"/>

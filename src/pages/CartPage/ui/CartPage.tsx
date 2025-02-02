@@ -15,7 +15,7 @@ export const CartPage = () => {
         <>
             <PaymentForm 
                 isOpen={paymentFormOpen} 
-                closeForm={closeModal}                             
+                closeForm={() => closeModal()}                             
                 onConfirm={(data: any) => console.log(data,'validated payment form values')}
             />
             <div className="cart-page">

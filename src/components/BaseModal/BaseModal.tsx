@@ -1,15 +1,16 @@
 import { useState } from "react";
 import {Modal as AntModal} from "antd";
-import type { ReactElement} from "react";
+import type { Dispatch, ReactElement,MouseEventHandler} from "react";
 
 interface IModal {
     title?: string,
     children?: ReactElement
     isOpen: boolean
+    onCancel?: ((e?: React.MouseEvent<HTMLButtonElement>) => void) | undefined
 }
 
 
-export const BaseModal = ({ title, children, isOpen }: IModal) => {
+export const BaseModal = ({ title, children, isOpen, onCancel }: IModal) => {
 
     // const [isOpen, setIsModalOpened] = useState(false)
     // const closeModal = () => setIsModalOpened(false)
@@ -18,7 +19,7 @@ export const BaseModal = ({ title, children, isOpen }: IModal) => {
         <AntModal
             title={title}
             open={isOpen}
-            // onCancel={closeModal}
+            onCancel={onCancel}
             footer={null}
         >
             {children}
