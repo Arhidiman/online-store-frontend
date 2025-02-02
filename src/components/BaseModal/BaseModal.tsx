@@ -5,19 +5,20 @@ import type { ReactElement} from "react";
 interface IModal {
     title?: string,
     children?: ReactElement
+    isOpen: boolean
 }
 
 
-export const BaseModal = ({ title, children }: IModal) => {
+export const BaseModal = ({ title, children, isOpen }: IModal) => {
 
-    const [isOpen, setIsModalOpened] = useState(false)
-    const closeModal = () => setIsModalOpened(false)
-    
+    // const [isOpen, setIsModalOpened] = useState(false)
+    // const closeModal = () => setIsModalOpened(false)
+
     return (
         <AntModal
             title={title}
             open={isOpen}
-            onCancel={closeModal}
+            // onCancel={closeModal}
             footer={null}
         >
             {children}

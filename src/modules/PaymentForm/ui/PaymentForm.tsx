@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, Dispatch } from "react"
 import { Form, Input, notification, Space } from "antd"
-import type { FormInstance } from 'antd'
 import { useForm } from "antd/es/form/Form"
 import { useQuery, useMutation } from "@apollo/client"
 import { BaseControlForm } from "@/components/ControlledForm/BaseControlForm"
+import { BaseModal } from "@/components/BaseModal/BaseModal"
 import { useGlobalStore } from "@//store/useGlobalStore"
-import { ActionButton } from "@//UI/ActionButton"
-import { CREATE_TRANSACTION, GET_ORDER_ITEMS } from "../queries"
-import type { Dispatch } from "react"
+import { CREATE_TRANSACTION } from "../queries"
 import type { IBaseControlForm } from "@/components/ControlledForm/BaseControlForm"
-import type { OrderItemsInfoDto } from "../../Cart/dto"
 import type { IActionButton } from "@/UI/ActionButton/ActionButton"
 
 const cardNumRules = [{required: true, message: 'Поле не может быть пустым'}]
 const cardHolderRules = [{required: true, message: 'Поле не может быть пустым'}]
 const CVVCodeRules = [{required: true, message: 'Поле не может быть пустым'}]
 
-type IPaymentForm = Omit<IBaseControlForm, 'children'>
+interface IPaymentForm extends IBaseControlForm {
+    isOpen: boolean, 
+    closeForm: Dispatch<boolean>
+}
 
-
-export const PaymentForm = () => { 
+export const PaymentForm = ({ isOpen, closeForm, onConfirm }: IPaymentForm) => { 
 
     const { orderData, setOrderItems, setOrderId } = useGlobalStore()
     const { order, items, full_price } = orderData || {}
@@ -42,7 +41,6 @@ export const PaymentForm = () => {
         }
     )
 
-
     const confirmButton: Omit<IActionButton, 'actionHandler'> = { 
         className: 'delivery-form_confirm-button',
         text: 'Оплатить',
@@ -50,8 +48,8 @@ export const PaymentForm = () => {
     }
 
     return (
-
-        <BaseControlForm extraConfirmHandlers={[() => payOrder()]} confirmButton={confirmButton}>
+        <BaseModal isOpen={isOpen}>
+            <BaseControlForm extraConfirmHandlers={[() => payOrder(), closeForm]} confirmButton={confirmButton}>
                 <>
                     <Form.Item rules={cardNumRules} name='cardNum'>
                         <Input placeholder="Номер карты"/>
@@ -62,11 +60,8 @@ export const PaymentForm = () => {
                     <Form.Item rules={CVVCodeRules} name='cardCode'>
                         <Input placeholder="cvv код"/>
                     </Form.Item>
-                    <Space size={15}>
-                        {/* <ActionButton text="Оплатить" type="pay" actionHandler={() => payOrder()}/>
-                        <ActionButton text="Отмена"/> */}
-                    </Space>
                 </>
-        </BaseControlForm>
+            </BaseControlForm>
+        </BaseModal>
     )
 }

@@ -10,7 +10,7 @@ import type { FormInstance } from "antd/es/form/Form"
 export interface IBaseControlForm {
     onConfirm?: (data?: any) => any,
     extraConfirmHandlers?: Function[],
-    children: ReactElement,
+    children?: ReactElement,
     title?: string,
     className?: string
     confirmButton?: IActionButton
