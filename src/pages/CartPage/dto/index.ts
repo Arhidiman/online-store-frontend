@@ -1,7 +1,3 @@
-export type GetAllTransactionsDto = {
-    jwt_token: string
-}
-
 export type TransactionsDataDto = {
     full_price: number, 
     created_at: string, 

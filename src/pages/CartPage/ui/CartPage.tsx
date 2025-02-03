@@ -3,7 +3,11 @@ import { OrderCard } from '@/modules/OrderCard'
 import { DeliveryForm } from '@/modules/DeliveryForm'
 import { PaymentForm } from '@/modules/PaymentForm'
 import { Cart } from '@/modules/Cart'
+import type { IDeliveryData } from '@/types'
 import './CartPage.scss'
+
+
+
 
 
 export const CartPage = () => {
@@ -11,12 +15,15 @@ export const CartPage = () => {
     const [paymentFormOpen, setIsPaymentFormOpened] = useState(false)
     const closeModal = () => setIsPaymentFormOpened(false)
 
+    const [deliveryData, setDeliveryData] = useState<IDeliveryData>({})
+
     return (
         <>
             <PaymentForm 
                 isOpen={paymentFormOpen} 
                 closeForm={() => closeModal()}                             
                 onConfirm={(data: any) => console.log(data,'validated payment form values')}
+                deliveryData={deliveryData}
             />
             <div className="cart-page">
                 <div className="cart-page-container">
@@ -24,7 +31,7 @@ export const CartPage = () => {
                         <Cart/>
                         <OrderCard/>
                         <DeliveryForm 
-                            onConfirm={(data: any) => console.log(data,'validated delivery form values')}
+                            onConfirm={(data: IDeliveryData) => setDeliveryData(data)}
                             extraConfirmHandlers={[() => setIsPaymentFormOpened(true)]} 
                         />
                     </div>
