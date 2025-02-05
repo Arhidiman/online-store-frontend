@@ -12,8 +12,10 @@ import './BuyingsPage.scss'
 const numberSorter = (key:  'full_price') => {
     return (a: TransactionsDataDto, b: TransactionsDataDto) => a[key] - b[key]
 }
+
+
 const alphabetSorter = (key: keyof Omit<TransactionsDataDto, 'full_price'>) => {
-    return (a: TransactionsDataDto, b: TransactionsDataDto) => a.full_price - b.full_price
+    return (a: TransactionsDataDto, b: TransactionsDataDto) => a[key].localeCompare(b[key])
 }
 
 const columns: TableProps<TransactionsDataDto>['columns'] = [
