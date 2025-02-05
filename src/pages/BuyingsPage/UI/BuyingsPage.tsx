@@ -5,33 +5,50 @@ import { GET_ALL_TRANSACTIONS } from '../queries';
 import type { TableProps } from 'antd';
 import type { TransactionsDataDto } from '../dto';
 import type { QueryResult } from '@apollo/client';
+import { getDateAndTimeFromTimestamp } from '@/utils';
 import './BuyingsPage.scss'
-  
+
+
+const numberSorter = (key:  'full_price') => {
+    return (a: TransactionsDataDto, b: TransactionsDataDto) => a[key] - b[key]
+}
+const alphabetSorter = (key: keyof Omit<TransactionsDataDto, 'full_price'>) => {
+    return (a: TransactionsDataDto, b: TransactionsDataDto) => a.full_price - b.full_price
+}
+
 const columns: TableProps<TransactionsDataDto>['columns'] = [
     {
         title: 'Цена заказа',
         dataIndex: 'full_price',
-        key: 'full_price'
+        key: 'full_price',
+        sorter: numberSorter('full_price')
     },
     {
         title: 'Время заказа',
         dataIndex: 'created_at',
-        key: 'created_at'
+        key: 'created_at',
+        sorter: alphabetSorter('created_at')
+
     },
     {
         title: 'Город',
         dataIndex: 'city',
-        key: 'city'
+        key: 'city',
+        sorter: alphabetSorter('city')
     },
     {
         title: 'Улица',
         dataIndex: 'street',
-        key: 'street'
+        key: 'street',
+        sorter: alphabetSorter('street')
+
     },
     {
         title: 'Дом',
         dataIndex: 'building',
-        key: 'building'
+        key: 'building',
+        sorter: alphabetSorter('building')
+
     }
 ]
 
@@ -47,7 +64,7 @@ export const BuyingsPage = () =>  {
 
     useEffect(() => {
         const { getTransactionsItemsData } = data || {}
-        getTransactionsItemsData && setTableData(getTransactionsItemsData)
+        getTransactionsItemsData && setTableData(getTransactionsItemsData.map(dataItem => ({...dataItem, created_at: getDateAndTimeFromTimestamp(dataItem.created_at)})))
     }, [data])
 
     return (
