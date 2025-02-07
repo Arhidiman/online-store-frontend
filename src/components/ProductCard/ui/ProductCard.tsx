@@ -15,10 +15,9 @@ interface IProductCard {
     description: string
 }
 
-
 export const ProductCard = ({name, product_id, image, price, userId, description}: IProductCard) => {
 
-    const { orderData, setOrderData, setOrderItems, addItem } = useGlobalStore()
+    const { orderData, setOrderData, addItem } = useGlobalStore()
     const [ initialProductCount ] = useState<number>(1)
     const [ inCart, setInCart ] = useState<boolean>(false)
 
@@ -58,14 +57,11 @@ export const ProductCard = ({name, product_id, image, price, userId, description
             const { id, product_id }: { id: number, product_id: number} = data || {}
 
             if (orderData.items.every(item => item.id != id)) {
-
                 id && product_id && addItem({id, product_id})
-                // setOrderItems({ ...orderData, ...( id && {items: [ ...orderData.items, { id, product_id }]} )   })
             }
 
         }
     }, [addOrderItemData, inCart])
-
 
     useEffect(() => {
         if (orderData) {
@@ -86,7 +82,6 @@ export const ProductCard = ({name, product_id, image, price, userId, description
 
         }
     }, [orderItemData])
-
 
     return <Card
         key={product_id}

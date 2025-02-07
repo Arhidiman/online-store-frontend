@@ -14,7 +14,7 @@ import "./Products.scss"
 export function Products() {
 
     const { filters, setFilters } = useFiltersStore()
-    const { orderData, setOrderData, setOrderId } = useGlobalStore()
+    const { orderData, setOrderData } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
     const [showMore] = useState<number>(6)

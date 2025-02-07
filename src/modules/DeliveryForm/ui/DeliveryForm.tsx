@@ -7,7 +7,6 @@ import './DeliveryForm.scss'
 
 const validationRules = [{ required: true, message: 'Поле не может быть пустым' }]
 
-
 export type TDeliveryData = {
     city: string,
     street: string,
@@ -16,11 +15,9 @@ export type TDeliveryData = {
 
 type IDeliveryForm = Omit<IBaseControlForm, 'children'>
 
-export const DeliveryForm = ({  onConfirm, extraConfirmHandlers }: IDeliveryForm) => { 
+export const DeliveryForm = ({ onConfirm, extraConfirmHandlers }: IDeliveryForm) => { 
 
     const { orderData } = useGlobalStore()
-
-
 
     const confirmButton: Omit<IActionButton, 'actionHandler'> = { 
         className: 'delivery-form_confirm-button',

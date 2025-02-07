@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Tag, Space, Pagination } from 'antd'
+import { Table } from 'antd'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_TRANSACTIONS } from '../queries';
 import type { TableProps } from 'antd';

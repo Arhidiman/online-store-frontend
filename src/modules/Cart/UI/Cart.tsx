@@ -10,7 +10,7 @@ import './Cart.scss'
 
 export const Cart = () => {
 
-    const { orderData, setOrderData, setOrderItems, setOrderId, setFullPrice } = useGlobalStore()
+    const { orderData, setOrderItems, setOrderId, setFullPrice } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
 
