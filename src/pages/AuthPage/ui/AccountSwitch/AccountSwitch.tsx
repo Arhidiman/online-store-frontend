@@ -13,7 +13,6 @@ export const AccountSwitch = () =>  {
     const { setCurrentTab } = headerStore()
 
     const exitAccount = () => {
-
         switchAuthReg()
         setCurrentUser('')
         localStorage.setItem('token', '')
@@ -24,12 +23,13 @@ export const AccountSwitch = () =>  {
         setCurrentTab(routes.main)
     }
 
-
     return (
             <div className='account-switch-container'>
+                <Space size={20} direction="vertical">
                 <h2 className="account-switch-title">{currentUser}, Вы авторизованы</h2>
-                <Space size={50}>
+
                     <ActionButton 
+                        className="account-switch_button"
                         text="К покупкам"
                         type="left"
                         actionHandler={goToProducts}
@@ -37,6 +37,7 @@ export const AccountSwitch = () =>  {
                     />
                 
                     <ActionButton 
+                        className="account-switch_button"
                         text="Войти под другим пользователем"
                         actionHandler={exitAccount}
                         size="large"
