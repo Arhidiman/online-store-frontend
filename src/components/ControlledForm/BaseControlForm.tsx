@@ -15,7 +15,6 @@ export interface IBaseControlForm {
     cancelButton?: IActionButton
 }
 
-
 export const BaseControlForm = ({ 
     onConfirm,
     extraConfirmHandlers,
