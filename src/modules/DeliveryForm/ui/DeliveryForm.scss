@@ -1,10 +1,10 @@
 .delivery-form {
-    position: fixed;
-    top: 350px;
+    position: sticky;
+    top: 100px; 
     right: 150px;
     min-width: 700px;
     max-width: 900px;
-    height: 350px;
+    height: 400px;
     padding: 20px;
     background: #ffffff;   
     border: solid grey 2px;
@@ -15,7 +15,9 @@
         height: 40px;
         margin-top: 20px;
     }
-    &_title {
+    &_extra-title {
         margin-bottom: 20px;
+        border-bottom: darkgray 2px solid;
+        font-size: 22px;
     }
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Modal as AntModal} from "antd";
-import type { Dispatch, ReactElement,MouseEventHandler} from "react";
+import type { ReactElement } from "react";
 
 interface IModal {
     title?: string,
@@ -9,12 +9,7 @@ interface IModal {
     onCancel?: ((e?: React.MouseEvent<HTMLButtonElement>) => void) | undefined
 }
 
-
 export const BaseModal = ({ title, children, isOpen, onCancel }: IModal) => {
-
-    // const [isOpen, setIsModalOpened] = useState(false)
-    // const closeModal = () => setIsModalOpened(false)
-
     return (
         <AntModal
             title={title}

@@ -1,7 +1,8 @@
 import { Form, Input } from "antd"
 import { ActionButton } from "@/UI/ActionButton"
-import { BaseControlForm } from "@//components/ControlledForm/BaseControlForm"
-import type { IBaseControlForm } from "@//components/ControlledForm/BaseControlForm"
+import { BaseControlForm } from "@/components/BaseControlForm/BaseControlForm"
+import { useGlobalStore } from "@/store/useGlobalStore"
+import type { IBaseControlForm } from "@/components/BaseControlForm/BaseControlForm"
 import type { MouseEventHandler } from "react"
 import type { IActionButton } from "@/UI/ActionButton/ActionButton"
 import './DeliveryForm.scss'
@@ -19,6 +20,10 @@ type IDeliveryForm = Omit<IBaseControlForm, 'children'>
 
 export const DeliveryForm = ({  onConfirm, extraConfirmHandlers }: IDeliveryForm) => { 
 
+    const { orderData } = useGlobalStore()
+
+
+
     const confirmButton: Omit<IActionButton, 'actionHandler'> = { 
         className: 'delivery-form_confirm-button',
         text: 'Перейти к оплате заказа'
@@ -26,6 +31,9 @@ export const DeliveryForm = ({  onConfirm, extraConfirmHandlers }: IDeliveryForm
 
     return (
         <div className="delivery-form">
+               
+            <h2 className='delivery-form_extra-title'>Стоимость заказа: {orderData?.full_price} ₽</h2>
+          
             <BaseControlForm 
                 onConfirm={onConfirm} 
                 extraConfirmHandlers={extraConfirmHandlers}

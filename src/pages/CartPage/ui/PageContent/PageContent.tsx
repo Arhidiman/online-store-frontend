@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { OrderCard } from '@/modules/OrderCard'
 import { DeliveryForm } from '@/modules/DeliveryForm'
 import { PaymentForm } from '@/modules/PaymentForm'
 import { Cart } from '@/modules/Cart'
@@ -24,7 +23,6 @@ export const PageContent = () => {
                 <div className="cart-page-container">
                     <div className="cart-page-content">
                         <Cart/>
-                        <OrderCard/>
                         <DeliveryForm 
                             onConfirm={(data: IDeliveryData) => setDeliveryData(data)}
                             extraConfirmHandlers={[() => setIsPaymentFormOpened(true)]} 

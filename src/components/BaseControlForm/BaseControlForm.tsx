@@ -5,6 +5,7 @@ import { ActionButton } from "@/UI/ActionButton"
 import type { ReactElement, ReactNode } from "react"
 import type { TActions, IActionButton } from "@//UI/ActionButton/ActionButton"
 import type { FormInstance } from "antd/es/form/Form"
+import './BaseControlForm.scss'
 
 
 export interface IBaseControlForm {
@@ -16,7 +17,6 @@ export interface IBaseControlForm {
     confirmButton?: IActionButton
     cancelButton?: IActionButton
 }
-
 
 
 export const BaseControlForm = ({ 
@@ -42,7 +42,7 @@ export const BaseControlForm = ({
 
     return (
         <div className="base-form">
-            <h2 className="delivery-form_title">{title || ''}</h2>
+            <h2 className="base-form_title">{title || ''}</h2>
                 <Form form={form} style={{width: '80%'}}>
                     {children}
                 </Form>
