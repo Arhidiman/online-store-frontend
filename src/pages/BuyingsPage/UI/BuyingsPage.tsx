@@ -13,7 +13,6 @@ const numberSorter = (key:  'full_price') => {
     return (a: TransactionsDataDto, b: TransactionsDataDto) => a[key] - b[key]
 }
 
-
 const alphabetSorter = (key: keyof Omit<TransactionsDataDto, 'full_price'>) => {
     return (a: TransactionsDataDto, b: TransactionsDataDto) => a[key].localeCompare(b[key])
 }

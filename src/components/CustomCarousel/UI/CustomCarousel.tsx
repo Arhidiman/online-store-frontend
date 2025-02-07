@@ -30,7 +30,6 @@ export const CustomCarousel = () =>  {
                     <CSSTransition key={currentPage} timeout={700} classNames="fade" mountOnEnter unmountOnExit>
                         {
                             <img className='carousel-image' src = {images[currentPage]} alt="banner"/>
-                            // <h3 style={{fontSize: '100px'}}>{`Content ${currentPage}`}</h3>
                         }
                     </CSSTransition>
                 </SwitchTransition>
