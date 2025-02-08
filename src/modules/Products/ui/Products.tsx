@@ -20,12 +20,17 @@ export function Products() {
     const [showMore] = useState<number>(6)
 
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
-    const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: userId }, skip: !userId})
+    const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: userId }, skip: !userId, fetchPolicy:'network-only' })
 
     const { sortedProducts: products } = data || []
 
     const jwt_token: string | null = localStorage.getItem('token')
     const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token})
+
+
+
+    console.log(orderGQLData, 'orderGQLData')
+    console.log(validUserData, 'validUserData')
 
     useEffect(() => {
         if (orderGQLData) {
@@ -35,6 +40,7 @@ export function Products() {
         }
 
     }, [orderGQLData])
+
 
     useEffect(() => {
         if (validUserData) {
