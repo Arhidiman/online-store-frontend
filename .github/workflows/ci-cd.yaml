@@ -41,6 +41,7 @@ jobs:
         uses: appleboy/scp-action@v1
         with:
           host: 89.169.39.119
+          username: root
           password: KIqOwM86PHb%
           source: "dist/**"
           target: online-store-frontend/dist
