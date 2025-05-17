@@ -29,7 +29,6 @@ jobs:
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           source: "dist/*"
           target: online-store-frontend/dist
