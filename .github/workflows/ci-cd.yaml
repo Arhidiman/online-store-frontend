@@ -28,8 +28,8 @@ jobs:
       - name: Copy files via SSH
         uses: appleboy/scp-action@v1
         with:
-          host: ${{ secrets.VPS_IP }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          host: 89.169.39.119
+          password: KIqOwM86PHb%
           source: "dist/*"
           target: online-store-frontend/dist
 
