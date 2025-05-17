@@ -25,11 +25,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: List build output
+        run: ls -la dist/
       - name: Copy files via SSH
         uses: appleboy/scp-action@v1
         with:
           host: 89.169.39.119
           password: KIqOwM86PHb%
-          source: "dist/*"
+          source: "dist/**"
           target: online-store-frontend/dist
 
