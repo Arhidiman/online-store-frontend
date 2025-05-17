@@ -7,7 +7,24 @@ jobs:
       matrix:
         node-version: [ 22 ]
     steps:
+      - name: Start build
+        run: echo "start build app from branch ${{ secrets.VPS_PASSWORD  }}"
+      - name: Download app repo
+        uses: actions/checkout@v4
+      - name: Install node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Build app
+        run: npm run build
+      - name: End build
+        run: echo "end build app"
+  deploy: 
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: test secrets
         run: echo "password is ${{ secrets.VPS_PASSWORD  }}"
-
 
