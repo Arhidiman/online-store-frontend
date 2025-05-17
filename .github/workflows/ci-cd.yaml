@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List build output
-        run: ls -la dist/
+        run: ls -la online-store-frontend/dist/
       - name: Copy files via SSH
         uses: appleboy/scp-action@v1
         with:
