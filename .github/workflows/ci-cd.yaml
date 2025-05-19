@@ -47,3 +47,21 @@ jobs:
           source: "dist/**"
           target: online-store-frontend/
 
+      - name: Start static server if not running
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            cd online-store-frontend
+            if ! pm2 list | grep -q 'serve-app'; then
+              echo "Process not found. Starting..."
+              pm2 start npx --name serve-app -- serve -s ./ -l 8000
+              pm2 save
+              pm2 startup
+            else
+              echo "Process already running. Skipping restart."
+            fi
+
+
