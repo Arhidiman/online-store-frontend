@@ -1,5 +1,4 @@
 name: frontend-ci-cd
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   build:
@@ -9,7 +8,7 @@ jobs:
         node-version: [ 22 ]
     steps:
       - name: Start build
-        run: echo "start build app from branch ${{ github.ref }}"
+        run: echo "start build app from branch ${{ secrets.VPS_PASSWORD  }}"
       - name: Download app repo
         uses: actions/checkout@v4
       - name: Install node
@@ -20,6 +19,31 @@ jobs:
         run: npm install
       - name: Build app
         run: npm run build
+      - name: Save dist folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-dist
+          path: dist
       - name: End build
         run: echo "end build app"
+  deploy: 
+    needs: build
+    runs-on: ubuntu-latest
+    environment: env
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-dist
+          path: dist
+      - name: List build output
+        run: ls
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "dist/**"
+          target: online-store-frontend/
 

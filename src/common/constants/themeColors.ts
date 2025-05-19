@@ -1,6 +1,6 @@
 export const COLORS = {
     common: {
-        light: '#0093ff',
+        light: 'black',
         dark: '#780eff',
     },
     dark: {
