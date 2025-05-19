@@ -16,7 +16,7 @@ export const AppHeader = () =>  {
 
     const navigate = useNavigate()
 
-    const { theme, switchTheme, currentUser, setCurrentUser } = useGlobalStore()
+    const { isMobileVersion, theme, switchTheme, currentUser, setCurrentUser } = useGlobalStore()
     const { currentTab, setCurrentTab } = headerStore()
 
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
@@ -66,11 +66,18 @@ export const AppHeader = () =>  {
     return (
         <Header className='header' style={headerColor()}>
             <div className='header-container'>
-                <Tabs
-                    items={tabItems}
-                    onChange={navigateByTab}
-                    activeKey={currentTab}
-                />
+
+                {
+                    !isMobileVersion 
+                    ? 
+                    <Tabs
+                        items={tabItems}
+                        onChange={navigateByTab}
+                        activeKey={currentTab}
+                    />
+                    : <></>
+                }
+               
                 <div className="header-right">
                     <div className='header-user'>
                         <UserOutlined />

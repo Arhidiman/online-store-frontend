@@ -7,7 +7,9 @@ import type { OrderDto, OrderItemDto } from './dto';
 export interface IGlobalStore {
     currentUser: string,
     theme: MenuTheme,
-    orderData: TOrderData
+    orderData: TOrderData,
+    isMobileVersion: boolean,
+    setIsMobileVersion: (isMobile: boolean) => void,
     switchTheme: () => void
     setCurrentUser: (user: string) => void
     setOrderData: (order: Partial<TOrderData>) => void,
@@ -25,6 +27,8 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
     currentUser: '',
     theme: 'light',
     orderData: { order: {}, items: [], full_price: 0 }, 
+    isMobileVersion: false,
+    setIsMobileVersion: (isMobile: boolean) => set((state) => ({...state, isMobileVersion: isMobile})),
     switchTheme: () => set((state: IGlobalStore) => ({
             ...state,
             theme: state.theme === 'dark' ? 'light' : 'dark'
