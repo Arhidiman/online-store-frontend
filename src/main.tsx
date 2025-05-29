@@ -30,6 +30,9 @@ const baseUrl = import.meta.env.VITE_BASE_API_URL || 'http://localhost:10000'
 
 
 console.log(baseUrl, 'base url')
+console.log( import.meta.env, 'env')
+console.log( import.meta.env.VITE_BASE_API_URL, 'env')
+
 
 export const apolloClient = new ApolloClient({uri: baseUrl, cache: new InMemoryCache(
 
