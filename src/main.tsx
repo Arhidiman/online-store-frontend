@@ -29,6 +29,8 @@ const themeConfig = {
 const baseUrl = import.meta.env.VITE_BASE_API_URL || 'http://localhost:10000'
 
 
+console.log(baseUrl, 'base url')
+
 export const apolloClient = new ApolloClient({uri: baseUrl, cache: new InMemoryCache(
 
     {
