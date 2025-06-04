@@ -15,14 +15,19 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
 
     const setProductCount = (change: 'add' | 'reduce') => {
         const updatedOrderItems = orderData.items.map(item => {
+
+
+            console.log(item.id, item.product_count)
             if (item.id && item.product_count) {
                 return  item.id !== id ? item : { 
-                ...item, 
-                product_count:  change === 'add' ? item.product_count + 1 : item.product_count - 1
+                    ...item, 
+                    product_count:  change === 'add' ? item.product_count + 1 : item.product_count - 1
                 }
             } else return item
         })
         
+        console.log(updatedOrderItems, 'ord itms')
+
         setOrderItems(updatedOrderItems)
     }
 

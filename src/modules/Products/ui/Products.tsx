@@ -27,8 +27,14 @@ export function Products() {
     const jwt_token: string | null = localStorage.getItem('token')
     const { data: validUserData } = useQuery(VALIDATE_JWT, { variables: { jwt_token }, skip: !jwt_token})
 
+    console.log(orderGQLData, 'orderGQLData')
+
+
     useEffect(() => {
         if (orderGQLData) {
+
+            console.log(orderGQLData, 'orderGQLData')
+
             const { getCurrentOrderByUserId: order } = orderGQLData
             const { id } = order || {}
             setOrderData({ ...orderData, order: { id } })

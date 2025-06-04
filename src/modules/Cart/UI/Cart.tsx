@@ -54,6 +54,8 @@ export const Cart = () => {
         setFullPrice()
     }, [orderData.items])
 
+
+    console.log(data, 'data')
     
     return (
         <div className="cart">

@@ -32,7 +32,10 @@ export const ProductCard = ({name, product_id, image, price, userId, description
             skip: !orderData.order.id
         }
     )
-   
+
+    console.log(orderData, orderItemData)
+
+    
     const createOrderHandler = () => {
         userId && createOrder({ variables: { user_id: userId, product_id,  product_count: initialProductCount } })
     }

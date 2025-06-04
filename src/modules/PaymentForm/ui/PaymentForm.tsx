@@ -59,17 +59,17 @@ export const PaymentForm = ({ isOpen, closeForm, onConfirm, deliveryData }: IPay
                 confirmButton={confirmButton}
                 onConfirm={onConfirm}
             >
-                <>
-                    <Form.Item rules={cardNumRules} name='cardNum'>
-                        <Input placeholder="Номер карты"/>
-                    </Form.Item>
-                    <Form.Item rules={cardHolderRules} name='cardHolder'>
-                        <Input placeholder="Имя владельца карты"/>
-                    </Form.Item>
-                    <Form.Item rules={CVVCodeRules} name='cardCode'>
-                        <Input placeholder="cvv код"/>
-                    </Form.Item>
-                </>
+            <>
+                <Form.Item rules={cardNumRules} name='cardNum'>
+                    <Input placeholder="Номер карты"/>
+                </Form.Item>
+                <Form.Item rules={cardHolderRules} name='cardHolder'>
+                    <Input placeholder="Имя владельца карты"/>
+                </Form.Item>
+                <Form.Item rules={CVVCodeRules} name='cardCode'>
+                    <Input placeholder="cvv код"/>
+                </Form.Item>
+            </>
             </BaseControlForm>
         </BaseModal>
     )
