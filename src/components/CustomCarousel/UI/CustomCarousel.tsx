@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { images } from "../mockData/images"
+import { useGlobalStore } from "../../../store/useGlobalStore"
 import './CustomCarousel.scss'
 
 export const CustomCarousel = () =>  {
     
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ _, setPageInterval ] = useState<any>()
+
+    const { isMobileVersion } = useGlobalStore()
 
     useEffect(() => {
         const pagesTotal = 2
@@ -23,8 +26,7 @@ export const CustomCarousel = () =>  {
 
 
     return (
-
-        <div className="carousel">
+        isMobileVersion && <div className="carousel">
             <div className="carousel-container">
                 <SwitchTransition>
                     <CSSTransition key={currentPage} timeout={700} classNames="fade" mountOnEnter unmountOnExit>
