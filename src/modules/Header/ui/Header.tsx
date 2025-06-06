@@ -68,14 +68,13 @@ export const AppHeader = () =>  {
             <div className='header-container'>
 
                 {
-                    !isMobileVersion 
-                    ? 
+                
                     <Tabs
                         items={tabItems}
                         onChange={navigateByTab}
                         activeKey={currentTab}
                     />
-                    : <></>
+                
                 }
                
                 <div className="header-right">

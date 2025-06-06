@@ -26,7 +26,7 @@ export const CustomCarousel = () =>  {
 
 
     return (
-        isMobileVersion && <div className="carousel">
+        !isMobileVersion && <div className="carousel">
             <div className="carousel-container">
                 <SwitchTransition>
                     <CSSTransition key={currentPage} timeout={700} classNames="fade" mountOnEnter unmountOnExit>

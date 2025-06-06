@@ -1,3 +1,3 @@
 export const screens = {
-    mobile: 750
+    mobile: 768
 }
