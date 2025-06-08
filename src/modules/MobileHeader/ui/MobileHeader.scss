@@ -1,6 +1,7 @@
 .mobile-header {
-  height: 70px;
   position: sticky;
+  margin-bottom: 30px;
+  height: 70px;
   top: 0;
   z-index: 1000;
   &-container {
