@@ -27,7 +27,7 @@ export const AppRouter = () => {
                 <Route path={routes.cart} element={<CartPage/>}/>
                 <Route path={routes.buyings} element={<BuyingsPage/>}/>
             </Routes>
-            <MobileFooterNavigation/>
+            { isMobileVersion && <MobileFooterNavigation/>}
         </Router>
     )
 }

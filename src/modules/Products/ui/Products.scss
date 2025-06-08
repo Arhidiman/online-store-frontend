@@ -14,10 +14,9 @@
     }
     &-cards {
         display: grid;
-        grid-gap: 30px;
-        row-gap: 50px;
+        grid-gap: 15px;
+        row-gap: 30px;
         grid-template-columns: repeat(5, 1fr);
-        // min-width: 70%;
         width: 100%;
     }
     &_show-more {

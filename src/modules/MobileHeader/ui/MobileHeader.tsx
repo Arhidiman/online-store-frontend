@@ -26,7 +26,7 @@ export const MobileAppHeader = () =>  {
 
     return (
         <Header className='mobile-header' style={headerColor()}>
-            <div className='header-container'>
+            <div className='mobile-header-container'>
                 <Input placeholder="Найти товар"/>
                 {themeSwitcher(switchTheme)}
             </div>

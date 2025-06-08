@@ -54,7 +54,7 @@ export const MobileFooterNavigation = () =>  {
                 theme: theme,
             },
             {
-                label: 'История покупок',
+                label: 'История',
                 key: routes.buyings,
             },
             {

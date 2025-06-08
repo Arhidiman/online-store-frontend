@@ -1,5 +1,6 @@
 .mobile-footer {
   height: 70px;
+  padding: 0;
   position: sticky;
   bottom: 0;
   z-index: 1000;
@@ -11,5 +12,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 20px
+  }
+  .ant-tabs-tab {
+    margin: 0;
+    margin-left: 12px !important;
   }
 }
