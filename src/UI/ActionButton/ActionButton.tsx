@@ -6,14 +6,17 @@ import {
     DeleteOutlined, 
     ArrowDownOutlined,
     ArrowLeftOutlined,
-    MoneyCollectFilled
+    MoneyCollectFilled,
+    MenuUnfoldOutlined,
+    CloseOutlined
 } from "@ant-design/icons"
 import {Button} from "antd"
 import { useGlobalStore } from "@/store/useGlobalStore";
 import type {MouseEventHandler} from "react";
+import type { CSSProperties } from "react";
 import './ActionButton.scss'
 
-export type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left' | 'pay'
+export type TActions = 'add' | 'reduce' | 'edit' | 'check' | 'delete' | 'complete' | 'down' | 'left' | 'pay' | 'menu-open' | 'menu-closed'
 
 export interface IActionButton {
     className?: string
@@ -22,25 +25,28 @@ export interface IActionButton {
     type?: TActions,
     disabled?: boolean,
     size?: 'large' | 'middle' | 'small',
-    ghost?: boolean
+    ghost?: boolean,
+    iconStyle?: CSSProperties
 }
 
-export const ActionButton = ({className, text, actionHandler, type, disabled, size, ghost}: IActionButton) =>  {
+export const ActionButton = ({className, text, actionHandler, type, disabled, size, ghost, iconStyle}: IActionButton) =>  {
 
     const {theme} = useGlobalStore()
 
     const themeSwitcher = () => theme === 'dark' ? 'default' : 'primary'
 
-    const getActionIcon = (type: TActions | undefined) => {
+    const getActionIcon = (type: TActions | undefined, iconStyle: CSSProperties | undefined) => {
         switch (type) {
-            case 'add': return <PlusOutlined/>
-            case 'reduce': return <MinusOutlined/>
-            case 'edit': return <EditOutlined/>
-            case 'check': return <CheckOutlined/>
-            case 'delete': return <DeleteOutlined/>
-            case 'down': return <ArrowDownOutlined/>
-            case 'left': return <ArrowLeftOutlined/>
-            case 'pay': return <MoneyCollectFilled/>
+            case 'add': return <PlusOutlined style={iconStyle}/>
+            case 'reduce': return <MinusOutlined style={iconStyle}/>
+            case 'edit': return <EditOutlined style={iconStyle}/>
+            case 'check': return <CheckOutlined style={iconStyle}/>
+            case 'delete': return <DeleteOutlined style={iconStyle}/>
+            case 'down': return <ArrowDownOutlined style={iconStyle}/>
+            case 'left': return <ArrowLeftOutlined style={iconStyle}/>
+            case 'pay': return <MoneyCollectFilled style={iconStyle}/>
+            case 'menu-open': return <CloseOutlined style={iconStyle}/>
+            case 'menu-closed': return <MenuUnfoldOutlined style={iconStyle}/>
         }
     }
 
@@ -54,7 +60,7 @@ export const ActionButton = ({className, text, actionHandler, type, disabled, si
             ghost={ghost}
         >
             {text}
-            {getActionIcon(type)}
+            {getActionIcon(type, iconStyle)}
         </Button>
     )
 }

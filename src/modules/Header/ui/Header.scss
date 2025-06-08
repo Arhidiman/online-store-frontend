@@ -1,12 +1,15 @@
 .header {
   height: 100px;
   margin-bottom: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   &-user {
     display: flex;
     gap: 15px
   }
   &-container {
-    width: 90%;
+    width: 75%;
     height: 100%;
     margin: 0 auto;
     display: flex;

@@ -17,7 +17,7 @@ export function Products() {
     const { orderData, setOrderData } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
-    const [showMore] = useState<number>(6)
+    const [showMore] = useState<number>(10)
 
     const {data} = useQuery(GET_SORTED_PRODUCTS, {variables: filters})
     const { data: orderGQLData } = useQuery(GET_CURRENT_ORDER, { variables: { user_id: userId }, skip: !userId, fetchPolicy:'network-only' })

@@ -9,6 +9,8 @@ export interface IGlobalStore {
     theme: MenuTheme,
     orderData: TOrderData,
     isMobileVersion: boolean,
+    isCategoriesMenuOpen: boolean,
+    setIsCategoriesMenuOpen: (open: boolean) => void,
     setIsMobileVersion: (isMobile: boolean) => void,
     switchTheme: () => void
     setCurrentUser: (user: string) => void
@@ -28,6 +30,8 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
     theme: 'light',
     orderData: { order: {}, items: [], full_price: 0 }, 
     isMobileVersion: false,
+    isCategoriesMenuOpen: false,
+    setIsCategoriesMenuOpen: (open) => set((state) => ({...state, isCategoriesMenuOpen: open})),
     setIsMobileVersion: (isMobile: boolean) => set((state) => ({...state, isMobileVersion: isMobile})),
     switchTheme: () => set((state: IGlobalStore) => ({
             ...state,
@@ -49,7 +53,6 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
     }),
 
     setOrderId: (id: number | undefined) => set((state: IGlobalStore) => {
-
         return {
             ...state, orderData: { ...state.orderData, order: {...state.orderData.order, id}}
         }        

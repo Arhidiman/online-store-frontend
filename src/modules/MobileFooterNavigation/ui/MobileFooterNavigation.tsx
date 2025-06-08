@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
-import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
-import {UserOutlined, LogoutOutlined} from "@ant-design/icons"
-import {useGlobalStore} from "@/store/useGlobalStore.ts"
-import type {SwitchChangeEventHandler} from "antd/es/switch";
-import {Switch, Tabs, Input} from "antd";
-import { Header } from "antd/es/layout/layout";
-import { MenuButton } from "../../../components/MenuButton/MenuButton";
-import { headerStore } from "../store/headerStore";
+import { useGlobalStore } from "@/store/useGlobalStore.ts"
+import { Switch, Tabs } from "antd";
+import { Footer } from "antd/es/layout/layout";
+import { useNavigate } from "react-router-dom";
+import { COLORS } from '@/common/constants/themeColors'
 import { routes } from "@/common/constants/routes"
-import {COLORS} from '@/common/constants/themeColors'
-import './Header.scss'
+import type {SwitchChangeEventHandler} from "antd/es/switch";
+import './MobileFooterNavigation.scss'
 
 
-export const AppHeader = () =>  {
+export const MobileFooterNavigation = () =>  {
+
+
+    const [ currentTab, setCurrentTab ] = useState('')
 
     const navigate = useNavigate()
 
@@ -24,9 +23,10 @@ export const AppHeader = () =>  {
         currentUser, 
         setCurrentUser, 
         isCategoriesMenuOpen,
-        setIsCategoriesMenuOpen
+        setIsCategoriesMenuOpen,
     } = useGlobalStore()
-    const { currentTab, setCurrentTab } = headerStore()
+
+    // const { currentTab, setCurrentTab } = headerStore()
 
     const themeSwitcher = (theme: "dark" | "light", changeTheme: SwitchChangeEventHandler)  =>
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
@@ -64,7 +64,7 @@ export const AppHeader = () =>  {
         ]
 
     useEffect(() => {
-        setCurrentUser(localStorage.getItem('username') || "")
+        // setCurrentUser(localStorage.getItem('username') || "")
     }, [currentTab])
 
     useEffect(() => {
@@ -77,31 +77,15 @@ export const AppHeader = () =>  {
     }
 
     return (
-        <Header className='header' style={headerColor()}>
-            <div className='header-container'>
-
-                <MenuButton 
-                    menuOpen={isCategoriesMenuOpen}
-                    actionHandler={switchCategoriesMenuOpen}
-                />
-                <Input placeholder="Найти товар"/>
-
+        <Footer className='mobile-footer' style={headerColor()}>
+            <div className="mobile-footer-container">
                 <Tabs
                     items={tabItems}
                     onChange={navigateByTab}
-                    activeKey={currentTab}
+                    // activeKey={currentTab}
                 />
-
-                <div className="header-right">
-                    <div className='header-user'>
-                        <UserOutlined />
-                        <p>{ currentUser }</p>
-                        <LogoutOutlined/>
-                    </div>
-                    {themeSwitcher(theme, switchTheme)}
-                </div>
             </div>
-        </Header>
+        </Footer>
     )
 }
 

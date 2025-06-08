@@ -1,0 +1,7 @@
+.menu-button {
+    background: transparent;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}

@@ -10,7 +10,6 @@ function App() {
 
     const screenWidth = window.screen.width
 
-
     useEffect(() => {
         if ( screenWidth && screenWidth <= screens.mobile ) {
             setIsMobileVersion(true)
@@ -18,9 +17,9 @@ function App() {
     }, [])
 
     return (
-        <>
-            <AppRouter/>
-        </>
+        
+        <AppRouter/>
+        
     )
 }
 

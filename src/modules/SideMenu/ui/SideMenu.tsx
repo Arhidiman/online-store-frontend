@@ -14,13 +14,14 @@ type TMenuItem = {
 }
 
 interface ISideMenu {
-  itemsData: TMenuItem[] | []
+  itemsData: TMenuItem[] | [],
+  open: boolean
 }
 
     
 const circle = <span className="side-menu-circle"></span>
 
-export const  SideMenu = ({itemsData}: ISideMenu) => {
+export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
 
     const {theme} = useGlobalStore()
     const { filters, setFilters } = useFiltersStore()
@@ -85,13 +86,13 @@ export const  SideMenu = ({itemsData}: ISideMenu) => {
         <Menu
             theme={theme}
             mode="inline"
-            inlineCollapsed={collapsed} 
+            inlineCollapsed={!open} 
             forceSubMenuRender   
             onClick={(e)=>console.log(e)}
 
         >
           {
-            [collapseMenuItem(), [firstMenuItem(), ...items(itemsData) || []]]
+            [[firstMenuItem(), ...items(itemsData) || []]]
           }     
         </Menu>
       </div>

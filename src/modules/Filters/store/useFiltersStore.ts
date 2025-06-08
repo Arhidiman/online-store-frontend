@@ -21,7 +21,7 @@ export type ProductsFiltersStore = {
 
 export const useFiltersStore = create(devtools<ProductsFiltersStore>((set => ({
 
-    filters: { showCount: 6, maxPrice: 25000, ratingSort: 'ASC'},
+    filters: { showCount: 10, maxPrice: 25000, ratingSort: 'ASC'},
     setFilters: (filters: Partial<ProductsFiltersDto> ) => {
         set((state: ProductsFiltersStore) => {
             return {
