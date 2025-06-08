@@ -3,6 +3,7 @@ import { Table } from 'antd'
 import { useQuery } from '@apollo/client'
 import { GET_ALL_TRANSACTIONS } from '../queries';
 import type { TableProps } from 'antd';
+import { useGlobalStore } from '@/store/useGlobalStore';
 import type { TransactionsDataDto } from '../dto';
 import type { QueryResult } from '@apollo/client';
 import { getDateAndTimeFromTimestamp } from '@/utils';
@@ -53,9 +54,35 @@ const columns: TableProps<TransactionsDataDto>['columns'] = [
     }
 ]
 
+
+const mobileColumns = [
+    {
+        title: 'Цена заказа',
+        dataIndex: 'full_price',
+        key: 'full_price',
+        sorter: numberSorter('full_price')
+    },
+    {
+        title: 'Время заказа',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        sorter: alphabetSorter('created_at')
+
+    },
+    {
+        title: 'Город',
+        dataIndex: 'city',
+        key: 'city',
+        sorter: alphabetSorter('city')
+    }
+]
+
 export const BuyingsPage = () =>  {
 
+    const { isMobileVersion } = useGlobalStore()
+
     const [ tableData, setTableData] = useState<TransactionsDataDto[] | []>([])
+    const [ mobileTableData, setMobileTableData] = useState<TransactionsDataDto[] | []>([])
 
     const jwt_token = localStorage.getItem('token')
     
@@ -68,11 +95,33 @@ export const BuyingsPage = () =>  {
         getTransactionsItemsData && setTableData(getTransactionsItemsData.map(dataItem => ({...dataItem, created_at: getDateAndTimeFromTimestamp(dataItem.created_at)})))
     }, [data])
 
+    useEffect(() => {
+        const { getTransactionsItemsData } = data || {}
+        isMobileVersion && getTransactionsItemsData && setMobileTableData(
+            getTransactionsItemsData.map(dataItem => ({
+                ...dataItem, created_at: getDateAndTimeFromTimestamp(dataItem.created_at)
+            })).map(item => {
+                return Object.keys(item).reduce((acc, key) => {
+
+                    if (key !== 'street' && key !== 'building') {
+                        return {
+                            ...acc,
+                            [key]: item[key as keyof TransactionsDataDto]
+                        }
+                    } else return acc
+                   
+                }, {} as TransactionsDataDto)
+            })
+        )
+    }, [data, isMobileVersion])
+
+    console.log(mobileTableData, 'mobileTableData')
+
     return (
         <div className='buyings-page-container'>
            <Table 
-                dataSource={tableData}  
-                columns={columns}
+                dataSource={ isMobileVersion ? mobileTableData : tableData}  
+                columns={isMobileVersion ? mobileColumns : columns}
                 pagination={{pageSize: 10, total: tableData?.length || 0}}
             >
            </Table>

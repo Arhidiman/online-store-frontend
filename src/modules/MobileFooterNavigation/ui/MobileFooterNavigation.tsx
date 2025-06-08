@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGlobalStore } from "@/store/useGlobalStore.ts"
 import { Switch, Tabs } from "antd";
 import { Footer } from "antd/es/layout/layout";
+import { HomeFilled, ShoppingFilled, HistoryOutlined, UserOutlined,  } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { COLORS } from '@/common/constants/themeColors'
 import { routes } from "@/common/constants/routes"
@@ -44,21 +45,21 @@ export const MobileFooterNavigation = () =>  {
 
     const tabItems = [
             {
-                label: 'Главная',
+                label: <HomeFilled className="nav-icon"/>,
                 key: routes.main,
                 theme: theme
             },
             {
-                label: 'Корзина',
+                label: <ShoppingFilled className="nav-icon"/>,
                 key: routes.cart,
                 theme: theme,
             },
             {
-                label: 'История',
+                label: <HistoryOutlined className="nav-icon"/>,
                 key: routes.buyings,
             },
             {
-                label: 'Вход',
+                label: <UserOutlined className="nav-icon"/>,
                 key: routes.auth
             }
         ]

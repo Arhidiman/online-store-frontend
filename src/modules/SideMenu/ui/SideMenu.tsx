@@ -80,6 +80,8 @@ export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
     }
 
 
+    console.log(open, 'is open')
+
 
     return (        
       <div className="side-menu" style={{ width: 242}}>
@@ -89,7 +91,6 @@ export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
             inlineCollapsed={!open} 
             forceSubMenuRender   
             onClick={(e)=>console.log(e)}
-
         >
           {
             [[firstMenuItem(), ...items(itemsData) || []]]
