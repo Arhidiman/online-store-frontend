@@ -71,13 +71,13 @@ export const RegistrationCard = () =>  {
         <Card className='registration-card' title='Регистрация'>
             <Form className='registration-card-form' form={form}>
                 <Form.Item rules={inputRules} name='username'>
-                    <Space className='input-item' >
+                    <Space direction={layoutDirecion} className='input-item'>
                         <span className="label">Имя пользователя</span>
                         <Input className='input' placeholder='имя'/>
                     </Space>
                 </Form.Item>
                 <Form.Item rules={inputRules} name='password'>
-                    <Space className='input-item' >
+                    <Space direction={layoutDirecion} className='input-item' >
                         <span className="label">Пароль</span>
                         <Input className='input' placeholder='Пароль'/>
                     </Space>

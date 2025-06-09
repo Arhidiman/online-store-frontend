@@ -7,7 +7,9 @@
     margin-bottom: 20px;
   }
   .input {
-    width: 400px;
+    width: 100%;
+    max-width: 600px;
+    min-width: 150px;
     &-item {
       display: flex;
       justify-content: space-between;
