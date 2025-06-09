@@ -5,11 +5,20 @@
     align-items: flex-start;
     width: 75%;
     margin: 0 auto;
-    margin-bottom: 50px;
+    padding: 50px;
+    padding-top: 0px
 }
 
 .main-top {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.filters-dropdown-wrapper  {
+    .ant-dropdown {
+        position: absolute !important;
+        top: 50px !important;
+        left: 0px !important;
+    }
 }

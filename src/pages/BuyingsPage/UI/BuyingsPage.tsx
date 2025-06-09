@@ -115,11 +115,10 @@ export const BuyingsPage = () =>  {
         )
     }, [data, isMobileVersion])
 
-    console.log(mobileTableData, 'mobileTableData')
-
     return (
         <div className='buyings-page-container'>
            <Table 
+                className='buyings-page-table'
                 dataSource={ isMobileVersion ? mobileTableData : tableData}  
                 columns={isMobileVersion ? mobileColumns : columns}
                 pagination={{pageSize: 10, total: tableData?.length || 0}}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Form, Input, notification } from "antd";
+import { Card, Form, Input, notification, Space } from "antd";
 import { useGlobalStore } from "@/store/useGlobalStore";
 import { useAuthPageStore } from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import { headerStore } from "@/modules/Header/store/headerStore";
@@ -12,11 +12,12 @@ import './AuthCard.scss'
 
 export const AuthCard = () =>  {
 
-    const { setOrderData } = useGlobalStore()
+    const { setOrderData, isMobileVersion } = useGlobalStore()
     const { switchAuthReg } = useAuthPageStore()
     const { setCurrentTab } = headerStore()
 
     const [ username, setUsername ] = useState<string>('')
+    const [layoutDirecion, setLayoytDirection] = useState<'vertical' | 'horizontal'>('vertical')
     const [form] = Form.useForm()
 
     const [authenticate, { data, error }] = useMutation(SIGN_IN)
@@ -59,22 +60,26 @@ export const AuthCard = () =>  {
 
     }, [data, error])
 
+    useEffect(() => {
+        setLayoytDirection(isMobileVersion ? 'vertical' : 'horizontal')
+    }, [isMobileVersion])
+
     const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     return (
         <Card className='auth-card' title='Вход'>
             <Form className='auth-card-form' form={form}>
                 <Form.Item rules={inputRules} name='username'>
-                    <div className='input-item' >
+                    <Space className='input-item' direction={layoutDirecion}>
                         <span className="label">Имя пользователя</span>
                         <Input className='input' placeholder='имя'/>
-                    </div>
+                    </Space>
                 </Form.Item>
                 <Form.Item rules={inputRules} name='password'>
-                    <div className='input-item' >
+                    <Space className='input-item' direction={layoutDirecion}>
                         <span className="label">Пароль</span>
                         <Input className='input' placeholder='Пароль'/>
-                    </div>
+                    </Space>
                 </Form.Item>
 
                 <ActionButton 

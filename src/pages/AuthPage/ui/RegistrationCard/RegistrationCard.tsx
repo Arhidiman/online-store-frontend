@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import {Card, Form, Input, notification} from "antd";
+import {Card, Form, Input, notification, Space} from "antd";
 import { useMutation } from "@apollo/client";
 import {useAuthPageStore} from "@/pages/AuthPage/store/useAuthPageStore.ts"
 import {useNavigate} from "react-router-dom";
@@ -13,11 +13,12 @@ import './RegistrationCard.scss'
 
 export const RegistrationCard = () =>  {
 
-    const { setOrderData } = useGlobalStore()
+    const { setOrderData, isMobileVersion } = useGlobalStore()
     const { switchAuthReg } = useAuthPageStore()
     const { setCurrentTab } = headerStore()
 
     const [ username, setUsername ] = useState<string>('')
+    const [layoutDirecion, setLayoytDirection] = useState<'vertical' | 'horizontal'>('vertical')
     const [form] = Form.useForm()
 
     const [register, { data, error }] = useMutation(SIGN_UP)
@@ -59,22 +60,27 @@ export const RegistrationCard = () =>  {
 
     }, [data, error])
 
+    useEffect(() => {
+        setLayoytDirection(isMobileVersion ? 'vertical' : 'horizontal')
+    }, [isMobileVersion])
+
+
     const inputRules = [{ required: true, message: 'Это поле не может быть пустым' }]
 
     return (
         <Card className='registration-card' title='Регистрация'>
             <Form className='registration-card-form' form={form}>
                 <Form.Item rules={inputRules} name='username'>
-                    <div className='input-item' >
+                    <Space className='input-item' >
                         <span className="label">Имя пользователя</span>
                         <Input className='input' placeholder='имя'/>
-                    </div>
+                    </Space>
                 </Form.Item>
                 <Form.Item rules={inputRules} name='password'>
-                    <div className='input-item' >
+                    <Space className='input-item' >
                         <span className="label">Пароль</span>
                         <Input className='input' placeholder='Пароль'/>
-                    </div>
+                    </Space>
                 </Form.Item>
                 <ActionButton className="registration-button" actionHandler={submitRegistration} text="Зарегистрироваться"/>
             </Form>
