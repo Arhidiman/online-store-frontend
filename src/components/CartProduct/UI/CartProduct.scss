@@ -4,7 +4,6 @@
     gap: 20px;
     align-items: center;
     justify-content: space-between;
-    // min-width: 700px;
     padding-right: 20px;
     border-radius: 10px;
     img {
@@ -18,7 +17,6 @@
         height: 150px;
     }
     &_name {
-        color: #222222;
         font-family: Montserrat;
         font-weight: bold;
         font-size: 24px;
@@ -30,22 +28,20 @@
         position: absolute;
         top: 0px;
         right: 20px;
-        color: #222222;
         font-family: Montserrat;
         font-weight: bold;
         font-size: 18px;
     }
     &_count {
-        color: #111111;
         font-family: Montserrat;
         font-weight: bold;
         font-size: 20px;
     }
     &_button {
-        width: 70px;
+        max-width: 70px;
         height: 40px;
         &_count {
-            width: 40px;
+            max-width: 40px;
             height: 40px;
             background: #ff3764;
         }
@@ -62,12 +58,20 @@
 
 @media screen and (max-width: 768px) {
    .cart-product {
+    gap: 0px;
         &-content {
             flex-direction: column;
             align-items: end;
         }
         &_price {
             position: relative;
+        }
+
+        &_button {
+            max-width: 20px;
+            &_count {
+                max-width: 20px;
+            }
         }
    }
 }
