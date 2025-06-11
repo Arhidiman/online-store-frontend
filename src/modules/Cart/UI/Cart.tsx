@@ -10,7 +10,7 @@ import './Cart.scss'
 
 export const Cart = () => {
 
-    const { orderData, setOrderItems, setOrderId, setFullPrice } = useGlobalStore()
+    const { orderData, setOrderItems, setOrderId, setFullPrice, appTheme } = useGlobalStore()
     const [ userId, setUserId ] = useState<number | undefined>()
 
 
@@ -58,7 +58,7 @@ export const Cart = () => {
     console.log(data, 'data')
     
     return (
-        <div className="cart">
+        <div className={`cart ${ appTheme === 'dark' ? 'dark-theme' : '' }`}>
             <h2 className="cart-title">Корзина</h2>
             {
                 orderData.items && orderData.items.map(({ id, name, image, price, product_count, order_id }: OrderItemsInfoDto) =>{

@@ -21,4 +21,27 @@
   .anticon.nav-icon {
     font-size: 20px;
   }
+
+  .ant-tabs {
+    width: 100%;
+  }
+
+  .ant-tabs-nav-wrap {
+    display: block !important;
+    .ant-tabs-nav-list {
+      justify-content: space-between !important;
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .cart-product {
+       &-content {
+           flex-direction: column;
+       }
+       &_price {
+           position: relative;
+       }
+  }
 }

@@ -54,7 +54,7 @@ export const AppHeader = () =>  {
                 theme: appTheme,
             },
             {
-                label: 'История покупок',
+                label: 'История',
                 key: routes.buyings,
             },
             {
@@ -96,7 +96,6 @@ export const AppHeader = () =>  {
                     <div className='header-user'>
                         <UserOutlined />
                         <p>{ currentUser }</p>
-                        <LogoutOutlined/>
                     </div>
                     {themeSwitcher(appTheme, switchTheme)}
                 </div>

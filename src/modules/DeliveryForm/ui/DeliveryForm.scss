@@ -21,3 +21,9 @@
         font-size: 22px;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .delivery-form {
+        display: none;
+    }
+}

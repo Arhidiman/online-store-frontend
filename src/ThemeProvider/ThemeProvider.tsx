@@ -50,7 +50,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactElement}) => 
     }
 
     useEffect(() => {
-        if ( screenWidth && screenWidth <= screens.mobile ) {
+        if ( screenWidth && screenWidth <= screens.laptop ) {
             setIsMobileVersion(true)
         }
     }, [])

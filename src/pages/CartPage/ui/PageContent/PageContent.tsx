@@ -23,10 +23,10 @@ export const PageContent = () => {
                 <div className="cart-page-container">
                     <div className="cart-page-content">
                         <Cart/>
-                        {/* <DeliveryForm 
+                        <DeliveryForm 
                             onConfirm={(data: IDeliveryData) => setDeliveryData(data)}
                             extraConfirmHandlers={[() => setIsPaymentFormOpened(true)]} 
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>    

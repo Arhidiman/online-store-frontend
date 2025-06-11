@@ -61,15 +61,13 @@
 
 
 @media screen and (max-width: 768px) {
-
- 
    .cart-product {
         &-content {
             flex-direction: column;
+            align-items: end;
         }
         &_price {
             position: relative;
         }
    }
-    
 }
