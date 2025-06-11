@@ -7,3 +7,10 @@
     background: #ffffff;
     border-radius: 30px;
 }
+
+
+@media screen and (max-width: 1024px) {
+    .cart {
+        width: 100%;
+    } 
+}
