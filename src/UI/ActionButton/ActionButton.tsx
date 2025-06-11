@@ -31,9 +31,9 @@ export interface IActionButton {
 
 export const ActionButton = ({className, text, actionHandler, type, disabled, size, ghost, iconStyle}: IActionButton) =>  {
 
-    const {theme} = useGlobalStore()
+    const { appTheme } = useGlobalStore()
 
-    const themeSwitcher = () => theme === 'dark' ? 'default' : 'primary'
+    const themeSwitcher = () => appTheme === 'dark' ? 'default' : 'primary'
 
     const getActionIcon = (type: TActions | undefined, iconStyle: CSSProperties | undefined) => {
         switch (type) {

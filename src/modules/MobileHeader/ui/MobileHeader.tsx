@@ -6,11 +6,10 @@ import {COLORS} from '@/common/constants/themeColors'
 import type {SwitchChangeEventHandler} from "antd/es/switch";
 import './MobileHeader.scss'
 
-
 export const MobileAppHeader = () =>  {
 
     const { 
-        theme, 
+        appTheme, 
         switchTheme, 
     } = useGlobalStore()
 
@@ -18,7 +17,7 @@ export const MobileAppHeader = () =>  {
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
 
     const headerColor = () => {
-        const color = theme === 'light' ? COLORS.light.header : COLORS.dark.header
+        const color = appTheme === 'light' ? COLORS.light.header : COLORS.dark.header
         return {
             background: color
         }

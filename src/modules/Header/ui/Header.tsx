@@ -19,7 +19,7 @@ export const AppHeader = () =>  {
 
     const { 
         isMobileVersion, 
-        theme, 
+        appTheme, 
         switchTheme, 
         currentUser, 
         setCurrentUser, 
@@ -32,7 +32,7 @@ export const AppHeader = () =>  {
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
 
     const headerColor = () => {
-        const color = theme === 'light' ? COLORS.light.header : COLORS.dark.header
+        const color = appTheme === 'light' ? COLORS.light.header : COLORS.dark.header
         return {
             background: color
         }
@@ -46,12 +46,12 @@ export const AppHeader = () =>  {
             {
                 label: 'Главная',
                 key: routes.main,
-                theme: theme
+                theme: appTheme
             },
             {
                 label: 'Корзина',
                 key: routes.cart,
-                theme: theme,
+                theme: appTheme,
             },
             {
                 label: 'История покупок',
@@ -98,7 +98,7 @@ export const AppHeader = () =>  {
                         <p>{ currentUser }</p>
                         <LogoutOutlined/>
                     </div>
-                    {themeSwitcher(theme, switchTheme)}
+                    {themeSwitcher(appTheme, switchTheme)}
                 </div>
             </div>
         </Header>

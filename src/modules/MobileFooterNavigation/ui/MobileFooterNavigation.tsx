@@ -12,14 +12,13 @@ import './MobileFooterNavigation.scss'
 
 export const MobileFooterNavigation = () =>  {
 
-
     const [ currentTab, setCurrentTab ] = useState('')
 
     const navigate = useNavigate()
 
     const { 
         isMobileVersion, 
-        theme, 
+        appTheme, 
         switchTheme, 
         currentUser, 
         setCurrentUser, 
@@ -33,7 +32,7 @@ export const MobileFooterNavigation = () =>  {
         <Switch className="side-menu-theme-switcher" onChange={changeTheme}/>
 
     const headerColor = () => {
-        const color = theme === 'light' ? COLORS.light.header : COLORS.dark.header
+        const color = appTheme === 'light' ? COLORS.light.header : COLORS.dark.header
         return {
             background: color
         }
@@ -47,12 +46,12 @@ export const MobileFooterNavigation = () =>  {
             {
                 label: <HomeFilled className="nav-icon"/>,
                 key: routes.main,
-                theme: theme
+                theme: appTheme
             },
             {
                 label: <ShoppingFilled className="nav-icon"/>,
                 key: routes.cart,
-                theme: theme,
+                theme: appTheme,
             },
             {
                 label: <HistoryOutlined className="nav-icon"/>,

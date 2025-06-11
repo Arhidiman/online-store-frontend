@@ -1,12 +1,12 @@
-import {create} from 'zustand'
-import {devtools} from "zustand/middleware";
+import { create } from 'zustand'
+import { devtools } from "zustand/middleware";
 import { type MenuTheme } from 'antd';
 import type { OrderDto, OrderItemDto } from './dto';
 
 
 export interface IGlobalStore {
     currentUser: string,
-    theme: MenuTheme,
+    appTheme: MenuTheme,
     orderData: TOrderData,
     isMobileVersion: boolean,
     isCategoriesMenuOpen: boolean,
@@ -22,20 +22,20 @@ export interface IGlobalStore {
     setFullPrice: () => void
 }
 
-type TOrderData = { order: OrderDto, items: OrderItemDto[] | [], full_price: number}
+type TOrderData = { order: OrderDto, items: OrderItemDto[] | [], full_price: number }
 
 export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
     currentUser: '',
-    theme: 'light',
-    orderData: { order: {}, items: [], full_price: 0 }, 
+    appTheme: 'light',
+    orderData: { order: {}, items: [], full_price: 0 },
     isMobileVersion: false,
     isCategoriesMenuOpen: false,
-    setIsCategoriesMenuOpen: (open) => set((state) => ({...state, isCategoriesMenuOpen: open})),
-    setIsMobileVersion: (isMobile: boolean) => set((state) => ({...state, isMobileVersion: isMobile})),
+    setIsCategoriesMenuOpen: (open) => set((state) => ({ ...state, isCategoriesMenuOpen: open })),
+    setIsMobileVersion: (isMobile: boolean) => set((state) => ({ ...state, isMobileVersion: isMobile })),
     switchTheme: () => set((state: IGlobalStore) => ({
-            ...state,
-            theme: state.theme === 'dark' ? 'light' : 'dark'
+        ...state,
+        appTheme: state.appTheme === 'dark' ? 'light' : 'dark'
     })),
     setCurrentUser: async (user: string) => {
         set((state: IGlobalStore) => {
@@ -43,36 +43,36 @@ export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
                 ...state,
                 currentUser: user
             }
-        })        
+        })
     },
 
     setOrderData: (data: Partial<TOrderData>) => set((state: IGlobalStore) => {
         return {
-            ...state, orderData: { ...state.orderData, ...data}
-        }        
+            ...state, orderData: { ...state.orderData, ...data }
+        }
     }),
 
     setOrderId: (id: number | undefined) => set((state: IGlobalStore) => {
         return {
-            ...state, orderData: { ...state.orderData, order: {...state.orderData.order, id}}
-        }        
+            ...state, orderData: { ...state.orderData, order: { ...state.orderData.order, id } }
+        }
     }),
 
-    setOrderItems: (items: OrderItemDto[] ) => set((state: IGlobalStore) => ({
-        ...state, orderData: { ...state.orderData, items: [...items]}
+    setOrderItems: (items: OrderItemDto[]) => set((state: IGlobalStore) => ({
+        ...state, orderData: { ...state.orderData, items: [...items] }
     })),
 
     addItem: (item: OrderItemDto) => set((state: IGlobalStore) => ({
-        ...state, orderData: { ...state.orderData, items: [...state.orderData.items, item]}
+        ...state, orderData: { ...state.orderData, items: [...state.orderData.items, item] }
     })),
 
     removeItem: (id: number) => set((state: IGlobalStore) => ({
-        ...state, orderData: { ...state.orderData, items: [...state.orderData.items.filter(item => item.id !== id)]}
+        ...state, orderData: { ...state.orderData, items: [...state.orderData.items.filter(item => item.id !== id)] }
     })),
 
     setFullPrice: () => set((state: IGlobalStore) => {
 
-        const calculateFullPrice: () => number = () =>  {
+        const calculateFullPrice: () => number = () => {
             if (state.orderData.items.length === 0) {
                 return 0
             }
