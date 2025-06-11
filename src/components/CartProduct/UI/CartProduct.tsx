@@ -79,7 +79,7 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
 
                     <Space direction='vertical'>
                         <p className='cart-product_name'>{name}</p>
-                        <p className='cart-product_description'>Описание описание описание описание описание описание описание описание описание</p>
+                        <p className='cart-product_description'>Описание </p>
                     </Space>
                     <p className='cart-product_price'>{ price ? count*price : ''} ₽</p>   
                      
