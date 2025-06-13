@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { DeliveryForm } from '@/modules/DeliveryForm'
 import { PaymentForm } from '@/modules/PaymentForm'
 import { Cart } from '@/modules/Cart'
+import { ActionButton } from '@/UI/ActionButton'
+import { useCartPageStore } from '../../store/useCartPageStore'
 import type { IDeliveryData } from '@/types'
 
 export const PageContent = () => {
@@ -11,8 +13,19 @@ export const PageContent = () => {
 
     const [deliveryData, setDeliveryData] = useState<IDeliveryData>({})
 
+    const { setDeliveryFormOpen, deliveryFormOpen } = useCartPageStore()
+
     return (
         <>
+            {
+                !deliveryFormOpen && <ActionButton 
+                    size='large' 
+                    text='Перейти к доставке'
+                    className="cart-page-delivery-button pulse-gradient"
+                    actionHandler={() => setDeliveryFormOpen(true)}
+                />
+            }
+         
             <PaymentForm 
                 isOpen={paymentFormOpen} 
                 closeForm={() => closeModal()}                             

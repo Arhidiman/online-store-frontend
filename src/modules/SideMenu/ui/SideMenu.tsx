@@ -23,9 +23,9 @@ const circle = <span className="side-menu-circle"></span>
 
 export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
 
-    const {theme} = useGlobalStore()
+    const { appTheme } = useGlobalStore()
     const { filters, setFilters } = useFiltersStore()
-    const [collapsed, setCollapsed] = useState(true)
+    const [ collapsed, setCollapsed ] = useState(true)
     
     const toggleCollapsed = () => {
       setCollapsed(!collapsed)
@@ -84,9 +84,9 @@ export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
 
 
     return (        
-      <div className="side-menu" style={{ width: 242}}>
+      <div className="side-menu">
         <Menu
-            theme={theme}
+            theme={appTheme}
             mode="inline"
             inlineCollapsed={!open} 
             forceSubMenuRender   

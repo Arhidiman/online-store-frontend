@@ -7,15 +7,11 @@ export const CartPage = () => {
 
     const { orderData } = useGlobalStore()
 
-    return (
-        <div className='cart-page-container'>
-            {
-                orderData.items.length 
-                ? 
-                <PageContent/>
-                :
-                <EmptyPageContent/>
-            }
-        </div>
+    return ( 
+        orderData.items.length 
+        ? 
+        <PageContent/>
+        :
+        <EmptyPageContent/>
     )
 }

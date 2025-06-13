@@ -2,8 +2,8 @@
     padding-bottom: 100px;
     &-container {
         width: 90%;
-        // min-height: 100vh;
         margin: 0 auto;
+        margin-top: 30px;
     }
     &-content {
         display: flex;
@@ -22,7 +22,35 @@
             text-align: center;
         }
     }
+    &-delivery-button {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        z-index: 100;
+    }
+
 }
+
+.pulse-gradient {
+    background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ADEDE, #ff6ec4);
+    background-size: 600% 600%;
+    animation: gradientPulse 4s ease infinite;
+    color: white;
+    border: none;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  @keyframes gradientPulse {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 
   
   

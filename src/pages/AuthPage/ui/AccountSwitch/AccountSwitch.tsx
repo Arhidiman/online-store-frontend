@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Space } from "antd";
 import { useGlobalStore } from "@/store/useGlobalStore";
 import { useAuthPageStore } from "@/pages/AuthPage/store/useAuthPageStore.ts"
@@ -8,7 +9,9 @@ import './AccountSwitch.scss'
 
 export const AccountSwitch = () =>  {
 
-    const { currentUser, setCurrentUser } = useGlobalStore()
+    const [ className, setCLassName] = useState('')
+
+    const { currentUser, setCurrentUser, appTheme } = useGlobalStore()
     const { switchAuthReg } = useAuthPageStore()
     const { setCurrentTab } = headerStore()
 
@@ -23,8 +26,13 @@ export const AccountSwitch = () =>  {
         setCurrentTab(routes.main)
     }
 
+    useEffect(() => {
+        appTheme === 'dark' && setCLassName('dark-theme')
+        appTheme === 'light' && setCLassName('')
+    }, [appTheme])
+
     return (
-            <div className='account-switch-container'>
+            <div className={`account-switch-container ${className}`}>
                 <Space size={20} direction="vertical">
                 <h2 className="account-switch-title">{currentUser}, Вы авторизованы</h2>
 

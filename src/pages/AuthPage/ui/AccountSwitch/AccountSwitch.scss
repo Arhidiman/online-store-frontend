@@ -1,4 +1,8 @@
 .account-switch-container {
+  &.dark-theme {
+      background: #111
+  }
+
   display: flex;
   flex-direction: column;
   align-items: center;

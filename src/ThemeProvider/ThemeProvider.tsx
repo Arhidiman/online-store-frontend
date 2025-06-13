@@ -1,27 +1,24 @@
-import React, { useState, useEffect} from "react"
+import React, { useEffect} from "react"
 import { ConfigProvider, theme } from "antd" 
 import { useGlobalStore } from "@/store/useGlobalStore"
 import { COLORS } from "@/common/constants/themeColors"
 import { screens } from "@/common/constants/screens"
-import type { TokenWithCommonCls } from "antd/es/theme/internal"
 
-
-
-
-type CustomGlobalToken = TokenWithCommonCls< {
+type CustomGlobalToken = {
     backgroundColorDark: string,
     backgroundColorLight: string,
     colorDarkTheme: string,
     colorLightTheme: string,
-}>
-
-const { useToken } = theme
+}
 
 export const ThemeProvider = ({ children }: { children: React.ReactElement}) => {
-
-    const { token } = useToken()
     
-    const customToken = token as unknown as CustomGlobalToken
+    const customToken: CustomGlobalToken = {
+        colorDarkTheme: 'white',
+        colorLightTheme: 'black',
+        backgroundColorDark: '#333',
+        backgroundColorLight: '#ececec',
+    }
 
     const { setIsMobileVersion, appTheme } = useGlobalStore()
 
@@ -32,10 +29,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactElement}) => 
         token: {
             colorPrimary: COLORS.common.light,
             fontFamily: 'Arial, sans-serif',
-            colorDarkTheme: 'white',
-            colorLightTheme: 'black',
-            backgroundColorDark: '#333',
-            backgroundColorLight: '#ececec'
+            
         },
         components: {
             Menu: {
@@ -59,17 +53,15 @@ export const ThemeProvider = ({ children }: { children: React.ReactElement}) => 
         const root = document.getElementById('root')
 
         if (root && appTheme === 'dark') {
-            root.style.background = '#333'
+            root.style.background = customToken.backgroundColorDark
             root.style.color = customToken.colorDarkTheme
+
+            console.log(customToken.colorDarkTheme, customToken.colorLightTheme)
         }
         if (root && appTheme === 'light') {
-            root.style.background = '#ececec'
+            root.style.background = customToken.backgroundColorLight
             root.style.color = customToken.colorLightTheme
         }
-
-        console.log(token, 'token')
-        
-        console.log(root, 'root')
     }, [appTheme])
 
 
