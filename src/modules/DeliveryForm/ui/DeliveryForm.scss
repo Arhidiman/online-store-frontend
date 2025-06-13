@@ -7,7 +7,6 @@
     min-width: 300px;
     max-width: 700px;
     width: 45%;
-    max-height: 400px;
     padding: 20px;
     background: #ffffff;   
     border: solid grey 2px;
@@ -32,28 +31,23 @@
 }
 
 @media screen and (max-width: 1024px) {
-
-
     .delivery-form {
         position: fixed;
         top: 100px;
         width: 90%;
+        max-height: 450px;
         display: none;
-
         &.open {
             display: block;
         }
-
         &_extra-title {
             margin-bottom: 10px;
             border-bottom: darkgray 2px solid;
             font-size: 18px;
         }
-
         .base-form_title {
             font-size: 20px;
         }
-
         .close-form-btn {
             display: block;
         }

@@ -4,7 +4,8 @@ import { useForm } from "antd/es/form/Form"
 import { useQuery, useMutation } from "@apollo/client"
 import { BaseControlForm } from "@/components/BaseControlForm/BaseControlForm"
 import { BaseModal } from "@/components/BaseModal/BaseModal"
-import { useGlobalStore } from "@//store/useGlobalStore"
+import { useGlobalStore } from "@/store/useGlobalStore"
+import { useCartPageStore } from "@/pages/CartPage"
 import { CREATE_TRANSACTION } from "../queries"
 import type { IBaseControlForm } from "@/components/BaseControlForm/BaseControlForm"
 import type { IActionButton } from "@/UI/ActionButton/ActionButton"
@@ -24,6 +25,7 @@ interface IPaymentForm extends IBaseControlForm {
 export const PaymentForm = ({ isOpen, closeForm, onConfirm, deliveryData }: IPaymentForm) => { 
 
     const { orderData, setOrderItems, setOrderId } = useGlobalStore()
+    const { setDeliveryFormOpen } = useCartPageStore()
     const { order, items, full_price } = orderData || {}
     
     const payOrder = async () => {
@@ -31,6 +33,7 @@ export const PaymentForm = ({ isOpen, closeForm, onConfirm, deliveryData }: IPay
         notification.success( {message: 'Ваш заказ оплачен!' })
         setOrderItems([])
         setOrderId(undefined)
+        setDeliveryFormOpen(false)
     }
 
     const [ createTransaction, { data } ] = useMutation(
