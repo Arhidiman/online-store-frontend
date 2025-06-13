@@ -23,12 +23,12 @@
         }
     }
     &-delivery-button {
+        display: none;
         position: fixed;
         bottom: 80px;
         right: 20px;
         z-index: 100;
     }
-
 }
 
 .pulse-gradient {
@@ -38,20 +38,24 @@
     color: white;
     border: none;
     transition: box-shadow 0.3s ease;
-  }
+}
   
-  @keyframes gradientPulse {
+@keyframes gradientPulse {
     0% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
     50% {
-      background-position: 100% 50%;
+        background-position: 100% 50%;
     }
     100% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
-  }
+}
 
-  
-  
-  
+@media screen and (max-width: 1024px) {
+    .cart-page {
+        &-delivery-button {
+           display: block;
+        }
+    }
+}
