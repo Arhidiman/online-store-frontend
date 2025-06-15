@@ -1,7 +1,7 @@
 import React from 'react';
 import { useKeenSlider, KeenSliderInstance } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
-import './Carousel.scss'
+import './Slider.scss'
 
 
 interface SliderProps {
