@@ -4,8 +4,10 @@ import {Products} from "@/modules/Products"
 import { Filters } from "@/modules/Filters";
 import { SideMenu } from "@/modules/SideMenu/ui/SideMenu.tsx";
 import { CustomCarousel } from "@/components/CustomCarousel";
+import { Slider } from "@/components/Slider/Slider";
 import { queries } from "../constants/queries";
 import { useGlobalStore } from "@/store/useGlobalStore";
+import { mockImages } from "../mockImages";
 import type { CategoriesDto } from "../dto/dto";
 import './Main.scss'
 
@@ -29,9 +31,6 @@ export const Main = () =>  {
                 <>     
                     <SideMenu itemsData={categories} open={isCategoriesMenuOpen}/>
                     <div className="main-top">
-
-
-
                         <Filters/>
                         <CustomCarousel/>
                     </div>
@@ -42,6 +41,7 @@ export const Main = () =>  {
     return (
         <>
             <div className='main-container'>
+                <Slider images={mockImages}/>
                 <DeskTopVersionContent/>
                 <Products/>
             </div>
