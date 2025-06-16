@@ -5,9 +5,7 @@
 
 @media screen and (max-width: 1024px) {
     .keen-slider {
+        border-radius: 10px;
         display: flex !important;
-        .keen-slider__slide {
-            border-radius: 10px;
-        }
     }
 }

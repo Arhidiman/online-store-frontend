@@ -1,25 +1,33 @@
-import React from 'react';
-import { useKeenSlider, KeenSliderInstance } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
+import React, { useEffect } from 'react';
+import { useKeenSlider } from 'keen-slider/react';
 import './Slider.scss'
-
+import 'keen-slider/keen-slider.min.css';
 
 interface SliderProps {
   images: string[];
+  interval?: number;
 }
 
-export const Slider: React.FC<SliderProps> = ({ images }) => {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
+export const Slider: React.FC<SliderProps> = ({ images, interval = 5000 }) => {
+
+  const [sliderInstanceRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: { perView: 1 },
     drag: true,
-    slideChanged(s) {
-      console.log('current slide index:', s.track.details.abs)
-    },
-  })
+  });
+
+  useEffect(() => {
+    if (!slider) return;
+
+    const timer = setInterval(() => {
+      slider.current?.next();
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [slider, interval]);
 
   return (
-    <div ref={sliderRef} className="keen-slider">
+    <div ref={sliderInstanceRef} className="keen-slider">
       {images.map((src, idx) => (
         <div key={idx} className="keen-slider__slide">
           <img
@@ -35,6 +43,6 @@ export const Slider: React.FC<SliderProps> = ({ images }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 

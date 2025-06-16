@@ -1,11 +1,21 @@
 .product-card {
+
+
+
   &-custom {
     .ant-card-body {
       padding: 0
     }
     .ant-card-head {
-      background: linear-gradient(to bottom, #6504f9, #6504f9, #c852ff)
+      background: linear-gradient(to bottom, #6504f9, #6504f9, #c852ff);
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
     }
+
+    &.ant-card {
+      border-radius: 15px;
+    }
+  
   }
   &_button {
     font-size: 15px;
@@ -13,6 +23,8 @@
   &-content-bottom {
     background: linear-gradient(to bottom, #c852ff, #6504f9, #6504f9);
     padding: 15px 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     &-container {
       display: flex;
       flex-direction: column;

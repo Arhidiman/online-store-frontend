@@ -6,7 +6,7 @@ import type { OrderDto, OrderItemDto } from './dto';
 
 export interface IGlobalStore {
     currentUser: string,
-    appTheme: MenuTheme,
+    appTheme: 'dark' | 'light',
     orderData: TOrderData,
     isMobileVersion: boolean,
     isCategoriesMenuOpen: boolean,
@@ -27,16 +27,23 @@ type TOrderData = { order: OrderDto, items: OrderItemDto[] | [], full_price: num
 export const useGlobalStore = create(devtools<IGlobalStore>((set) => ({
 
     currentUser: '',
-    appTheme: 'light',
+    appTheme: (localStorage.getItem('theme') || 'light') as IGlobalStore['appTheme'],
     orderData: { order: {}, items: [], full_price: 0 },
     isMobileVersion: false,
     isCategoriesMenuOpen: false,
     setIsCategoriesMenuOpen: (open) => set((state) => ({ ...state, isCategoriesMenuOpen: open })),
     setIsMobileVersion: (isMobile: boolean) => set((state) => ({ ...state, isMobileVersion: isMobile })),
-    switchTheme: () => set((state: IGlobalStore) => ({
-        ...state,
-        appTheme: state.appTheme === 'dark' ? 'light' : 'dark'
-    })),
+    switchTheme: () => set((state: IGlobalStore) => {
+
+        const theme = localStorage.getItem('theme') || state.appTheme
+        const appTheme = theme === 'dark' ? 'light' : 'dark'
+        localStorage.setItem('theme', appTheme)
+
+        return {
+            ...state,
+            appTheme
+        }
+    }),
     setCurrentUser: async (user: string) => {
         set((state: IGlobalStore) => {
             return {
