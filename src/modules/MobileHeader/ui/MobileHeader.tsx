@@ -1,12 +1,17 @@
 
+import { useState } from "react";
 import {useGlobalStore} from "@/store/useGlobalStore.ts"
 import {Switch, Input} from "antd";
 import { Header } from "antd/es/layout/layout";
 import {COLORS} from '@/common/constants/themeColors'
+import { routes } from "@/common/constants/routes";
 import type {SwitchChangeEventHandler} from "antd/es/switch";
 import './MobileHeader.scss'
 
 export const MobileAppHeader = () =>  {
+
+
+    const [ currentPage, setCurrentPage ] = useState(window.location.pathname)
 
     const { 
         appTheme, 
@@ -23,7 +28,10 @@ export const MobileAppHeader = () =>  {
         }
     }
 
+    console.log(window.location)
+
     return (
+        currentPage !== routes.filters && 
         <Header className='mobile-header' style={headerColor()}>
             <div className='mobile-header-container'>
                 <Input placeholder="Найти товар"/>

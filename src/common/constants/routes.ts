@@ -1,6 +1,7 @@
 export const routes = {
     main: '/',
-    auth: '/autn',
+    auth: '/auth',
     cart: '/cart',
-    buyings: '/buyings'
+    buyings: '/buyings',
+    filters: '/filters'
 }

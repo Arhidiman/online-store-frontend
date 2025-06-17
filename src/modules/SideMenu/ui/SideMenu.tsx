@@ -15,13 +15,14 @@ type TMenuItem = {
 
 interface ISideMenu {
   itemsData: TMenuItem[] | [],
-  open: boolean
+  open: boolean,
+  className?: string
 }
 
     
 const circle = <span className="side-menu-circle"></span>
 
-export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
+export const  SideMenu = ({ itemsData, open, className }: ISideMenu) => {
 
     const { appTheme } = useGlobalStore()
     const { filters, setFilters } = useFiltersStore()
@@ -84,7 +85,7 @@ export const  SideMenu = ({ itemsData, open }: ISideMenu) => {
 
 
     return (        
-      <div className="side-menu">
+      <div className={`side-menu ${className ? className : ''}`}>
         <Menu
             theme={appTheme}
             mode="inline"

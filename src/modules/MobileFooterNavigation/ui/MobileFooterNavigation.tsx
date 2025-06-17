@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGlobalStore } from "@/store/useGlobalStore.ts"
 import { Switch, Tabs } from "antd";
 import { Footer } from "antd/es/layout/layout";
-import { HomeFilled, ShoppingFilled, HistoryOutlined, UserOutlined,  } from "@ant-design/icons";
+import { HomeFilled, ShoppingFilled, HistoryOutlined, UserOutlined, FilterFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { COLORS } from '@/common/constants/themeColors'
 import { routes } from "@/common/constants/routes"
@@ -47,6 +47,11 @@ export const MobileFooterNavigation = () =>  {
                 label: <HomeFilled className="nav-icon"/>,
                 key: routes.main,
                 theme: appTheme
+            },
+            {
+                label: <FilterFilled className="nav-icon"/>,
+                key: routes.filters,
+                theme: appTheme,
             },
             {
                 label: <ShoppingFilled className="nav-icon"/>,

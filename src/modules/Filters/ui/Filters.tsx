@@ -4,6 +4,7 @@ import { Select } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import './FIlters.scss'
 
+
 export const Filters = () => {
 
     const { filters, setFilters } = useFiltersStore()
@@ -53,8 +54,7 @@ export const Filters = () => {
     }
 
     return (
-        <div className="filters">
-            <div className='filters-container'>
+            <div className={`filters-container`}>
                 <div>
                     <h2>Фильтры</h2>
                     <Space direction="vertical">
@@ -76,6 +76,5 @@ export const Filters = () => {
                     <Select defaultValue="Выберите сортировку" style={{ width: 250 }} onChange={setCheckBoxSorters} options={ sorters }/>
                 </div> 
             </div>
-        </div>
     )
 }

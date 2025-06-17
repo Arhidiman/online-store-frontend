@@ -4,7 +4,8 @@ import {AuthPage} from "@/pages/AuthPage";
 import {AppHeader} from "@/modules/Header"
 import { MobileAppHeader } from "@/modules/MobileHeader";
 import { MobileFooterNavigation } from "@/modules/MobileFooterNavigation";
-import {Main} from "@/pages/Main";
+import { Main } from "@/pages/Main";
+import { FiltersPage } from "@/pages/FiltersPage/FiltersPage";
 import { CartPage } from "@/pages/CartPage";
 import { BuyingsPage } from "@/pages/BuyingsPage/UI/BuyingsPage";
 import {routes} from "@/common/constants/routes.ts";
@@ -24,6 +25,7 @@ export const AppRouter = () => {
             <Routes>
                 <Route path={routes.main} element={<Main/>}/>
                 <Route path={routes.auth} element={<AuthPage/>}/>
+                <Route path={routes.filters} element={<FiltersPage/>}/>
                 <Route path={routes.cart} element={<CartPage/>}/>
                 <Route path={routes.buyings} element={<BuyingsPage/>}/>
             </Routes>
