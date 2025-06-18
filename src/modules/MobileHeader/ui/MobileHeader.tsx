@@ -11,7 +11,7 @@ import './MobileHeader.scss'
 export const MobileAppHeader = () =>  {
 
 
-    const [ currentPage, setCurrentPage ] = useState(window.location.pathname)
+    const [ currentPage ] = useState(window.location.pathname)
 
     const { 
         appTheme, 

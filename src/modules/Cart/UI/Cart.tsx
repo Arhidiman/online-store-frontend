@@ -54,24 +54,22 @@ export const Cart = () => {
         setFullPrice()
     }, [orderData.items])
 
-
-    console.log(data, 'data')
     
     return (
         <div className={`cart ${ appTheme === 'dark' ? 'dark-theme' : '' }`}>
             <h2 className="cart-title">Корзина</h2>
             {
-                orderData.items && orderData.items.map(({ id, name, image, price, product_count, order_id }: OrderItemsInfoDto) =>{
-                    return <CartProduct
-                                key={id}
-                                id={id}
-                                name={name} 
-                                image={image}
-                                price={price}
-                                product_count={product_count}
-                                order_id={order_id}
-                            />
-                })
+                orderData.items && orderData.items.map(({ id, name, image, price, product_count, order_id }: OrderItemsInfoDto) => (
+                    <CartProduct
+                        key={id}
+                        id={id}
+                        name={name} 
+                        image={image}
+                        price={price}
+                        product_count={product_count}
+                        order_id={order_id}
+                    />
+                ))
             }
         </div>
     )
