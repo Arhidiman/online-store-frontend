@@ -52,7 +52,6 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
 
             navigate(routes.main)
         } catch (error) {
-            console.log(error, 'reg err')
             if(axios.isAxiosError(error)) {
                 notification.error({
                     message: error.response ? error.response.data : error.message
@@ -63,7 +62,6 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
     signIn: async (data: {username: string, password: string}, navigate: NavigateFunction) => {
         try {
             const response = await axios.post(apiUrls.USER_SIGN_IN, data)
-            console.log(response.data, 'res data')
             const {username, user_id, user_role, jwt_token} = response.data
 
             set((state: IAuthPageStore) => ({
@@ -80,7 +78,6 @@ export const useAuthPageStore = create(devtools<IAuthPageStore>((set) => ({
             })
         } catch (error) {
             if(axios.isAxiosError(error)) {
-                console.log(error.response)
                 notification.error({
                     message: error.response ? error.response.data : error.message
                 })

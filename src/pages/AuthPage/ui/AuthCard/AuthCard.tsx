@@ -33,7 +33,6 @@ export const AuthCard = () =>  {
             setUsername(username)
             authenticate({ variables: { username, password}})
         } catch (error) {
-            console.log(error)
         }
     }
 
@@ -54,7 +53,6 @@ export const AuthCard = () =>  {
         }
 
         if (error) {
-            console.log(error)
             notification.error(error)
         }
 

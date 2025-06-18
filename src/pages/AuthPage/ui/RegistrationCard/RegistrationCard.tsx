@@ -54,7 +54,6 @@ export const RegistrationCard = () =>  {
         }
 
         if (error) {
-            console.log(error)
             notification.error(error)
         }
 

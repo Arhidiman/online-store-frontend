@@ -28,8 +28,6 @@ export const MobileAppHeader = () =>  {
         }
     }
 
-    console.log(window.location)
-
     return (
         currentPage !== routes.filters && 
         <Header className='mobile-header' style={headerColor()}>

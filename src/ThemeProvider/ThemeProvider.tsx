@@ -55,8 +55,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactElement}) => 
         if (root && appTheme === 'dark') {
             root.style.background = customToken.backgroundColorDark
             root.style.color = customToken.colorDarkTheme
-
-            console.log(customToken.colorDarkTheme, customToken.colorLightTheme)
         }
         if (root && appTheme === 'light') {
             root.style.background = customToken.backgroundColorLight

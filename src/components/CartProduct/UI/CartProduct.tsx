@@ -47,7 +47,6 @@ export const CartProduct = ({ id, name, image, price, product_count }: OrderItem
 
     const deleteOrderItem = () => {
 
-
         const deleteOrderItem = () => {
             deleteItem( { variables: { id }, fetchPolicy: 'network-only' })
             id && removeItem(id)

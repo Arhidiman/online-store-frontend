@@ -80,10 +80,6 @@ export const  SideMenu = ({ itemsData, open, className }: ISideMenu) => {
         )
     }
 
-
-    console.log(open, 'is open')
-
-
     return (        
       <div className={`side-menu ${className ? className : ''}`}>
         <Menu
