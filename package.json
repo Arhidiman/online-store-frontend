@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "set VITE_BASE_API_URL=http://localhost:10000&& vite",
     "host": "VITE_BASE_API_URL=http://89.169.39.119:10000 && vite --host --port 5173",
-    "build": "cross-env VITE_BASE_API_URL=http://89.169.39.119:10000 vite build && cp serve.json dist/serve.json",
+    "build": "cross-env VITE_BASE_API_URL=http://89.169.39.119:10000 vite build && cpx serve.json dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,6 +16,7 @@
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.12.5",
     "axios": "^1.6.3",
+    "cpx": "^1.5.0",
     "cross-env": "^7.0.3",
     "keen-slider": "^6.8.6",
     "react": "^18.2.0",
